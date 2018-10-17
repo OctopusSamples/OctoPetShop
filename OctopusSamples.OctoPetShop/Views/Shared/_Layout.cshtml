@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Octo - Pet Shop</title>
+    <title>@(!Settings.Value.EnvironmentName.ToUpper().Contains("PROD") ? Settings.Value.EnvironmentName : "") Octo Pet Shop</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
