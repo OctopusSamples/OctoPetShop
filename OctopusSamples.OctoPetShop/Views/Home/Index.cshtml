@@ -38,7 +38,10 @@
                      <div><p style="color: gray; font-size: smaller">@product.Description</p></div>
                      <img class="img-rounded img-responsive center-block" src="@product.ImageUrl" width="200" height="200"/>
              
-                     <button type="button" class="btn btn-primary">Add to Cart</button>
+                     <form asp-controller="Home" asp-action="AddToCart" asp-route-id="@product.Id" method="post">
+                         <button type="submit" class="btn btn-primary">Add to Cart</button>
+                     </form>
+                     
                  </div>
              </div>
      

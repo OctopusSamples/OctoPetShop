@@ -54,7 +54,15 @@ namespace OctopusSamples.OctoPetShop.Controllers
             return View(shoppingCartViewModel);
         }
 
-        public IActionResult Checkout()
+        [HttpPost]
+        public IActionResult AddToCart(int id)
+        {
+            // TODO: Call Cart Service and Save Items 
+            return RedirectToAction("ShoppingCart");
+        }
+        
+        [HttpPost]
+        public IActionResult Checkout(ShoppingCartViewModel cart)
         {
             // TODO: Redirect to Order Confirmation / Thank you page 
             return RedirectToAction("ShoppingCart");
