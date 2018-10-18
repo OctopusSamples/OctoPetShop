@@ -4,6 +4,6 @@ namespace OctopusSamples.OctoPetShop
     {
         public string AppVersion { get; set; }
         public string EnvironmentName { get; set; }
-        public string ProductServiceUrl { get; set; }
+        public string ProductServiceBaseUrl { get; set; }
     }
 }

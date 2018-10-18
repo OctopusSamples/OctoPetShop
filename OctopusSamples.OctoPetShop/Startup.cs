@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OctopusSamples.OctoPetShop.Controllers.Client;
 
 namespace OctopusSamples.OctoPetShop
 {
@@ -32,6 +33,7 @@ namespace OctopusSamples.OctoPetShop
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddScoped<IProductClient, ProductClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

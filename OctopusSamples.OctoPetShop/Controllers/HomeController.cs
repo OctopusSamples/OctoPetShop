@@ -2,17 +2,27 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OctopusSamples.OctoPetShop.Controllers.Client;
 using OctopusSamples.OctoPetShop.Models;
 
 namespace OctopusSamples.OctoPetShop.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IProductClient _productClient;
+
+        public HomeController(IProductClient productClient)
         {
-            return View();
+            _productClient = productClient;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var products = await _productClient.GetAsync(CancellationToken.None);
+            return View(products);
         }
 
         public IActionResult About()
