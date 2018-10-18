@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,15 +25,11 @@ namespace OctopusSamples.OctoPetShop.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 
@@ -50,10 +44,21 @@ namespace OctopusSamples.OctoPetShop.Controllers
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
 
-        public IActionResult ShoppingCart()
+        public async Task<IActionResult> ShoppingCart()
         {
+            var products = await _productClient.GetAsync(CancellationToken.None);
             
-            throw new NotImplementedException();
+            var shoppingCartViewModel = new ShoppingCartViewModel();
+            shoppingCartViewModel.CartItems.Add(products.First());
+            
+            return View(shoppingCartViewModel);
         }
+
+        public IActionResult Checkout()
+        {
+            // TODO: Redirect to Order Confirmation / Thank you page 
+            return RedirectToAction("ShoppingCart");
+        }
+        
     }
 }

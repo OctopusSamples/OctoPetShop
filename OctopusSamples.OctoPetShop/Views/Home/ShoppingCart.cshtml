@@ -7,5 +7,100 @@
 
 <h2>Shopping Cart</h2>
 
+<p>You have the following products in your shopping cart:</p>
 
-<h2>Checkout</h2>
+@foreach (var item in Model.CartItems)
+{
+
+    <div class="row">
+    
+        <div class="col-md-8">
+ 
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <img class="img-rounded img-responsive center-block pull-left" src="@item.ImageUrl" width="50" height="50"/>
+                    <div>
+                        <div style="margin: 20px; padding-left: 50px;">
+                                <span class="pull-left"><strong>@item.Name</strong></span>&nbsp;&nbsp;<span style="color: gray; font-size: smaller">@item.Description</span>
+                            <span class="pull-right"><strong>@item.PriceString</strong></span>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+    </div>
+    
+}
+
+<h3>Checkout</h3>
+
+<p>Provide your name, address and payment details to complete your purchase.</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Checkout">
+            
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div>
+            
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Street" class="control-label"></label>
+                <input asp-for="Street" class="form-control"/>
+                <span asp-validation-for="Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control"/>
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostCode" class="control-label"></label>
+                <input asp-for="PostCode" class="form-control"/>
+                <span asp-validation-for="PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreditCardNumber" class="control-label"></label>
+                <input asp-for="CreditCardNumber" class="form-control"/>
+                <span asp-validation-for="CreditCardNumber" class="text-danger"></span>
+            </div>
+
+            </div>
+            
+            <div class="form-inline">
+
+                <div class="form-group">
+                    <label asp-for="CreditCardExpiryMonth" class="control-label"></label>
+                    <input style="width: 50px" asp-for="CreditCardExpiryMonth" class="form-control"/>
+                    <span asp-validation-for="CreditCardExpiryMonth" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CreditCardExpiryYear" class="control-label"></label>
+                    <input style="width: 50px" asp-for="CreditCardExpiryYear" class="form-control"/>
+                    <span asp-validation-for="CreditCardExpiryYear" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CreditCardSecurityNumber" class="control-label"></label>
+                    <input style="width: 50px" asp-for="CreditCardSecurityNumber" class="form-control"/>
+                    <span asp-validation-for="CreditCardSecurityNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <br/>
+            
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
