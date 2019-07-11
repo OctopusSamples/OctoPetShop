@@ -1,0 +1,102 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "servicePlanName": {
+            "type": "string",
+            "defaultValue": "sdnug-demo",
+            "metadata": {
+                "description": "Service plan name"
+            },
+            "minLength": 2
+        },
+        "shoppingCartAppName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the shopping cart app"
+            },
+            "minLength": 2
+        },
+        "productAppName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the product app"
+            },
+            "minLength": 2
+        },
+        "webAppName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the web app"
+            },
+            "minLength": 2
+        },
+        "sku": {
+            "type": "string",
+            "defaultValue": "S1",
+            "metadata": {
+                "description": "The SKU of App Service Plan, by default is Standard S1"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "centralus",
+            "metadata": {
+                "description": "Location for all resources"
+            }
+        }
+    },
+    "resources": [
+        {
+            "apiVersion": "2017-08-01",
+            "type": "Microsoft.Web/serverfarms",
+            "kind": "app",
+            "name": "[parameters('servicePlanName')]",
+            "location": "[parameters('location')]",
+            "properties": {},
+            "dependsOn": [],
+            "sku": {
+                "name": "[parameters('sku')]"
+            }
+        },
+        {
+            "apiVersion": "2016-08-01",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('webAppName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            ]
+        },
+        {
+            "apiVersion": "2016-08-01",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('productAppName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            ]
+        },
+        {
+            "apiVersion": "2016-08-01",
+            "type": "Microsoft.Web/sites",
+            "kind": "app",
+            "name": "[parameters('shoppingCartAppName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('servicePlanName'))]"
+            ]
+        }
+    ]
+}
