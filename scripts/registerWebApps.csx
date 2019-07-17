@@ -19,7 +19,6 @@ var webApps = new[] { "product", "shoppingcart", "web" };
 var webAppNames = new Dictionary<string, string>();
 var webAppRoles = new Dictionary<string, string>();
 var environments = new[] { "Development", "Test", "Production" };
-var environmentLabels = new Dictionary<string, string>();
 
 webAppNames["product"] = "Product API";
 webAppNames["shoppingcart"] = "Shopping Cart API";
@@ -28,9 +27,6 @@ webAppNames["web"] = "Main Web App";
 webAppRoles["product"] = "octopetshop-product-api";
 webAppRoles["shoppingcart"] = "octopetshop-shoppingcart-api";
 webAppRoles["web"] = "octopetshop-web-app";
-
-environmentLabels["Test"] = "test";
-environmentLabels["Production"] = "prod";
 
 try
 {
@@ -45,7 +41,7 @@ try
     {
 
         var environment = repositoryForSpace.Environments.FindByName(environmentName);
-        var environmentLabel = environmentLabels[environmentName];
+        var environmentLabel = environmentName.ToLower();
 
         foreach (var webApp in webApps)
         {
