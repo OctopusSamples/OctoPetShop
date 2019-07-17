@@ -4,7 +4,7 @@ using Cake.Common.Tools.OctopusDeploy;
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var version = Argument("packageVersion", "0.0.1");
+var version = Argument("packageVersion", "0.0.2");
 var prerelease = Argument("prerelease", "");
 var databaseRuntime = Argument("databaseRuntime", "win-x64");
 var octopusServer = Argument("octopusServer", "https://your.octopus.server");
@@ -12,7 +12,7 @@ var octopusApiKey = Argument("octopusApiKey", "hey, don't commit your API key");
 
 var packageVersion = $"{version}{prerelease}";
 
-var projects = GetFiles("./**/*.csproj"); //.Concat(GetFiles("../test/**/*.csproj"));
+var projects = GetFiles("./**/*.csproj");
 
 Task("Clean")
     .Does(() =>
@@ -90,6 +90,9 @@ Task("Publish")
 
             DotNetCorePublish(project.GetDirectory().FullPath, publishSettings);
         }
+
+        // publish infrastructure
+        CopyDirectory("OctopusSamples.OctoPetShop.Infrastructure", System.IO.Path.Combine("publish", "OctopusSamples.OctoPetShop.Infrastructure"));
     });
 
 Task("Pack")
@@ -109,6 +112,17 @@ Task("Pack")
                     Version = packageVersion
                 });
         }
+
+        // pack infrastructure
+        OctoPack(
+            "OctopusSamples.OctoPetShop.Infrastructure",
+            new OctopusPackSettings()
+            {
+                Format = OctopusPackFormat.Zip,
+                BasePath = System.IO.Path.Combine("publish", "OctopusSamples.OctoPetShop.Infrastructure"),
+                OutFolder = "package",
+                Version = packageVersion
+            });
     });
 
 Task("Default")
