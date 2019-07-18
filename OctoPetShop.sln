@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop", "OctopusSamples.OctoPetShop\OctopusSamples.OctoPetShop.csproj", "{6D02010B-BC6C-4D46-ADAB-5A1581DBCFC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.Web", "OctopusSamples.OctoPetShop.Web\OctopusSamples.OctoPetShop.Web.csproj", "{6D02010B-BC6C-4D46-ADAB-5A1581DBCFC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.ProductService", "OctopusSamples.ProductService\OctopusSamples.ProductService.csproj", "{9B82848D-5ADB-4B48-89E3-DE1EEE02C6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.ProductService", "OctopusSamples.OctoPetShop.ProductService\OctopusSamples.OctoPetShop.ProductService.csproj", "{9B82848D-5ADB-4B48-89E3-DE1EEE02C6C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.ShoppingCartService", "OctopusSamples.ShoppingCartService\OctopusSamples.ShoppingCartService.csproj", "{F1D9A293-5967-40DE-B88C-FEE6C831E28B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.ShoppingCartService", "OctopusSamples.OctoPetShop.ShoppingCartService\OctopusSamples.OctoPetShop.ShoppingCartService.csproj", "{F1D9A293-5967-40DE-B88C-FEE6C831E28B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusSamples.OctoPetShopDatabase", "OctopusSamples.OctoPetShopDatabase\OctopusSamples.OctoPetShopDatabase.csproj", "{8A23BBDA-EA46-4079-B2E2-F70BCBD9EDBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.Database", "OctopusSamples.OctoPetShop.Database\OctopusSamples.OctoPetShop.Database.csproj", "{8A23BBDA-EA46-4079-B2E2-F70BCBD9EDBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
