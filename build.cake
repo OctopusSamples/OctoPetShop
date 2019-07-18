@@ -4,7 +4,7 @@ using Cake.Common.Tools.OctopusDeploy;
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var version = Argument("packageVersion", "0.0.2");
+var version = Argument("packageVersion", "0.0.1");
 var prerelease = Argument("prerelease", "");
 var databaseRuntime = Argument("databaseRuntime", "win-x64");
 var octopusServer = Argument("octopusServer", "https://your.octopus.server");
