@@ -106,7 +106,7 @@ Task("Pack")
                 projectName,
                 new OctopusPackSettings()
                 {
-                    Format = OctopusPackFormat.Zip,
+                    Format = OctopusPackFormat.NuPkg,
                     BasePath = System.IO.Path.Combine("publish", projectName),
                     OutFolder = "package",
                     Version = packageVersion
@@ -118,7 +118,7 @@ Task("Pack")
             "OctopusSamples.OctoPetShop.Infrastructure",
             new OctopusPackSettings()
             {
-                Format = OctopusPackFormat.Zip,
+                Format = OctopusPackFormat.NuPkg,
                 BasePath = System.IO.Path.Combine("publish", "OctopusSamples.OctoPetShop.Infrastructure"),
                 OutFolder = "package",
                 Version = packageVersion
