@@ -38,7 +38,7 @@ Task("Restore")
             var projectName = project.GetFilenameWithoutExtension().ToString();
             var restoreSettings = new DotNetCoreRestoreSettings();
 
-            if (projectName == "OctopusSamples.OctoPetShopDatabase")
+            if (projectName == "OctopusSamples.OctoPetShop.Database")
             {
                 restoreSettings.Runtime = databaseRuntime;
             }
@@ -60,7 +60,7 @@ Task("Restore")
                     NoRestore = true
                 };
 
-            if (projectName == "OctopusSamples.OctoPetShopDatabase")
+            if (projectName == "OctopusSamples.OctoPetShop.Database")
             {
                 buildSettings.Runtime = databaseRuntime;
             }
@@ -83,7 +83,7 @@ Task("Publish")
                     ArgumentCustomization = args => args.Append("--no-restore")
                 };
 
-            if (projectName == "OctopusSamples.OctoPetShopDatabase")
+            if (projectName == "OctopusSamples.OctoPetShop.Database")
             {
                 publishSettings.Runtime = databaseRuntime;
             }
