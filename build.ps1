@@ -41,7 +41,7 @@ Param(
     [string]$Target,
     [string]$Configuration,
     [string]$PackageVersion,
-    [string]$PrereleaseTag,
+    [string]$Prerelease,
     [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
     [string]$Verbosity,
     [switch]$ShowDescription,

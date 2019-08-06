@@ -1,0 +1,46 @@
+image: Visual Studio 2019
+configuration: Release
+platform: Any CPU
+skip_branch_with_pr: true
+build_script:
+- ps: >-
+    $version = $env:APPVEYOR_BUILD_VERSION
+
+    $prBranch = $env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH
+
+    $buildBranch = $env:APPVEYOR_REPO_BRANCH
+
+    write-output "prBranch: $prBranch"
+
+    write-output "buildBranch: $buildBranch"
+
+    .\build.ps1 --databaseRuntime="linux-x64" --PackageVersion="$version" --Prerelease="-$buildBranch"
+artifacts:
+- path: .\package\*.nupkg
+  type: OctopusPackage
+notifications:
+- provider: GitHubPullRequest
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: true
+
+deploy:
+  - provider: GitHub
+    artifact: /.*\.nupkg/           # upload all NuGet packages to release assets
+    draft: false
+    prerelease: false
+    on:
+      branch: master
+
+for:
+-
+  branches:
+    only:
+      - master
+  version: 1.1.{build}
+
+-
+  branches:
+    except:
+      - master
+  version: 0.0.{build}
