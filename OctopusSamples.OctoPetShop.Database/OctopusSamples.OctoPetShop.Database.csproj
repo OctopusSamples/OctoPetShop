@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <None Update="deploy.sh" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="deploy.ps1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

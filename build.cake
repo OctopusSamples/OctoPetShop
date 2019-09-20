@@ -1,4 +1,4 @@
-#tool "nuget:?package=OctopusTools"
+#tool "nuget:?package=OctopusTools&version=6.13.1"
 
 using Cake.Common.Tools.OctopusDeploy;
 
@@ -10,9 +10,34 @@ var databaseRuntime = Argument("databaseRuntime", "win-x64");
 var octopusServer = Argument("octopusServer", "https://your.octopus.server");
 var octopusApiKey = Argument("octopusApiKey", "hey, don't commit your API key");
 
-var packageVersion = $"{version}{prerelease}";
+class ProjectInformation
+{
+    public string Name { get; set; }
+    public string FullPath { get; set; }
+    public string Runtime { get; set; }
+}
 
-var projects = GetFiles("./**/*.csproj");
+string packageVersion;
+List<ProjectInformation> projects;
+
+Setup(context =>
+{
+    if (BuildSystem.IsLocalBuild && string.IsNullOrEmpty(prerelease))
+    {
+        prerelease = "-local";
+    }
+
+    packageVersion = $"{version}{prerelease}";
+
+    projects = GetFiles("./**/*.csproj").Select(p => new ProjectInformation
+    {
+        Name = p.GetFilenameWithoutExtension().ToString(),
+        FullPath = p.GetDirectory().FullPath,
+        Runtime = p.GetFilenameWithoutExtension().ToString() == "OctopusSamples.OctoPetShop.Database" ? databaseRuntime : null
+    }).ToList();
+
+    Information("Building OctoPetShop v{0}", packageVersion);
+});
 
 Task("Clean")
     .Does(() =>
@@ -20,75 +45,73 @@ Task("Clean")
             CleanDirectory("publish");
             CleanDirectory("package");
 
-            foreach(var project in projects) {
-                DotNetCoreClean(project.GetDirectory().FullPath,
-                    new DotNetCoreCleanSettings
-                    {
-                        Configuration = configuration
-                    });
+            var cleanSettings = new DotNetCoreCleanSettings { Configuration = configuration };
+
+            foreach(var project in projects)
+            {
+                DotNetCoreClean(project.FullPath, cleanSettings);
             }
         });
 
 // Run dotnet restore to restore all package references.
 Task("Restore")
+    .IsDependentOn("Clean")
     .Does(() =>
     {
         foreach(var project in projects)
         {
-            var projectName = project.GetFilenameWithoutExtension().ToString();
             var restoreSettings = new DotNetCoreRestoreSettings();
 
-            if (projectName == "OctopusSamples.OctoPetShop.Database")
+            if (!string.IsNullOrEmpty(project.Runtime))
             {
-                restoreSettings.Runtime = databaseRuntime;
+                restoreSettings.Runtime = project.Runtime;
             }
 
-            DotNetCoreRestore(project.GetDirectory().FullPath, restoreSettings);
+            DotNetCoreRestore(project.FullPath, restoreSettings);
         }
     });
 
  Task("Build")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Restore")
     .Does(() =>
     {
         foreach(var project in projects)
         {
-            var projectName = project.GetFilenameWithoutExtension().ToString();
-
             var buildSettings = new DotNetCoreBuildSettings()
                 {
                     Configuration = configuration,
                     NoRestore = true
                 };
 
-            if (projectName == "OctopusSamples.OctoPetShop.Database")
+            if (!string.IsNullOrEmpty(project.Runtime))
             {
-                buildSettings.Runtime = databaseRuntime;
+                buildSettings.Runtime = project.Runtime;
             }
 
-            DotNetCoreBuild(project.GetDirectory().FullPath, buildSettings);
+            DotNetCoreBuild(project.FullPath, buildSettings);
         }
     });
 
 Task("Publish")
+    .IsDependentOn("Build")
     .Does(() =>
     {
         foreach(var project in projects)
         {
-            var projectName = project.GetFilenameWithoutExtension().ToString();
-
             var publishSettings = new DotNetCorePublishSettings()
                 {
                     Configuration = configuration,
-                    OutputDirectory = System.IO.Path.Combine("publish", projectName),
+                    OutputDirectory = System.IO.Path.Combine("publish", project.Name),
                     ArgumentCustomization = args => args.Append("--no-restore")
                 };
 
-            if (projectName == "OctopusSamples.OctoPetShop.Database")
+            if (!string.IsNullOrEmpty(project.Runtime))
             {
-                publishSettings.Runtime = databaseRuntime;
+                publishSettings.Runtime = project.Runtime;
             }
 
-            DotNetCorePublish(project.GetDirectory().FullPath, publishSettings);
+            DotNetCorePublish(project.FullPath, publishSettings);
         }
 
         // publish infrastructure
@@ -96,18 +119,17 @@ Task("Publish")
     });
 
 Task("Pack")
+    .IsDependentOn("Publish")
     .Does(() =>
     {
         foreach(var project in projects)
         {
-            var projectName = project.GetFilenameWithoutExtension().ToString();
-
             OctoPack(
-                projectName,
+                project.Name,
                 new OctopusPackSettings()
                 {
                     Format = OctopusPackFormat.NuPkg,
-                    BasePath = System.IO.Path.Combine("publish", projectName),
+                    BasePath = System.IO.Path.Combine("publish", project.Name),
                     OutFolder = "package",
                     Version = packageVersion
                 });
@@ -125,11 +147,37 @@ Task("Pack")
             });
     });
 
+Task("PushPackages")
+    .IsDependentOn("Pack")
+    .Does(() =>
+    {
+        OctoPush(octopusServer, octopusApiKey, GetFiles("./package/*.nupkg"), new OctopusPushSettings());
+    });
+
+Task("CreateRelease")
+    .IsDependentOn("PushPackages")
+    .Does(() =>
+    {
+        OctoCreateRelease("Octo Pet Shop", new CreateReleaseSettings
+            {
+                Server = octopusServer,
+                ApiKey = octopusApiKey,
+                ReleaseNumber = packageVersion,
+                DefaultPackageVersion = packageVersion
+            });
+    });
+
+Task("DeployRelease")
+    .IsDependentOn("CreateRelease")
+    .Does(() =>
+    {
+        OctoDeployRelease(octopusServer, octopusApiKey, "Octo Pet Shop", "Dev", packageVersion, new OctopusDeployReleaseDeploymentSettings
+            {
+                ShowProgress = true
+            });
+    });
+
 Task("Default")
-    .IsDependentOn("Clean")
-    .IsDependentOn("Restore")
-    .IsDependentOn("Build")
-    .IsDependentOn("Publish")
-    .IsDependentOn("Pack");
+    .IsDependentOn("Build");
 
 RunTarget(target);
