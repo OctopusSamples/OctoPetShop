@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1
+
+RUN mkdir /src
+WORKDIR /src
+ADD . /src
+RUN dotnet restore
+RUN ["dotnet", "build", "--configuration", "release"]
+
+
+ENV ASPNETCORE_URLS=http://+:5011
+ENV ASPNETCORE_ENVIRONMENT="Production"
+
+ENTRYPOINT [ "dotnet", "run", "--no-launch-profile" ]

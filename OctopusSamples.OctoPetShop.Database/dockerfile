@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1
+
+RUN mkdir /src
+WORKDIR /src
+ADD . /src
+RUN dotnet restore
+RUN ["dotnet", "build", "--configuration", "release"]
+
+ENTRYPOINT [ "dotnet", "run", "--no-launch-profile", "Data Source=192.168.1.4;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!" ]
