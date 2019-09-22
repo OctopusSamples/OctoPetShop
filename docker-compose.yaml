@@ -17,6 +17,7 @@ services:
       context: ./OctopusSamples.OctoPetshop.Productservice
     ports:
       - '5011:5011'
+      - '5014:5014'
     networks:
       container_net:
         ipv4_address: 192.168.1.1
@@ -26,6 +27,7 @@ services:
       context: ./OctopusSamples.OctoPetShop.Web
     ports:
       - '5000:5000'
+      - '5001:5001'
     networks:
       container_net:
         ipv4_address: 192.168.1.2
@@ -35,6 +37,7 @@ services:
       context: ./OctopusSamples.OctoPetShop.ShoppingCartService
     ports:
       - '5012:5012'
+      - '5013:5013'
     networks:
       container_net:
         ipv4_address: 192.168.1.3

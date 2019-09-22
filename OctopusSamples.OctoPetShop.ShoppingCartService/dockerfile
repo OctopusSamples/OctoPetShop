@@ -7,7 +7,7 @@ RUN dotnet restore
 RUN ["dotnet", "build", "--configuration", "release"]
 
 
-ENV ASPNETCORE_URLS=http://+:5012
+ENV ASPNETCORE_URLS="http://+:5012;https://+:5013"
 ENV ASPNETCORE_ENVIRONMENT="Production"
 
 ENTRYPOINT [ "dotnet", "run", "--no-launch-profile" ]
