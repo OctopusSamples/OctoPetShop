@@ -10,9 +10,8 @@ namespace OctopusSamples.OctoPetShopDatabase
     {
         static int Main(string[] args)
         {
-            var connectionString =
-                args.FirstOrDefault()
-                ?? "Server=(local)\\SqlExpress; Database=ops; Trusted_connection=true";
+            var environmentVariableConnectionString = Environment.GetEnvironmentVariable("DbUpConnectionString");
+            var connectionString = environmentVariableConnectionString == null ? args.FirstOrDefault() ?? "Server=(local)\\SqlExpress; Database=ops; Trusted_connection=true" : environmentVariableConnectionString;
 
             EnsureDatabase.For.SqlDatabase(connectionString);
 

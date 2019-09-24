@@ -7,24 +7,27 @@ using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using OctopusSamples.ProductService.Models;
+using Microsoft.Extensions.Options;
 
 namespace OctopusSamples.ProductService.Repositories
 {
     public class ProductRepository : IProductRepository
     {
         private readonly IConfiguration _configuration;
+        private readonly OctopusSamples.OctoPetShop.ProductService.EnvironmentConfig _environmentConfig;
 
         public IDbConnection Connection
         {
             get
             {
-                return new SqlConnection(_configuration.GetConnectionString("OPSConnectionString"));
+                return new SqlConnection(_environmentConfig.OPSConnectionString == null ? _configuration.GetConnectionString("OPSConnectionString") : _environmentConfig.OPSConnectionString);
             }
         }
 
-        public ProductRepository(IConfiguration configuration)
+        public ProductRepository(IConfiguration configuration, IOptions<OctopusSamples.OctoPetShop.ProductService.EnvironmentConfig> configurationSettings)
         {
             _configuration = configuration;
+            _environmentConfig = configurationSettings.Value;
         }
 
         public async Task<List<ProductDetail>> GetAll()
