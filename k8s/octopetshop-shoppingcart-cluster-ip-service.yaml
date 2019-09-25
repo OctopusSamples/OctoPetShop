@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: octopetshop-shoppingcart-cluster-ip-service.yaml
+spec:
+  type: ClusterIP
+  selector:
+    component: shoppingcartservice
+  ports:
+    - port: 5012
+      targetPort: 5012
+    - port: 5013
+      targetPort: 5013
