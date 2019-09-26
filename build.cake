@@ -190,6 +190,6 @@ Task("DeployRelease")
     });
 
 Task("Default")
-    .IsDependentOn("Build");
+    .IsDependentOn("RunUnitTests");
 
 RunTarget(target);
