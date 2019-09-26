@@ -18,12 +18,15 @@ namespace OctopusSamples.OctoPetShop.Controllers.Client
     public class ProductClient : IProductClient
     {
         private readonly HttpClient _httpClient = new HttpClient();
+        private readonly OctopusSamples.OctoPetShop.Web.EnvironmentConfig _environmentConfig;
 
-        public ProductClient(IOptions<AppSettings> appSettings)
+        public ProductClient(IOptions<AppSettings> appSettings, IOptions<OctopusSamples.OctoPetShop.Web.EnvironmentConfig> configuration)
         {
-            _httpClient.BaseAddress = new Uri(appSettings.Value.ProductServiceBaseUrl);
+            _environmentConfig = configuration.Value;
+            _httpClient.BaseAddress = new Uri((_environmentConfig.ProductServiceBaseUrl == null ? appSettings.Value.ProductServiceBaseUrl : _environmentConfig.ProductServiceBaseUrl));
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
 
         public async Task<List<ProductViewModel>> GetAsync(CancellationToken cancellationToken)
         {

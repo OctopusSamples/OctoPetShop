@@ -1,0 +1,65 @@
+version: '3'
+services:
+  sql-server:
+    container_name: sql-server-db
+    image: microsoft/mssql-server-linux:2017-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Great balls 0f fire!"
+      ACCEPT_EULA: "Y"
+    networks:
+      container_net:
+        ipv4_address: 192.168.1.4
+  productservice:
+    environment:
+      - OPSConnectionString=Data Source=192.168.1.4;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
+    build:
+      dockerfile: dockerfile
+      context: ./OctopusSamples.OctoPetshop.Productservice
+    ports:
+      - '5011:5011'
+      - '5014:5014'
+    networks:
+      container_net:
+        ipv4_address: 192.168.1.1
+  octopetshop:
+    environment:
+      - ProductServiceBaseUrl=http://192.168.1.1:5011/
+      - ShoppingCartServiceBaseUrl=http://192.168.1.3:5012
+    build:
+      dockerfile: dockerfile
+      context: ./OctopusSamples.OctoPetShop.Web
+    ports:
+      - '5000:5000'
+      - '5001:5001'
+    networks:
+      container_net:
+        ipv4_address: 192.168.1.2
+  shoppingcartservice:
+    environment:
+      - OPSConnectionString=Data Source=192.168.1.4;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
+    build:
+      dockerfile: dockerfile
+      context: ./OctopusSamples.OctoPetShop.ShoppingCartService
+    ports:
+      - '5012:5012'
+      - '5013:5013'
+    networks:
+      container_net:
+        ipv4_address: 192.168.1.3
+  database:
+    environment:
+      - DbUpConnectionString=Data Source=192.168.1.4;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
+    build:
+      dockerfile: dockerfile
+      context: ./OctopusSamples.OctoPetShop.Database 
+    networks:
+        container_net:
+          ipv4_address: 192.168.1.5
+networks:
+  container_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/16

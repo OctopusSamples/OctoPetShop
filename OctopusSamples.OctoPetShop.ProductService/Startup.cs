@@ -22,6 +22,7 @@ namespace OctopusSamples.ProductService
             services.AddTransient<IProductRepository, ProductRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.Configure<OctopusSamples.OctoPetShop.ProductService.EnvironmentConfig>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +37,12 @@ namespace OctopusSamples.ProductService
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            /*
+            Check to see if we're running in a container.  This is only for this test application
+            do not do something like this in Production
+            */
+            if (System.Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == null)
+                app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
