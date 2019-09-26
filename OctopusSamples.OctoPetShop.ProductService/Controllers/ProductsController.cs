@@ -18,58 +18,18 @@ namespace OctopusSamples.ProductService.Controllers
         {
             _productRepository = productRepository;
         }
-
-        private static readonly ProductDetail[] PetProducts = new[]
-        {
-            new ProductDetail
-            {
-                Id = 1,
-                Name = "Dog",
-                Description = "Black and white Border Collie puppy",
-                ImageUrl = "https://s3.amazonaws.com/i.octopus.com/videos/Dog.png",
-                Price = 100.0,
-                InStock = true
-            },
-            new ProductDetail
-            {
-                Id = 2,
-                Name = "Cat",
-                Description = "Friendly kitten",
-                ImageUrl = "https://s3.amazonaws.com/i.octopus.com/videos/Cat.png",
-                Price = 75.0,
-                InStock = false
-            }, 
-            new ProductDetail
-            {
-                Id = 4,
-                Name = "Fish",
-                Description = "Goldie the goldfish",
-                ImageUrl = "https://s3.amazonaws.com/i.octopus.com/videos/Fish.png",
-                Price = 15.0,
-                InStock = true
-            },
-            new ProductDetail
-            {
-                Id = 4,
-                Name = "Octopus",
-                Description = "The amazing wonder of the ocean",
-                ImageUrl = "https://s3.amazonaws.com/i.octopus.com/videos/Octopus.png",
-                Price = 250.0,
-                InStock = true
-            },
-        };
         
         [HttpGet]
         public async Task<ActionResult<List<ProductDetail>>> GetAllAsync()
         {
-            return await _productRepository.GetAll(); //Task.Run(() => PetProducts.ToList());
+            return await _productRepository.GetAll();
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(404)]
         public async Task<ActionResult<ProductDetail>> GetByIdAsync(int id)
         {
-            var pet = await _productRepository.GetById(id); // Task.Run(() => PetProducts.FirstOrDefault(x => x.Id == id));
+            var pet = await _productRepository.GetById(id);
 
             if (pet == null)
             {

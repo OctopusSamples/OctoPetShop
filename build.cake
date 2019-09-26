@@ -15,6 +15,7 @@ class ProjectInformation
     public string Name { get; set; }
     public string FullPath { get; set; }
     public string Runtime { get; set; }
+    public bool IsTestProject { get; set; }
 }
 
 string packageVersion;
@@ -33,7 +34,8 @@ Setup(context =>
     {
         Name = p.GetFilenameWithoutExtension().ToString(),
         FullPath = p.GetDirectory().FullPath,
-        Runtime = p.GetFilenameWithoutExtension().ToString() == "OctopusSamples.OctoPetShop.Database" ? databaseRuntime : null
+        Runtime = p.GetFilenameWithoutExtension().ToString() == "OctopusSamples.OctoPetShop.Database" ? databaseRuntime : null,
+        IsTestProject = p.GetFilenameWithoutExtension().ToString().EndsWith(".Tests")
     }).ToList();
 
     Information("Building OctoPetShop v{0}", packageVersion);
@@ -93,11 +95,21 @@ Task("Restore")
         }
     });
 
-Task("Publish")
+Task("RunUnitTests")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        foreach(var project in projects)
+        foreach(var project in projects.Where(p => p.IsTestProject))
+        {
+            DotNetCoreTest(project.FullPath, new DotNetCoreTestSettings { Configuration = configuration });
+        }
+    });
+
+Task("Publish")
+    .IsDependentOn("RunUnitTests")
+    .Does(() =>
+    {
+        foreach(var project in projects.Where(p => !p.IsTestProject))
         {
             var publishSettings = new DotNetCorePublishSettings()
                 {
@@ -122,7 +134,7 @@ Task("Pack")
     .IsDependentOn("Publish")
     .Does(() =>
     {
-        foreach(var project in projects)
+        foreach(var project in projects.Where(p => !p.IsTestProject))
         {
             OctoPack(
                 project.Name,

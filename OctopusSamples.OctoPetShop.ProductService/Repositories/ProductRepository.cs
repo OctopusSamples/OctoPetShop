@@ -16,7 +16,7 @@ namespace OctopusSamples.ProductService.Repositories
         private readonly IConfiguration _configuration;
         private readonly OctopusSamples.OctoPetShop.ProductService.EnvironmentConfig _environmentConfig;
 
-        public IDbConnection Connection
+        private IDbConnection Connection
         {
             get
             {
