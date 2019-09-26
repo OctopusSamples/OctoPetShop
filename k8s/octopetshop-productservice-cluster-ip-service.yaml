@@ -3,11 +3,13 @@ kind: Service
 metadata:
   name: octopetshop-productservice-cluster-ip-service
 spec:
-  type: CluserIP
+  type: ClusterIP
   selector:
     component: productservice
   ports:
     - port: 5011
       targetPort: 5011
+      name: http-port
     - port: 5014
       targetPort: 5014
+      name: https-port

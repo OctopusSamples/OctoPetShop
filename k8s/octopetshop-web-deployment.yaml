@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octopetshop-web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: web
+          image: octopetshop_octopetshop
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
+              name: http-port
+            - containerPort: 5001
+              name: https-port
+          env:
+            - name: ProductServiceBaseUrl
+              value: http://productservice:5011/
+            - name: ShoppingCartServiceBaseUrl
+              value: http://shoppingcartservice:5012

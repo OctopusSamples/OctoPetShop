@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octopetshop-shoppingcartservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: shoppingcart
+  template:
+    metadata:
+      labels:
+        component: shoppingcart
+    spec:
+      containers:
+        - name: shoppingcart
+          image: octopetshop_shoppingcartservice
+          imagePullPolicy: Never
+          env:
+            - name: OPSConnectionString
+              value: Data Source=sqlserver;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
