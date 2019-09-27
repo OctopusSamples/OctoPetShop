@@ -12,6 +12,6 @@ spec:
           command: [ "dotnet", "run", "--no-launch-profile" ]
           env:
             - name: DbUpConnectionString
-              value: Data Source=sqlserver-deployment;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
+              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
       restartPolicy: Never
 

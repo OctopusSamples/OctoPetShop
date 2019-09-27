@@ -23,6 +23,6 @@ spec:
               name: https-port
           env:
             - name: ProductServiceBaseUrl
-              value: http://productservice:5011/
+              value: http://octopetshop-productservice-cluster-ip-service:5011/
             - name: ShoppingCartServiceBaseUrl
-              value: http://shoppingcartservice:5012
+              value: http://octopetshop-shoppingcart-cluster-ip-service:5012
