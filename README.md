@@ -8,3 +8,5 @@ Octopus Pet Shop Example Web app written in .NET Core.  This solution consists o
  Included in this example are docker files to make each component as a container.  The docker-compose file at the root of the project also includes a SQL Server image so the entire application can be run in containers.  
 
  Kubernetes .yaml files have been included in this project which will pull the images from the octopussamples Docker Hub repo.  Note: the Sql Server password is in plain text, these would usually be created as [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/).  NOTE: SQL Server image has not been configured with a persistent volume claim, you will lose your data if you re-create your Kubernetes cluster.
+
+ NOTE:  When using Octopus Deploy to deploy the .yaml files to a Kubernetes cluster, be sure that teh octopetshop-database-job.yaml is run AFTER both octopetshop-sqlserver-cluster-ip-service.yaml and octopetshop-sql-deployment.yaml.
