@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlserver-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: sqlserver
+  template:
+    metadata:
+      labels:
+        component: sqlserver
+    spec:
+      containers:
+        - name: sqlserver
+          image: microsoft/mssql-server-linux:2017-latest
+          ports:
+            - containerPort: 1433
+          env:
+            - name: SA_PASSWORD
+              value: "ReplaceThisWithYourPassword"
+            - name: ACCEPT_EULA
+              value: "Y"
