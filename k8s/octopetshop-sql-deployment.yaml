@@ -19,6 +19,6 @@ spec:
             - containerPort: 1433
           env:
             - name: SA_PASSWORD
-              value: "Great balls 0f fire!"
+              value: "ReplaceThisWithYourPassword"
             - name: ACCEPT_EULA
               value: "Y"
