@@ -9,6 +9,9 @@ var prerelease = Argument("prerelease", "");
 var databaseRuntime = Argument("databaseRuntime", "win-x64");
 var octopusServer = Argument("octopusServer", "https://your.octopus.server");
 var octopusApiKey = Argument("octopusApiKey", "hey, don't commit your API key");
+var octopusSpace = Argument("octopusSpace", "Default");
+var octopusProject = Argument("octopusProject", "OctoPetShop");
+var octopusEnvironment = Argument("octopusEnvironment", "Development");
 
 class ProjectInformation
 {
@@ -46,6 +49,7 @@ Task("Clean")
         {
             CleanDirectory("publish");
             CleanDirectory("package");
+            CleanDirectory("testResults");
 
             var cleanSettings = new DotNetCoreCleanSettings { Configuration = configuration };
 
@@ -101,7 +105,25 @@ Task("RunUnitTests")
     {
         foreach(var project in projects.Where(p => p.IsTestProject))
         {
-            DotNetCoreTest(project.FullPath, new DotNetCoreTestSettings { Configuration = configuration });
+            DotNetCoreTest(project.FullPath, new DotNetCoreTestSettings
+                {
+                    Configuration = configuration,
+                    NoRestore = true,
+                    NoBuild = true,
+                    Logger = "TRX",
+                    ResultsDirectory = "testResults"
+                });
+        }
+
+        var isTFSBuild = TFBuild.IsRunningOnAzurePipelinesHosted;
+
+        if (isTFSBuild)
+        {
+            TFBuild.Commands.PublishTestResults(new TFBuildPublishTestResultsData
+                {
+                    TestRunner = TFTestRunnerType.XUnit,
+                    TestResultsFiles = GetFiles("testResults/*.trx").ToList()
+                });
         }
     });
 
@@ -163,17 +185,21 @@ Task("PushPackages")
     .IsDependentOn("Pack")
     .Does(() =>
     {
-        OctoPush(octopusServer, octopusApiKey, GetFiles("./package/*.nupkg"), new OctopusPushSettings());
+        OctoPush(octopusServer, octopusApiKey, GetFiles("./package/*.nupkg"), new OctopusPushSettings
+            {
+                Space = octopusSpace
+            });
     });
 
 Task("CreateRelease")
     .IsDependentOn("PushPackages")
     .Does(() =>
     {
-        OctoCreateRelease("Octo Pet Shop", new CreateReleaseSettings
+        OctoCreateRelease(octopusProject, new CreateReleaseSettings
             {
                 Server = octopusServer,
                 ApiKey = octopusApiKey,
+                Space = octopusSpace,
                 ReleaseNumber = packageVersion,
                 DefaultPackageVersion = packageVersion
             });
@@ -183,8 +209,9 @@ Task("DeployRelease")
     .IsDependentOn("CreateRelease")
     .Does(() =>
     {
-        OctoDeployRelease(octopusServer, octopusApiKey, "Octo Pet Shop", "Dev", packageVersion, new OctopusDeployReleaseDeploymentSettings
+        OctoDeployRelease(octopusServer, octopusApiKey, octopusProject, octopusEnvironment, packageVersion, new OctopusDeployReleaseDeploymentSettings
             {
+                Space = octopusSpace,
                 ShowProgress = true
             });
     });
