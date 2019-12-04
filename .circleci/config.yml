@@ -1,0 +1,125 @@
+version: 2.1
+
+orbs:
+  cake: octopus-samples/cake@0.0.1
+  octo: octopusdeploylabs/octopus-cli@0.0.2
+  octopetshop:
+    orbs:
+      octo: octopusdeploylabs/octopus-cli@0.0.2
+    commands:
+      pack:
+        parameters:
+          id:
+            type: string
+        steps:
+          - octo/pack:
+              id: "<< parameters.id >>"
+              version: $PACKAGEVERSION
+              base_path: "publish/<< parameters.id >>"
+              out_folder: "package"
+      push:
+        parameters:
+          id:
+            type: string
+        steps:
+          - octo/push:
+              package: "package/<< parameters.id >>.${PACKAGEVERSION}.zip"
+              server: "OCTOPUS_SERVER_URL"
+              api_key: "OCTOPUS_API_KEY"
+          - octo/build-information:
+              package_id: "<< parameters.id >>"
+              version: "$PACKAGEVERSION"
+              server: "OCTOPUS_SERVER_URL"
+              api_key: "OCTOPUS_API_KEY"
+jobs:
+  package:
+    executor:
+      name: octo/default
+    environment:
+      PACKAGEVERSION: 1.8.<< pipeline.number >>
+    steps:
+      - octo/install-tools
+      - attach_workspace:
+          at: publish
+      - octopetshop/pack:
+          id: "OctopusSamples.OctoPetShop.Database"
+      - octopetshop/pack:
+          id: "OctopusSamples.OctoPetShop.Infrastructure"
+      - octopetshop/pack:
+          id: "OctopusSamples.OctoPetShop.ProductService"
+      - octopetshop/pack:
+          id: "OctopusSamples.OctoPetShop.ShoppingCartService"
+      - octopetshop/pack:
+          id: "OctopusSamples.OctoPetShop.Web"
+      - persist_to_workspace:
+          root: package
+          paths:
+            - OctopusSamples*
+  push:
+    executor:
+      name: octo/default
+    environment:
+      PACKAGEVERSION: 1.8.<< pipeline.number >>
+    steps:
+      - octo/install-tools
+      - attach_workspace:
+          at: package
+      - octopetshop/push:
+          id: "OctopusSamples.OctoPetShop.Database"
+      - octopetshop/push:
+          id: "OctopusSamples.OctoPetShop.Infrastructure"
+      - octopetshop/push:
+          id: "OctopusSamples.OctoPetShop.ProductService"
+      - octopetshop/push:
+          id: "OctopusSamples.OctoPetShop.ShoppingCartService"
+      - octopetshop/push:
+          id: "OctopusSamples.OctoPetShop.Web"
+  create-release:
+    executor:
+      name: octo/default
+    environment:
+      PACKAGEVERSION: 1.8.<< pipeline.number >>
+    steps:
+      - octo/install-tools
+      - octo/create-release:
+          project: "Octo Pet Shop"
+          server: "OCTOPUS_SERVER_URL"
+          api_key: "OCTOPUS_API_KEY"
+          release_number: $PACKAGEVERSION
+  deploy-release:
+    executor:
+      name: octo/default
+    environment:
+      PACKAGEVERSION: 1.8.<< pipeline.number >>
+    steps:
+      - octo/install-tools
+      - octo/deploy-release:
+          project: "Octo Pet Shop"
+          server: "OCTOPUS_SERVER_URL"
+          api_key: "OCTOPUS_API_KEY"
+          release_number: $PACKAGEVERSION
+          deploy_to: "Dev"
+          progress: false
+workflows:
+  version: 2
+  build:
+    jobs:
+      - cake/build:
+          package_version: 1.8.<< pipeline.number >>
+          filters:
+            branches:
+              only:
+                - master
+                - circleci
+      - package:
+          requires:
+            - cake/build
+      - push:
+          requires:
+            - package
+      - create-release:
+          requires:
+            - push
+      - deploy-release:
+          requires:
+            - create-release

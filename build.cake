@@ -26,7 +26,11 @@ List<ProjectInformation> projects;
 
 Setup(context =>
 {
-    if (BuildSystem.IsLocalBuild && string.IsNullOrEmpty(prerelease))
+    var circleCI = EnvironmentVariable("CIRCLECI");
+    var isCircleCI = !string.IsNullOrEmpty(circleCI);
+    var isLocalBuild = !isCircleCI && BuildSystem.IsLocalBuild;
+
+    if (isLocalBuild && string.IsNullOrEmpty(prerelease))
     {
         prerelease = "-local";
     }
@@ -158,6 +162,7 @@ Task("Pack")
     {
         foreach(var project in projects.Where(p => !p.IsTestProject))
         {
+            Console.WriteLine($"Calling OctoPack for {project.Name}");
             OctoPack(
                 project.Name,
                 new OctopusPackSettings()
