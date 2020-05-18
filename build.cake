@@ -12,34 +12,28 @@ var octopusApiKey = Argument("octopusApiKey", "hey, don't commit your API key");
 var octopusSpace = Argument("octopusSpace", "Default");
 var octopusProject = Argument("octopusProject", "OctoPetShop");
 var octopusEnvironment = Argument("octopusEnvironment", "Development");
+var packageVersion = "";
 
-class ProjectInformation
-{
-    public string Name { get; set; }
-    public string FullPath { get; set; }
-    public string Runtime { get; set; }
-    public bool IsTestProject { get; set; }
-}
 
-string packageVersion;
-List<ProjectInformation> projects;
+var database = "OctopusSamples.OctoPetShop.Database";
+var databaseProject = $"./{database}/{database}.csproj";
+var productService = "OctopusSamples.OctoPetShop.ProductService";
+var productServiceProject = $"./{productService}/{productService}.csproj";
+var productServiceTests = "OctopusSamples.OctoPetShop.ProductService.Tests";
+var productServiceTestsProject = $"./{productServiceTests}/{productServiceTests}.csproj";
+var web = "OctopusSamples.OctoPetShop.Web";
+var webProject = $"./{web}/{web}.csproj";
 
 Setup(context =>
 {
-    if (BuildSystem.IsLocalBuild && string.IsNullOrEmpty(prerelease))
+    var isLocalBuild = BuildSystem.IsLocalBuild;
+
+    if (isLocalBuild && string.IsNullOrEmpty(prerelease))
     {
         prerelease = "-local";
     }
 
     packageVersion = $"{version}{prerelease}";
-
-    projects = GetFiles("./**/*.csproj").Select(p => new ProjectInformation
-    {
-        Name = p.GetFilenameWithoutExtension().ToString(),
-        FullPath = p.GetDirectory().FullPath,
-        Runtime = p.GetFilenameWithoutExtension().ToString() == "OctopusSamples.OctoPetShop.Database" ? databaseRuntime : null,
-        IsTestProject = p.GetFilenameWithoutExtension().ToString().EndsWith(".Tests")
-    }).ToList();
 
     Information("Building OctoPetShop v{0}", packageVersion);
 });
@@ -53,10 +47,10 @@ Task("Clean")
 
             var cleanSettings = new DotNetCoreCleanSettings { Configuration = configuration };
 
-            foreach(var project in projects)
-            {
-                DotNetCoreClean(project.FullPath, cleanSettings);
-            }
+            DotNetCoreClean(databaseProject, cleanSettings);
+            DotNetCoreClean(productServiceProject, cleanSettings);
+            DotNetCoreClean(productServiceTestsProject, cleanSettings);
+            DotNetCoreClean(webProject, cleanSettings);
         });
 
 // Run dotnet restore to restore all package references.
@@ -64,17 +58,12 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        foreach(var project in projects)
-        {
             var restoreSettings = new DotNetCoreRestoreSettings();
 
-            if (!string.IsNullOrEmpty(project.Runtime))
-            {
-                restoreSettings.Runtime = project.Runtime;
-            }
-
-            DotNetCoreRestore(project.FullPath, restoreSettings);
-        }
+            DotNetCoreRestore(databaseProject, new DotNetCoreRestoreSettings { Runtime = "win-x64" });
+            DotNetCoreRestore(productServiceProject, restoreSettings);
+            DotNetCoreRestore(productServiceTestsProject, restoreSettings);
+            DotNetCoreRestore(webProject, restoreSettings);
     });
 
  Task("Build")
@@ -82,100 +71,97 @@ Task("Restore")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        foreach(var project in projects)
-        {
-            var buildSettings = new DotNetCoreBuildSettings()
+            var buildSettings = new DotNetCoreBuildSettings
                 {
                     Configuration = configuration,
                     NoRestore = true
                 };
 
-            if (!string.IsNullOrEmpty(project.Runtime))
-            {
-                buildSettings.Runtime = project.Runtime;
-            }
-
-            DotNetCoreBuild(project.FullPath, buildSettings);
-        }
+            DotNetCoreBuild(databaseProject, new DotNetCoreBuildSettings
+                {
+                    Configuration = configuration,
+                    NoRestore = true,
+                    Runtime = "win-x64"
+                });
+            DotNetCoreBuild(productServiceProject, buildSettings);
+            DotNetCoreBuild(productServiceTestsProject, buildSettings);
+            DotNetCoreBuild(webProject, buildSettings);
     });
 
 Task("RunUnitTests")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        foreach(var project in projects.Where(p => p.IsTestProject))
-        {
-            DotNetCoreTest(project.FullPath, new DotNetCoreTestSettings
-                {
-                    Configuration = configuration,
-                    NoRestore = true,
-                    NoBuild = true,
-                    Logger = "TRX",
-                    ResultsDirectory = "testResults"
-                });
-        }
+        var testSettings = new DotNetCoreTestSettings
+            {
+                Configuration = configuration,
+                NoRestore = true,
+                NoBuild = true,
+                Logger = "TRX",
+                ResultsDirectory = "testResults"
+            };
 
-        var isTFSBuild = TFBuild.IsRunningOnAzurePipelinesHosted;
-
-        if (isTFSBuild)
-        {
-            TFBuild.Commands.PublishTestResults(new TFBuildPublishTestResultsData
-                {
-                    TestRunner = TFTestRunnerType.XUnit,
-                    TestResultsFiles = GetFiles("testResults/*.trx").ToList()
-                });
-        }
+        DotNetCoreTest(productServiceTestsProject, testSettings);
     });
 
 Task("Publish")
     .IsDependentOn("RunUnitTests")
     .Does(() =>
     {
-        foreach(var project in projects.Where(p => !p.IsTestProject))
-        {
-            var publishSettings = new DotNetCorePublishSettings()
+        DotNetCorePublish(databaseProject, new DotNetCorePublishSettings()
                 {
                     Configuration = configuration,
-                    OutputDirectory = System.IO.Path.Combine("publish", project.Name),
+                    OutputDirectory = System.IO.Path.Combine("publish", database),
+                    ArgumentCustomization = args => args.Append("--no-restore"),
+                    Runtime = "win-x64"
+                });
+        DotNetCorePublish(productServiceProject, new DotNetCorePublishSettings()
+                {
+                    Configuration = configuration,
+                    OutputDirectory = System.IO.Path.Combine("publish", productService),
                     ArgumentCustomization = args => args.Append("--no-restore")
-                };
-
-            if (!string.IsNullOrEmpty(project.Runtime))
-            {
-                publishSettings.Runtime = project.Runtime;
-            }
-
-            DotNetCorePublish(project.FullPath, publishSettings);
-        }
-
-        // publish infrastructure
-        CopyDirectory("OctopusSamples.OctoPetShop.Infrastructure", System.IO.Path.Combine("publish", "OctopusSamples.OctoPetShop.Infrastructure"));
+                });
+        DotNetCorePublish(webProject, new DotNetCorePublishSettings()
+                {
+                    Configuration = configuration,
+                    OutputDirectory = System.IO.Path.Combine("publish", web),
+                    ArgumentCustomization = args => args.Append("--no-restore")
+                });
     });
 
 Task("Pack")
     .IsDependentOn("Publish")
     .Does(() =>
     {
-        foreach(var project in projects.Where(p => !p.IsTestProject))
-        {
-            OctoPack(
-                project.Name,
-                new OctopusPackSettings()
-                {
-                    Format = OctopusPackFormat.NuPkg,
-                    BasePath = System.IO.Path.Combine("publish", project.Name),
-                    OutFolder = "package",
-                    Version = packageVersion
-                });
-        }
-
-        // pack infrastructure
+        Console.WriteLine($"Calling OctoPack for {database}");
         OctoPack(
-            "OctopusSamples.OctoPetShop.Infrastructure",
+            database,
             new OctopusPackSettings()
             {
-                Format = OctopusPackFormat.NuPkg,
-                BasePath = System.IO.Path.Combine("publish", "OctopusSamples.OctoPetShop.Infrastructure"),
+                Format = OctopusPackFormat.Zip,
+                BasePath = System.IO.Path.Combine("publish", database),
+                OutFolder = "package",
+                Version = packageVersion
+            });
+
+        Console.WriteLine($"Calling OctoPack for {productService}");
+        OctoPack(
+            productService,
+            new OctopusPackSettings()
+            {
+                Format = OctopusPackFormat.Zip,
+                BasePath = System.IO.Path.Combine("publish", productService),
+                OutFolder = "package",
+                Version = packageVersion
+            });
+
+        Console.WriteLine($"Calling OctoPack for {web}");
+        OctoPack(
+            web,
+            new OctopusPackSettings()
+            {
+                Format = OctopusPackFormat.Zip,
+                BasePath = System.IO.Path.Combine("publish", web),
                 OutFolder = "package",
                 Version = packageVersion
             });
@@ -185,7 +171,7 @@ Task("PushPackages")
     .IsDependentOn("Pack")
     .Does(() =>
     {
-        OctoPush(octopusServer, octopusApiKey, GetFiles("./package/*.nupkg"), new OctopusPushSettings
+        OctoPush(octopusServer, octopusApiKey, GetFiles("./package/*.zip"), new OctopusPushSettings
             {
                 Space = octopusSpace
             });

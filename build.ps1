@@ -245,8 +245,6 @@ else {
 $cakeArguments = @("$Script");
 if ($Target) { $cakeArguments += "-target=$Target" }
 if ($Configuration) { $cakeArguments += "-configuration=$Configuration" }
-if ($PackageVersion) { $cakeArguments += "--packageVersion=$PackageVersion" }
-if ($Prerelease) { $cakeArguments += "--prerelease=$Prerelease" }
 if ($Verbosity) { $cakeArguments += "-verbosity=$Verbosity" }
 if ($ShowDescription) { $cakeArguments += "-showdescription" }
 if ($DryRun) { $cakeArguments += "-dryrun" }
