@@ -6,14 +6,12 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var version = Argument("packageVersion", "0.0.1");
 var prerelease = Argument("prerelease", "");
-var databaseRuntime = Argument("databaseRuntime", "win-x64");
 var octopusServer = Argument("octopusServer", "https://your.octopus.server");
 var octopusApiKey = Argument("octopusApiKey", "hey, don't commit your API key");
 var octopusSpace = Argument("octopusSpace", "Default");
 var octopusProject = Argument("octopusProject", "OctoPetShop");
 var octopusEnvironment = Argument("octopusEnvironment", "Development");
 var packageVersion = "";
-
 
 var database = "OctopusSamples.OctoPetShop.Database";
 var databaseProject = $"./{database}/{database}.csproj";
