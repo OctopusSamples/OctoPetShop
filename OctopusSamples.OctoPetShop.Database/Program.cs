@@ -10,10 +10,38 @@ namespace OctopusSamples.OctoPetShopDatabase
     {
         static int Main(string[] args)
         {
-            var environmentVariableConnectionString = Environment.GetEnvironmentVariable("DbUpConnectionString");
+			var retryCount = 0;
+			var environmentVariableConnectionString = Environment.GetEnvironmentVariable("DbUpConnectionString");
             var connectionString = environmentVariableConnectionString == null ? args.FirstOrDefault() ?? "Server=(local)\\SqlExpress; Database=ops; Trusted_connection=true" : environmentVariableConnectionString;
 
-            EnsureDatabase.For.SqlDatabase(connectionString);
+
+			// retry three times
+			while (true)
+			{
+				try
+				{
+					EnsureDatabase.For.SqlDatabase(connectionString);
+					break;
+				}
+				catch (System.Exception e)
+				{
+					// check type
+					if (e.GetType() == typeof(System.Data.SqlClient.SqlException) && retryCount < 3)
+					{
+						// Display
+						Console.WriteLine("Connection error occured, waiting 3 seconds then trying again.");
+						System.Threading.Thread.Sleep(3000);
+						retryCount += 1;
+					}
+					else
+					{
+						// retrhow
+						throw e;
+					}
+				}
+			}
+			
+			
 
             var upgrader =
                 DeployChanges.To
