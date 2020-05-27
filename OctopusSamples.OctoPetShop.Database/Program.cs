@@ -23,10 +23,10 @@ namespace OctopusSamples.OctoPetShopDatabase
 					EnsureDatabase.For.SqlDatabase(connectionString);
 					break;
 				}
-				catch (System.Exception e)
+				catch (System.Data.SqlClient.SqlException)
 				{
 					// check type
-					if (e.GetType() == typeof(System.Data.SqlClient.SqlException) && retryCount < 3)
+					if (retryCount < 3)
 					{
 						// Display
 						Console.WriteLine("Connection error occured, waiting 3 seconds then trying again.");
@@ -35,8 +35,8 @@ namespace OctopusSamples.OctoPetShopDatabase
 					}
 					else
 					{
-						// retrhow
-						throw e;
+						// rethrow
+						throw;
 					}
 				}
 			}
