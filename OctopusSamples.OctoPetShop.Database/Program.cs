@@ -41,8 +41,6 @@ namespace OctopusSamples.OctoPetShopDatabase
 				}
 			}
 			
-			
-
             var upgrader =
                 DeployChanges.To
                     .SqlDatabase(connectionString)
