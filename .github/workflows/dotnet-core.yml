@@ -27,19 +27,19 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Create artifacts folder
       run: |
-        mkdir artifacts
-        mkdir artifacts/OctopusSamples.OctoPetShop.Database
-        mkdir artifacts/OctopusSamples.OctoPetShop.Web
-        mkdir artifacts/OctopusSamples.OctoPetShop.ProductService
-        mkdir artifacts/OctopusSamples.OctoPetShop.ShoppingCartService
+        mkdir ./artifacts
+        mkdir ./artifacts/OctopusSamples.OctoPetShop.Database
+        mkdir ./artifacts/OctopusSamples.OctoPetShop.Web
+        mkdir ./artifacts/OctopusSamples.OctoPetShop.ProductService
+        mkdir ./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService
     - name: Publish OctoPetShopDatabase
-      run: dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output artifacts/OctopusSamples.OctoPetShot.Database
+      run: dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output ./artifacts/OctopusSamples.OctoPetShot.Database
     - name: Publish OctoPetShopWeb
-      run: dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output artifacts/OctopusSamples.OctoPetShop.Web
+      run: dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output ./artifacts/OctopusSamples.OctoPetShop.Web
     - name: Publish OctoPetShopProductService
-      run: dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output artifacts/OctopusSamples.OctoPetShop.ProductService
+      run: dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output ./artifacts/OctopusSamples.OctoPetShop.ProductService
     - name: Publish OctoPetShopShoppingCartService
-      run: dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output artifacts/OctopusSamples.OctoPetshop.ShoppingCartService
+      run: dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output ./artifacts/OctopusSamples.OctoPetshop.ShoppingCartService
     - name: Install Octopus CLI
       run: |
         sudo apt update && sudo apt install --no-install-recommends gnupg curl ca-certificates apt-transport-https && \
@@ -48,25 +48,25 @@ jobs:
         sudo apt update && sudo apt install octopuscli
     - name: Package OctoPetShopDatabase
       run: |
-        octo pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="artifacts"
+        octo pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
     - name: Package OctoPetShopWeb
       run: |
-        octo pack --id="OctoPetShop.Web" --format="Zip" --version="$PACKAGE_VERSION" --basePath="artifacts/OctopusSamples.OctoPetShop.Web" --outFolder="artifacts"
+        octo pack --id="OctoPetShop.Web" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Web" --outFolder="./artifacts"
     - name: Package OctoPetShopProductService
       run: |
-        octo pack --id="OctoPetShop.ProductService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder="artifacts"
+        octo pack --id="OctoPetShop.ProductService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder="./artifacts"
     - name: Package OctoPetShopShoppingCartService
       run: |
-        octo pack --id="OctoPetShop.ShoppingCartService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --outFolder="artifacts"
+        octo pack --id="OctoPetShop.ShoppingCartService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --outFolder="./artifacts"
     - name: Push OctoPetShop Database
       run: |
-        octo push --package="artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
+        octo push --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
     - name: Push OctoPetShop Web
       run: |
-        octo push --package="artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
+        octo push --package="./artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
     - name: Push OctoPetShop ProductService
       run: |
-        octo push --package="artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
+        octo push --package="./artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
     - name: Push OctoPetShop ShoppingCartService
       run: |
-        octo push --package="artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
+        octo push --package="./artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
