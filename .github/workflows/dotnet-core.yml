@@ -33,7 +33,7 @@ jobs:
         mkdir ./artifacts/OctopusSamples.OctoPetShop.ProductService
         mkdir ./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService
     - name: Publish OctoPetShopDatabase
-      run: dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output ./artifacts/OctopusSamples.OctoPetShot.Database
+      run: dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output artifacts/OctopusSamples.OctoPetShot.Database
     - name: Publish OctoPetShopWeb
       run: dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output ./artifacts/OctopusSamples.OctoPetShop.Web
     - name: Publish OctoPetShopProductService
