@@ -3,6 +3,10 @@ using System.Linq;
 using System.Reflection;
 using DbUp;
 using DbUp.SqlServer;
+using DbUp.Engine;
+using DbUp.Helpers;
+using DbUp.Support;
+using System.IO;
 
 namespace OctopusSamples.OctoPetShopDatabase
 {
@@ -12,8 +16,8 @@ namespace OctopusSamples.OctoPetShopDatabase
         {
             var retryCount = 0;
             var environmentVariableConnectionString = Environment.GetEnvironmentVariable("DbUpConnectionString");
-            var connectionString = environmentVariableConnectionString == null ? args.FirstOrDefault() ?? "Server=(local)\\SqlExpress; Database=ops; Trusted_connection=true" : environmentVariableConnectionString;
-
+            var connectionString = environmentVariableConnectionString == null ? args.FirstOrDefault(x => x.StartsWith("--ConnectionString", StringComparison.OrdinalIgnoreCase)) : environmentVariableConnectionString;
+            //connectionString = connectionString.Substring(connectionString.IndexOf("=") + 1).Replace(@"""", string.Empty);
 
             // retry three times
             while (true)
@@ -48,27 +52,35 @@ namespace OctopusSamples.OctoPetShopDatabase
                    .LogToConsole()
                    .Build();
 
-            var result = upgrader.PerformUpgrade();
-
-            if (!result.Successful)
+            if (args.Any(a => a.StartsWith("--PreviewReportPath", StringComparison.InvariantCultureIgnoreCase)))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(result.Error);
-                Console.ResetColor();
-#if DEBUG
-                Console.ReadLine();
-#endif
-                return -1;
+                // Generate a preview file so Octopus Deploy can generate an artifact for approvals
+                var report = args.FirstOrDefault(x => x.StartsWith("--PreviewReportPath", StringComparison.OrdinalIgnoreCase));
+                report = report.Substring(report.IndexOf("=") + 1).Replace(@"""", string.Empty);
+
+                var fullReportPath = Path.Combine(report, "UpgradeReport.html");
+
+                Console.WriteLine($"Generating the report at {fullReportPath}");
+
+                upgrader.GenerateUpgradeHtmlReport(fullReportPath);
             }
+            else
+            {
+                var result = upgrader.PerformUpgrade();
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Success!");
-            Console.ResetColor();
-
-#if DEBUG
-            Console.ReadLine();
-#endif
-
+                // Display the result
+                if (result.Successful)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Success!");
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(result.Error);
+                    Console.WriteLine("Failed!");
+                }
+            }
             return 0;
         }
     }
