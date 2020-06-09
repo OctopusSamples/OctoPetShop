@@ -2,7 +2,7 @@ name: .NET Core Local runner
 
 on:
   push:
-    branches: [ master ] 
+    branches: [ master ]  
   pull_request:
     branches: [ master ]
 
