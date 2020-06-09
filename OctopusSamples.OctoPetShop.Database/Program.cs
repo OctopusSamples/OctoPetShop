@@ -17,7 +17,9 @@ namespace OctopusSamples.OctoPetShopDatabase
             var retryCount = 0;
             var environmentVariableConnectionString = Environment.GetEnvironmentVariable("DbUpConnectionString");
             var connectionString = environmentVariableConnectionString == null ? args.FirstOrDefault(x => x.StartsWith("--ConnectionString", StringComparison.OrdinalIgnoreCase)) : environmentVariableConnectionString;
-            //connectionString = connectionString.Substring(connectionString.IndexOf("=") + 1).Replace(@"""", string.Empty);
+
+            if (string.IsNullOrEmpty(environmentVariableConnectionString))
+                connectionString = connectionString.Substring(connectionString.IndexOf("=") + 1).Replace(@"""", string.Empty);
 
             // retry three times
             while (true)
