@@ -10,6 +10,9 @@ jobs:
   build:
 
     runs-on: [self-hosted, linux]
+    
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1    
 
     steps:
     - uses: actions/checkout@v2
