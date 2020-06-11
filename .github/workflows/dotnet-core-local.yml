@@ -1,4 +1,4 @@
-name: .NET Core Local runner  
+name: .NET Core Local runner 
 
 on:
   push:
