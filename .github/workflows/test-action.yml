@@ -1,0 +1,14 @@
+name: Action Tester
+
+on:
+  pull_request:
+    branches: [ demo ]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: twerthi/Octopus-Deploy-Action
+      with:
+        command: "pack"
