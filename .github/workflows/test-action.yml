@@ -1,7 +1,7 @@
-name: Action Tester 
+name: Action Tester
 
 on:
-  pull_request:
+  push:
     branches: [ demo ]
 jobs:
   build:
