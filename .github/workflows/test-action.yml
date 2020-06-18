@@ -1,4 +1,4 @@
-name: Action Tester
+name: Action Tester 
 
 on:
   pull_request:
