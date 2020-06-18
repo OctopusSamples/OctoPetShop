@@ -11,4 +11,4 @@ jobs:
     steps:
     - uses: twerthi/Octopus-Deploy-Action@v1
       with:
-        command: "pack"
+        command: "pack" 
