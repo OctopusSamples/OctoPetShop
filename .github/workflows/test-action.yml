@@ -2,7 +2,7 @@ name: Action Tester
 
 on:
   pull_request:
-    branches: [ demo ]
+    branches: [ demo ] 
 jobs:
   build:
 
