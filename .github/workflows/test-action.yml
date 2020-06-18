@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: twerthi/Octopus-Deploy-Action@alpha2
+    - uses: twerthi/Octopus-Deploy-Action@alpha3
       with:
         command: "pack" 
