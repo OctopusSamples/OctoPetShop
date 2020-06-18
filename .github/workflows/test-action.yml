@@ -1,14 +1,15 @@
-name: Action Tester
+on: [push]
 
-on:
-  pull_request:
-    branches: [ demo ] 
 jobs:
-  build:
-
+  hello_world_job:
     runs-on: ubuntu-latest
-
+    name: A job to say hello
     steps:
-    - uses: twerthi/Octopus-Deploy-Action
+    - name: Hello world action step
+      id: hello
+      uses: actions/hello-world-docker-action@v1
       with:
-        command: "pack"
+        who-to-greet: 'Mona the Octocat'
+    # Use the output from the `hello` step
+    - name: Get the output time
+      run: echo "The time was ${{ steps.hello.outputs.time }}"
