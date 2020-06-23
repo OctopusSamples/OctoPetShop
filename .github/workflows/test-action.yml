@@ -84,6 +84,12 @@ jobs:
         octopus-apikey: "${{ env.OCTOPUSSERVERAPIKEY }}"
         space: "${{ env.OCTOPUSSERVERSPACE_HYBRID }}"
      
+    - uses: twerthi/Octopus-Deploy-Action@alpha1
+      with:
+        command: "create-release"
+        version: "${{ env.PACKAGE_VERSION }}"
+        project: "Octo Pet Shop"
+        space: "${{ env.OCTOPUSSERVERSPACE_HYBRID }}"
         
         
         
