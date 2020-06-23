@@ -78,7 +78,7 @@ jobs:
     - uses: twerthi/Octopus-Deploy-Action@alpha1
       with:
         command: "push"
-        package-id: "*.zip"
+        package-id: "OctoPetShop.Database.${{ env.PACKAGE_VERSION }}.zip"
         artifact-folder: "artifacts"
         octopus-server-url: "${{ env.OCTOPUSSERVERURL }}"
         octopus-apikey: "${{ env.OCTOPUSSERVERAPIKEY }}"
