@@ -2,7 +2,7 @@ name: Action Tester
 
 on:
   push:
-    branches: [ demo ]             
+    branches: [ demo ]            
 jobs:
   build:
 
