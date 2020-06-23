@@ -43,5 +43,5 @@ jobs:
         command: "pack"
         version:  "${{ env.PACKAGE_VERSION }}"
         package-id: "OctoPetShop.Database"
-        pack-folder: "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
-        artifact-folder: "$GITHUB_WORKSPACE/artifacts"
+        pack-folder: "artifacts/OctopusSamples.OctoPetShop.Database"
+        artifact-folder: "artifacts"
