@@ -41,7 +41,7 @@ jobs:
     - uses: twerthi/Octopus-Deploy-Action@alpha1
       with:
         command: "pack"
-        version:  "$PACKAGE_VERSION"
+        version:  "${{ env.PACKAGE_VERSION }}"
         package-id: "OctoPetShop.Database"
         pack-folder: "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
         artifact-folder: "$GITHUB_WORKSPACE/artifacts"
