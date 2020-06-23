@@ -90,7 +90,9 @@ jobs:
         version: "${{ env.PACKAGE_VERSION }}"
         project: "Octo Pet Shop"
         space: "${{ env.OCTOPUSSERVERSPACE_HYBRID }}"
-        
+        octopus-server-url: "${{ env.OCTOPUSSERVERURL }}"
+        octopus-apikey: "${{ env.OCTOPUSSERVERAPIKEY }}"
+     
         
         
         
