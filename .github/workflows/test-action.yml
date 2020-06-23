@@ -37,6 +37,11 @@ jobs:
       run: dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService"
     - name: Publish OctoPetShopShoppingCartService
       run: dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
+    - name: Set environment variables
+      run: | 
+        echo "::set-env name=OCTOPUSSERVERAPIKEY::${{ secrets.OCTOPUSSERVERAPIKEY }}"
+        echo "::set-env name=OCTOPUSSERVERSPACE_HYBRID::${{ secrets.OCTOPUSSERVERSPACE_HYBRID }}"
+        echo "::set-env name=OCTOPUSSERVERURL::${{ secrets.OCTOPUSSERVERURL }}"
 
     - uses: twerthi/Octopus-Deploy-Action@alpha1
       with:
@@ -45,3 +50,43 @@ jobs:
         package-id: "OctoPetShop.Database"
         pack-folder: "artifacts/OctopusSamples.OctoPetShop.Database"
         artifact-folder: "artifacts"
+        
+    - uses: twerthi/Octopus-Deploy-Action@alpha1
+      with:
+        command: "pack"
+        version: "${{ env.PACKAGE_VERSION }}"
+        package-id: "OctoPetShop.Web"
+        pack-folder: "artifacts/OctopusSamples.OctoPetShop.Web"
+        artifact-folder: "artifacts"
+        
+    - uses: twerthi/Octopus-Deploy-Action@alpha1
+      with:
+        command: "pack"
+        version: "${{ env.PACKAGE_VERSION }}"
+        package-id: "OctoPetShop.ProductServer"
+        pack-folder: "artifacts/OctopusSamples.OctoPetShop.ProductService"
+        artifact-folder: "artifacts"
+    
+    - uses: twerthi/Octopus-Depoloy-Action@alpha1
+      with:
+        command: "pack"
+        version: "${{ env.PACKAGE_VERSION }}"
+        package-id: "OctoPetShop.ShoppingCartService"
+        pack-folder: "artifacts/OctopusSamples.OctoPetShop.ShoppingCartService"
+        artifact-folder: "artifacts"
+        
+    - uses: twerthi/Octopus-Deploy-Action@alpha1
+      with:
+        command: "pack"
+        version: "${{ env.PACKAGE_VERSION }} "
+        pack-folder: "artifacts/OctopusSamples.OctoPetShop.Database"
+        package-id: "OctoPetShop.Database"
+        artifact-folder: "artifacts"
+     
+        
+        
+        
+        
+        
+        
+        
