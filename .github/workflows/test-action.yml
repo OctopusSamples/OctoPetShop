@@ -67,7 +67,7 @@ jobs:
         pack-folder: "artifacts/OctopusSamples.OctoPetShop.ProductService"
         artifact-folder: "artifacts"
     
-    - uses: twerthi/Octopus-Depoloy-Action@alpha1
+    - uses: twerthi/Octopus-Deploy-Action@alpha1
       with:
         command: "pack"
         version: "${{ env.PACKAGE_VERSION }}"
