@@ -92,9 +92,10 @@ jobs:
         space: "${{ env.OCTOPUSSERVERSPACE_HYBRID }}"
         octopus-server-url: "${{ env.OCTOPUSSERVERURL }}"
         octopus-apikey: "${{ env.OCTOPUSSERVERAPIKEY }}"
-     
-        
-        
+   
+    - uses: twerthi/Octopus-Deploy-Action@alpha1
+      with:
+        command: "build-information"
         
         
         
