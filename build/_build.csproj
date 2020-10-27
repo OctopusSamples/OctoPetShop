@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace></RootNamespace>
+    <NoWarn>CS0649;CS0169</NoWarn>
+    <NukeRootDirectory>..</NukeRootDirectory>
+    <NukeScriptDirectory>..</NukeScriptDirectory>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nuke.Common" Version="0.25.0" />
+    <PackageDownload Include="OctopusTools" Version="[7.4.2]" />
+  </ItemGroup>
+
+</Project>
