@@ -88,7 +88,7 @@ jobs:
           server: "OCTOPUS_SERVER_URL"
           api_key: "OCTOPUS_API_KEY"
           space: $OCTOPUS_SPACE
-          release_number: $PACKAGEVERSION
+          
   deploy-release:
     executor:
       name: octo/default
@@ -101,7 +101,7 @@ jobs:
           server: "OCTOPUS_SERVER_URL"
           api_key: "OCTOPUS_API_KEY"
           space: $OCTOPUS_SPACE
-          release_number: $PACKAGEVERSION
+          
           deploy_to: "Development"
           progress: false
 workflows:
