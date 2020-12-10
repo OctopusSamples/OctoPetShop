@@ -87,7 +87,7 @@ jobs:
           project: "Octo Pet Shop"
           server: "OCTOPUS_SERVER_URL"
           api_key: "OCTOPUS_API_KEY"
-          space: "OCTOPUS_SPACE"
+          space: $OCTOPUS_SPACE
           release_number: $PACKAGEVERSION
   deploy-release:
     executor:
@@ -100,9 +100,9 @@ jobs:
           project: "Octo Pet Shop"
           server: "OCTOPUS_SERVER_URL"
           api_key: "OCTOPUS_API_KEY"
-          space: "OCTOPUS_SPACE"
+          space: $OCTOPUS_SPACE
           release_number: $PACKAGEVERSION
-          deploy_to: "Dev"
+          deploy_to: "Development"
           progress: false
 workflows:
   version: 2
