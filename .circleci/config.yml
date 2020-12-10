@@ -10,7 +10,7 @@ orbs:
       pack:
         parameters:
           id:
-            type: string
+            type: string 
         steps:
           - octo/pack:
               id: "<< parameters.id >>"
