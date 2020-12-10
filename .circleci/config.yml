@@ -101,7 +101,7 @@ jobs:
           server: "OCTOPUS_SERVER_URL"
           api_key: "OCTOPUS_API_KEY"
           space: $OCTOPUS_SPACE
-          
+          release_number: "latest"
           deploy_to: "Development"
           progress: false
 workflows:
