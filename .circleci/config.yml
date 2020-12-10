@@ -31,7 +31,7 @@ orbs:
               package_id: "<< parameters.id >>"
               version: "$PACKAGEVERSION"
               server: "OCTOPUS_SERVER_URL"
-              api_key: "OCTOPUS_API_KEY"
+              api_key: "OCTOPUS_API_KEY" 
               space: $OCTOPUS_SPACE
 jobs:
   package:
