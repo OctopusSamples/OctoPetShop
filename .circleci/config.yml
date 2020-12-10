@@ -26,13 +26,13 @@ orbs:
               package: "package/<< parameters.id >>.${PACKAGEVERSION}.zip"
               server: "OCTOPUS_SERVER_URL"
               api_key: "OCTOPUS_API_KEY"
-              space: "OCTOPUS_SPACE"
+              space: $OCTOPUS_SPACE
           - octo/build-information:
               package_id: "<< parameters.id >>"
               version: "$PACKAGEVERSION"
               server: "OCTOPUS_SERVER_URL"
               api_key: "OCTOPUS_API_KEY"
-              space: "OCTOPUS_SPACE"
+              space: $OCTOPUS_SPACE
 jobs:
   package:
     executor:
