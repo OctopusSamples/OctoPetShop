@@ -106,7 +106,7 @@ jobs:
           progress: false
 workflows:
   version: 2
-  daily:
+  nightly:
     triggers:
       - schedule:
         cron: "0 7 * * 1-5"
