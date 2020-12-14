@@ -115,7 +115,11 @@ workflows:
               only:
                 - master
     jobs:
-      - build
+      - cake/build
+      - package
+      - push
+      - create-release
+      - deploy-release
   build:
     jobs:
       - cake/build:
