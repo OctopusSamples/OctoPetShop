@@ -13,12 +13,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusSamples.OctoPetShop.ProductService.Tests", "OctopusSamples.OctoPetShop.ProductService.Tests\OctopusSamples.OctoPetShop.ProductService.Tests.csproj", "{B70F1D27-31F0-4CBF-8CD7-C8AEA01BB142}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{89298923-0A9E-4594-A197-FC93EDB48596}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89298923-0A9E-4594-A197-FC93EDB48596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89298923-0A9E-4594-A197-FC93EDB48596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D02010B-BC6C-4D46-ADAB-5A1581DBCFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D02010B-BC6C-4D46-ADAB-5A1581DBCFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D02010B-BC6C-4D46-ADAB-5A1581DBCFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
