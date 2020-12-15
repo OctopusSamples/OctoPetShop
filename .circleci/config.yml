@@ -115,17 +115,23 @@ workflows:
               only:
                 - master
     jobs:
-      - cake/build
-      - package
+      - cake/build:
+          package_version: 1.8.<< pipeline.number >>
+          filters:
+            branches:
+              only:
+                - master
+                - circleci
+      - package:
           requires:
             - cake/build
-      - push
+      - push:
           requires:
             - package
-      - create-release
+      - create-release:
           requires:
             - push
-      - deploy-release
+      - deploy-release:
           requires:
             - create-release
   build:
