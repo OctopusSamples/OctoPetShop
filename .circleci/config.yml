@@ -109,17 +109,26 @@ workflows:
   nightly:
     triggers:
       - schedule:
-          cron: "0 7 * * 1-5"
+          cron: "0 0 * * 1-5"
           filters:
             branches:
               only:
                 - master
     jobs:
       - cake/build
+          package_version: 1.8.<< pipeline.number >>
       - package
+          requires:
+            - cake/build
       - push
+          requires:
+            - package
       - create-release
+          requires:
+            - push
       - deploy-release
+          requires:
+            - create-release
   build:
     jobs:
       - cake/build:
