@@ -17,6 +17,8 @@ services:
     ports:
       - '5011:5011'
       - '5014:5014'
+    depends_on: 
+      - "database"
   octopetshop:
     environment:
       - ProductServiceBaseUrl=http://productservice:5011/
@@ -27,6 +29,9 @@ services:
     ports:
       - '5000:5000'
       - '5001:5001'
+    depends_on: 
+      - "shoppingcartservice"
+      - "productservice"
   shoppingcartservice:
     environment:
       - OPSConnectionString=Data Source=sql-server;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
@@ -36,6 +41,8 @@ services:
     ports:
       - '5012:5012'
       - '5013:5013'
+    depends_on: 
+      - "database"
   database:
     environment:
       - DbUpConnectionString=Data Source=sql-server;Initial Catalog=OctoPetShop; User ID=sa; Password=Great balls 0f fire!
