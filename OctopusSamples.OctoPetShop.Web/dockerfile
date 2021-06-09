@@ -6,7 +6,7 @@ ADD . /src
 RUN dotnet restore
 RUN ["dotnet", "build", "--configuration", "release"]
 RUN ["dotnet", "dev-certs", "https", "--clean"]
-RUN ["dotnet", "dev-certs", "https"]
+RUN ["dotnet", "dev-certs", "https", "-v"]
 
 EXPOSE 5000 5001
 
