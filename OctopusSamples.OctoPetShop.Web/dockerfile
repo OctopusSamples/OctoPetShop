@@ -5,7 +5,6 @@ WORKDIR /src
 ADD . /src
 RUN dotnet restore
 RUN ["dotnet", "build", "--configuration", "release"]
-RUN ["dotnet", "dev-certs", "https", "-t"]
 
 EXPOSE 5000 5001
 
