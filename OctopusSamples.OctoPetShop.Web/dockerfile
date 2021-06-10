@@ -5,15 +5,10 @@ WORKDIR /src
 ADD . /src
 RUN dotnet restore
 RUN ["dotnet", "build", "--configuration", "release"]
-RUN ["dotnet", "dev-certs", "https", "--clean"]
-RUN mkdir /https
-RUN ["dotnet", "dev-certs", "https", "--export-path", "/https/cert.pfx", "-p", "ThisIsTemporary!!"]
 
 EXPOSE 5000 5001
 
 ENV ASPNETCORE_URLS="http://+:5000;https://+:5001"
 ENV ASPNETCORE_ENVIRONMENT="Production"
-ENV ASPNETCORE_Kestrel__Certificates__Default__Password="ThisIsTemporary!!"
-ENV ASPNETCORE_Kestrel__Certificates__Default__Path="/https/cert.pfx"
 
 ENTRYPOINT [ "dotnet", "run", "--no-launch-profile" ]
