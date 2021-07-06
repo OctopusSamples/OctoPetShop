@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: sqlserver
-          image: microsoft/mssql-server-linux:2017-latest
+          image: mcr.microsoft.com/mssql/server:2019-latest
           ports:
             - containerPort: 1433
           env:
