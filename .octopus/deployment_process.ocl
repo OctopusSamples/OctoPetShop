@@ -162,6 +162,7 @@ step "Run a Script" {
                 $URL = $OctopusParameters["Project.Web.URL"]
                 Write-Highlight "OctoPetShop has been deployed to [$url]($url)"
                 Write-Highlight "Please verify the deployment has completed successfully"
+                Write-Highlight "Hello Derek"
             EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
