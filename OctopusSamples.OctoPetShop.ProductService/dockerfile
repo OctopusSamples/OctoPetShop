@@ -10,5 +10,6 @@ EXPOSE 5011 5014
 
 ENV ASPNETCORE_URLS="http://+:5011;https://+:5014"
 ENV ASPNETCORE_ENVIRONMENT="Production"
+RUN ["dotnet", "dev-certs", "https"]
 
 ENTRYPOINT [ "dotnet", "run", "--no-launch-profile" ]
