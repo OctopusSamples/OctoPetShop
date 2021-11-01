@@ -35,8 +35,8 @@ namespace OctopusSamples.OctoPetShopDatabase
                     if (retryCount < 3)
                     {
                         // Display
-                        Console.WriteLine("Connection error occured, waiting 3 seconds then trying again.");
-                        System.Threading.Thread.Sleep(3000);
+                        Console.WriteLine("Connection error occured, waiting 10 seconds then trying again.");
+                        System.Threading.Thread.Sleep(10000);
                         retryCount += 1;
                     }
                     else
