@@ -66,7 +66,8 @@ jobs:
       with:
         api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
         server: ${{ secrets.OCTOPUSSERVERURL }}"
-        packages: "artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip,artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip,artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip,artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip"
+        packages: "OctoPetShop.Database.$PACKAGE_VERSION.zip,artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip,artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip,artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip"
+        space: ${{ secrets.OCTOPUSSERVER_SPACE }}
     - name: Create release
       run: |
         octo create-release --project="Octo Pet Shop" --server="${{ secrets.OCTOPUSSERVERURL }}" --apiKey="${{ secrets.OCTOPUSSERVERAPIKEY }}" --space="${{ secrets.OCTOPUSSERVER_SPACE }}"
