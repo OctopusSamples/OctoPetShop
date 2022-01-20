@@ -65,7 +65,7 @@ jobs:
       uses: OctopusDeploy/push-package-action@v1.1.1
       with:
         api_key: ${{ secrets.OCTOPUSSERVERAPIKEY }}
-        server: ${{ secrets.OCTOPUSSERVERURL }}"
+        server: ${{ secrets.OCTOPUSSERVERURL }}
         packages: "artifacts/OctoPetShop.Database.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.Web.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.ProductService.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.ShoppingCartService.${{ env.PACKAGE_VERSION }}.zip"
         space: ${{ secrets.OCTOPUSSERVER_SPACE }}
     - name: Create release
