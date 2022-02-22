@@ -45,13 +45,13 @@ jobs:
       run: dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService"
     - name: Publish OctoPetShopShoppingCartService
       run: dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
-    - name: Setup .NET Core for publish
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.200
     - name: Pack OctoPetShopDatabase
       run: |
         dotnet pack OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" -p:PackageVersion=$PACKAGE_VERSION
+    - name: Setup .NET Core for publish
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.200        
     - name: Add source
       run: |
         dotnet nuget add source "https://nuget.pkg.github.com/OctopusSamples/index.json" --username twerthi --password ${{ secrets.ACTIONS_GITHUB_PAT }} --store-password-in-clear-text --name github 
