@@ -2,7 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp2.1</TargetFramework>
-        <RepositoryUrl>https://github.com/OctopusSamples/OctoPetShop.git</RepositoryUrl>        
+        <RepositoryUrl>https://github.com/OctopusSamples/OctoPetShop.git</RepositoryUrl>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
