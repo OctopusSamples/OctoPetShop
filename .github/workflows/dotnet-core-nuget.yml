@@ -57,4 +57,4 @@ jobs:
         dotnet nuget add source "https://nuget.pkg.github.com/OctopusSamples/index.json" --username twerthi --password ${{ secrets.ACTIONS_GITHUB_PAT }} --store-password-in-clear-text --name github 
     - name: Push packages to GitHub Packages NuGet feed
       run: |
-        dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctoPetShop.Database.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.ACTIONS_GITHUB_PAT }} --source "github"
+        dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.ACTIONS_GITHUB_PAT }} --source "github"
