@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <RepositoryUrl>https://github.com/OctopusSamples/OctoPetShop.git</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
