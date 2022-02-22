@@ -61,9 +61,6 @@ jobs:
     - name: Package OctoPetShopShoppingCartService
       run: |
         octo pack --id="OctoPetShop.ShoppingCartService" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService" --outFolder="$GITHUB_WORKSPACE/artifacts"
-    - name: Add GitHub NuGet package source
-      run: |
-        dotnet nuget add source --username OctopusSamples --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/OctopusSamples/index.json"
     - name: Push packages to GitHub Packages NuGet feed
       run: |
         dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
