@@ -56,7 +56,7 @@ jobs:
         dotnet pack OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService" -p:PackageVersion=$PACKAGE_VERSION
     - name: Pack OctoPetShopShoppingCartService
       run: |
-        dotnet pack OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService" -p:PackageVersion=$PACKAGE_VERSION
+        dotnet pack OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts" -p:PackageVersion=$PACKAGE_VERSION
 
     - name: Setup .NET Core for publish
       uses: actions/setup-dotnet@v1
@@ -71,5 +71,5 @@ jobs:
         dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
         dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
         dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
-        ls $GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ShoppingCartService
-        dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
+        ls $GITHUB_WORKSPACE/artifacts
+        dotnet nuget push "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.nupkg"  --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
