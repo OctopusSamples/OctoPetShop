@@ -8,7 +8,7 @@ using OctopusSamples.OctoPetShop.Models;
 
 namespace OctopusSamples.OctoPetShop.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Microsoft.AspNetCore.Mvc.Controller
     {
         private readonly IProductClient _productClient;
 
