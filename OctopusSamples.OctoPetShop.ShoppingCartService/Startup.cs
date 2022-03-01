@@ -27,6 +27,19 @@ namespace OctopusSamples.ShoppingCartService
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<OctopusSamples.OctoPetShop.ShoppingCartService.EnvironmentConfig>(Configuration);
+
+            services.AddMvcCore(options =>
+            {
+                options.RequireHttpsPermanent = true; //does not affect API requests
+                options.RespectBrowserAcceptHeader = true; //false by default
+            })
+           .AddApiExplorer()
+           .AddFormatterMappings()
+           .AddNewtonsoftJson()
+           .AddCacheTagHelper()
+           .AddDataAnnotations()
+           .AddAuthorization()
+           .AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +54,17 @@ namespace OctopusSamples.ShoppingCartService
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            app.UseRouting();
+
             if (System.Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == null)
                 app.UseHttpsRedirection();
-            
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
+
         }
     }
 }
