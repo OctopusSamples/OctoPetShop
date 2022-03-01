@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+}
+<h2>@ViewData["Title"]</h2>
+
+<img class="img-rounded img-responsive center-block pull-left" src="~/images/logo.png"/>
+
+<p>Thankyou for your order</p> 
+
+<form asp-controller="Home" asp-action="Finish" method="post">
+    <button type="submit" class="btn btn-primary">Finish</button>
+ </form>
+
