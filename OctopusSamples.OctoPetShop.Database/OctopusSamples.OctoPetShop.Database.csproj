@@ -5,12 +5,14 @@
     <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <RepositoryUrl>https://github.com/OctopusSamples/OctoPetShop.git</RepositoryUrl>
+    <UserSecretsId>a8ab1976-376a-4758-84bd-a1aa688371a2</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="dbup" Version="4.2.0" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="scripts/*.sql" />
