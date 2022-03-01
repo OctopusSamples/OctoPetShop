@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using OctopusSamples.ProductService.Repositories;
 
 namespace OctopusSamples.ProductService
@@ -21,12 +22,12 @@ namespace OctopusSamples.ProductService
         {
             services.AddTransient<IProductRepository, ProductRepository>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.Configure<OctopusSamples.OctoPetShop.ProductService.EnvironmentConfig>(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -43,7 +44,7 @@ namespace OctopusSamples.ProductService
             */
             if (System.Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == null)
                 app.UseHttpsRedirection();
-            app.UseMvc();
+            
         }
     }
 }
