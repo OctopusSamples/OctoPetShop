@@ -24,6 +24,19 @@ namespace OctopusSamples.ProductService
 
             services.Configure<OctopusSamples.OctoPetShop.ProductService.EnvironmentConfig>(Configuration);
 
+            services.AddMvcCore(options =>
+            {
+                options.RequireHttpsPermanent = true; //does not affect API requests
+                options.RespectBrowserAcceptHeader = true; //false by default
+            })
+            .AddApiExplorer()
+            .AddFormatterMappings()
+            .AddNewtonsoftJson()
+            .AddCacheTagHelper()
+            .AddDataAnnotations()
+            .AddAuthorization()
+            .AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,13 +51,21 @@ namespace OctopusSamples.ProductService
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            app.UseRouting();
+
             /*
             Check to see if we're running in a container.  This is only for this test application
             do not do something like this in Production
             */
             if (System.Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == null)
                 app.UseHttpsRedirection();
-            
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
+
         }
     }
 }

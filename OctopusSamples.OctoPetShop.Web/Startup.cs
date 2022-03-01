@@ -41,6 +41,7 @@ namespace OctopusSamples.OctoPetShop
             .AddNewtonsoftJson()
             .AddCacheTagHelper()
             .AddDataAnnotations()
+            .AddAuthorization()
             .AddRazorPages();
         }
 
@@ -62,6 +63,8 @@ namespace OctopusSamples.OctoPetShop
             app.UseCookiePolicy();
 
             app.UseRouting();
+
+            app.UseAuthorization();
             
             app.UseEndpoints(endpoints =>
             {
