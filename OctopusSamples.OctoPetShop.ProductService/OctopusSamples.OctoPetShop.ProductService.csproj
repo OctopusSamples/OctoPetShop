@@ -3,6 +3,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <RepositoryUrl>https://github.com/OctopusSamples/OctoPetShop.git</RepositoryUrl>
     <IsPackable>true</IsPackable>
+    <UserSecretsId>4c8e5400-8e43-46d2-a445-db73dbcca867</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
@@ -13,5 +16,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
   </ItemGroup>
 </Project>

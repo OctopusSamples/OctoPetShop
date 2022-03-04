@@ -18,8 +18,15 @@ namespace OctopusSamples.OctoPetShopDatabase
             var environmentVariableConnectionString = Environment.GetEnvironmentVariable("DbUpConnectionString");
             var connectionString = environmentVariableConnectionString == null ? args.FirstOrDefault(x => x.StartsWith("--ConnectionString", StringComparison.OrdinalIgnoreCase)) : environmentVariableConnectionString;
 
-            if (string.IsNullOrEmpty(environmentVariableConnectionString))
+            if (string.IsNullOrEmpty(environmentVariableConnectionString) && !string.IsNullOrEmpty(connectionString))
+            {
                 connectionString = connectionString.Substring(connectionString.IndexOf("=") + 1).Replace(@"""", string.Empty);
+            }
+            else
+            {
+                return -1;
+            }
+                
 
             // retry three times
             while (true)
