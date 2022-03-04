@@ -51,7 +51,6 @@ namespace OctopusSamples.ProductService
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseRouting();
 
             /*

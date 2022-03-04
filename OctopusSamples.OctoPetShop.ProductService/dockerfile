@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 5011 5014
+EXPOSE 5014 5015
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -12,7 +12,7 @@ COPY . .
 WORKDIR "/src/OctopusSamples.OctoPetShop.ProductService"
 RUN dotnet build "OctopusSamples.OctoPetShop.ProductService.csproj" -c Release -o /app/build
 
-ENV ASPNETCORE_URLS="http://+:5011;https://+:5014"
+ENV ASPNETCORE_URLS="http://+:80;https://+:443"
 ENV ASPNETCORE_ENVIRONMENT="Production"
 RUN ["dotnet", "dev-certs", "https"]
 

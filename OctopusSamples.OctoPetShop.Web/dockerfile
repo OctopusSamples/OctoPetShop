@@ -15,7 +15,7 @@ RUN dotnet build "OctopusSamples.OctoPetShop.Web.csproj" -c Release -o /app/buil
 FROM build AS publish
 RUN dotnet publish "OctopusSamples.OctoPetShop.Web.csproj" -c Release -o /app/publish
 
-ENV ASPNETCORE_URLS="http://+:5000;https://+:5001"
+ENV ASPNETCORE_URLS="http://+:80;https://+:443"
 ENV ASPNETCORE_ENVIRONMENT="Production"
 RUN ["dotnet", "dev-certs", "https"]
 

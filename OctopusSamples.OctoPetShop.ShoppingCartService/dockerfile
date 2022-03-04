@@ -12,7 +12,7 @@ COPY . .
 WORKDIR "/src/OctopusSamples.OctoPetShop.ShoppingCartService"
 RUN dotnet build "OctopusSamples.OctoPetShop.ShoppingCartService.csproj" -c Release -o /app/build
 
-ENV ASPNETCORE_URLS="http://+:5012;https://+:5013"
+ENV ASPNETCORE_URLS="http://+:80;https://+:443"
 ENV ASPNETCORE_ENVIRONMENT="Production"
 RUN ["dotnet", "dev-certs", "https"]
 

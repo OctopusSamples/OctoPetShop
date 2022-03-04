@@ -22,11 +22,10 @@ namespace OctopusSamples.OctoPetShopDatabase
             {
                 connectionString = connectionString.Substring(connectionString.IndexOf("=") + 1).Replace(@"""", string.Empty);
             }
-            else
+            else if (string.IsNullOrEmpty(environmentVariableConnectionString) && string.IsNullOrEmpty(connectionString))
             {
                 return -1;
-            }
-                
+            }                
 
             // retry three times
             while (true)
