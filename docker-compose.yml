@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.6'
 
 services:
   sql-server:
@@ -10,6 +10,7 @@ services:
       SA_PASSWORD: "OctopusDeploy_1234"
       ACCEPT_EULA: "Y"
   octopussamples.octopetshop.productservice:
+    container_name: productservice
     environment:
       - OPSConnectionString=Data Source=sql-server;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234
     image: ${DOCKER_REGISTRY-}octopussamplesoctopetshopproductservice
@@ -17,12 +18,13 @@ services:
       context: .
       dockerfile: OctopusSamples.OctoPetShop.ProductService/Dockerfile
     ports:
-      - '5011:80'
-      - '5014:443'
+      - "5011:80"
+      - "5014:443"
     depends_on: 
       - "octopussamples.octopetshop.database"
 
   octopussamples.octopetshop.shoppingcartservice:
+    container_name: shoppingcartservice
     image: ${DOCKER_REGISTRY-}octopussamplesoctopetshopshoppingcartservice
     build:
       context: .
@@ -30,27 +32,29 @@ services:
     environment:
       - OPSConnectionString=Data Source=sql-server;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234
     ports:
-      - '5012:80'
-      - '5013:443'
+      - "5012:80"
+      - "5013:443"
     depends_on: 
       - "octopussamples.octopetshop.database"
 
   octopussamples.octopetshop.web:
+    container_name: web
     image: ${DOCKER_REGISTRY-}octopussamplesoctopetshopweb
     build:
       context: .
       dockerfile: OctopusSamples.OctoPetShop.Web/Dockerfile
     environment:
-      - ProductServiceBaseUrl=http://octopussamples.octopetshop.productservice:5011/
-      - ShoppingCartServiceBaseUrl=http://octopussamples.octopetshop.shoppingcartservice:5012
+      - ProductServiceBaseUrl=http://productservice:5011
+      - ShoppingCartServiceBaseUrl=http://shoppingcartservice:5012
     ports:
-      - '5000:80'
-      - '5001:443'
+      - "5000:80"
+      - "5001:443"
     depends_on: 
       - "octopussamples.octopetshop.shoppingcartservice"
       - "octopussamples.octopetshop.productservice"
 
   octopussamples.octopetshop.database:
+    container_name: database
     environment:
       - DbUpConnectionString=Data Source=sql-server;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234
     image: ${DOCKER_REGISTRY-}octopussamplesoctopetshopdatabase
