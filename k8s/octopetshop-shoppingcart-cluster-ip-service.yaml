@@ -8,8 +8,8 @@ spec:
     component: shoppingcartservice
   ports:
     - port: 5012
-      targetPort: 5012
+      targetPort: 80
       name: http-port
     - port: 5013
-      targetPort: 5013
+      targetPort: 443
       name: https-port

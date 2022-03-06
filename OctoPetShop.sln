@@ -16,7 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4E5D6ED-B4A5-4390-96EF-B3A85C30B5D3}"
 	ProjectSection(SolutionItems) = preProject
 		build.ps1 = build.ps1
-		docker-compose.yaml = docker-compose.yaml
 		README.md = README.md
 	EndProjectSection
 EndProject

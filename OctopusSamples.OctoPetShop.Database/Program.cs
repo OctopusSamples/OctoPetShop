@@ -24,8 +24,11 @@ namespace OctopusSamples.OctoPetShopDatabase
             }
             else if (string.IsNullOrEmpty(environmentVariableConnectionString) && string.IsNullOrEmpty(connectionString))
             {
+                Console.WriteLine("No Connection String Supplied");
                 return -1;
-            }                
+            }
+
+            Console.WriteLine("Connection String is: " + connectionString);
 
             // retry three times
             while (true)

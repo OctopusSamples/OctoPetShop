@@ -7,9 +7,9 @@ spec:
   selector:
     component: productservice
   ports:
-    - port: 5011
-      targetPort: 5011
-      name: http-port
     - port: 5014
-      targetPort: 5014
+      targetPort: 80
+      name: http-port
+    - port: 5015
+      targetPort: 443
       name: https-port
