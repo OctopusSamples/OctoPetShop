@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: octopetshop-shoppingcartservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: shoppingcart
+  template:
+    metadata:
+      labels:
+        component: shoppingcart
+    spec:
+      containers:
+        - name: shoppingcart
+          #image: octopetshop_shoppingcartservice
+          #imagePullPolicy: Never
+          image: pjgcreations/octopetshop-shoppingcartservice
+          command: [ "dotnet", "OctopusSamples.OctoPetShop.ShoppingCartService.dll" ]
+          env:
+            - name: OPSConnectionString
+              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234

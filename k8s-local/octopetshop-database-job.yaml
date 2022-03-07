@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: octopetshop-dbup
+spec:
+  template:
+    spec:
+      containers:
+        - name: dbup
+          image: pjgcreations/octopetshop-database
+          #image: octopetshop_database
+          #imagePullPolicy: Never
+          command: [ "dotnet", "OctopusSamples.OctoPetShop.Database.dll" ]
+          env:
+            - name: DbUpConnectionString
+              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234
+      restartPolicy: Never
+

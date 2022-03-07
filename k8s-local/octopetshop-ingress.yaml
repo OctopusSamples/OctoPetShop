@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            backend:
+              service:
+                name: octopetshop-web-cluster-ip-service
+                port:
+                  number: 5000
+            path: /
