@@ -1,10 +1,12 @@
+# For the Ingress Version
+
 # Apply Local Kubernetes Stuff (From repo root) (Loca version doesn't deploy a load balancer)
 
-kubectl apply -f k8s-local
+kubectl apply -f k8s-ingress
 
 # Delete local Kubernetes Stuff (From repo root)
 
-kubectl delete -f k8s-local
+kubectl delete -f k8s-ingress
 
 # Port Forward (Without Ingress Service) (Copy full Web Deployment Name and replace octopetshop-web-deployment-{GUID} )
 
