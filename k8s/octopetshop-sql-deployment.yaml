@@ -6,19 +6,19 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      component: sql-server
+      component: sqlserver
   template:
     metadata:
       labels:
-        component: sql-server
+        component: sqlserver
     spec:
       containers:
-        - name: sql-server
+        - name: sqlserver
           image: mcr.microsoft.com/mssql/server:2019-latest
           ports:
             - containerPort: 1433
           env:
             - name: SA_PASSWORD
-              value: "OctopusDeploy_1234"
+              value: "ReplaceThisWithYourPassword"
             - name: ACCEPT_EULA
               value: "Y"

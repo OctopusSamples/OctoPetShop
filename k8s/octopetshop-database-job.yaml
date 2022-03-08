@@ -7,12 +7,12 @@ spec:
     spec:
       containers:
         - name: dbup
-          image: pjgcreations/octopetshop-database
+          image: octopussamples/octopetshop-database
           #image: octopetshop_database
           #imagePullPolicy: Never
-          command: [ "dotnet", "OctopusSamples.OctoPetShop.Database.dll" ]
+          command: [ "dotnet", "run", "--no-launch-profile" ]
           env:
             - name: DbUpConnectionString
-              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234
+              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=ReplaceThisWithYourPassword
       restartPolicy: Never
 

@@ -14,17 +14,16 @@ spec:
     spec:
       containers:
         - name: web
-          image: pjgcreations/octopetshop-web
+          image: octopussamples/octopetshop-web
           #image: octopetshop_octopetshop # use these when building locally
           #imagePullPolicy: Never
-          #command: [ "dotnet", "OctopusSamples.OctoPetShop.Web.dll" ]
           ports:
-            - containerPort: 80
+            - containerPort: 5000
               name: http-port
-            - containerPort: 443
+            - containerPort: 5001
               name: https-port
           env:
             - name: ProductServiceBaseUrl
-              value: http://octopetshop-productservice-cluster-ip-service
+              value: http://octopetshop-productservice-cluster-ip-service:5011/
             - name: ShoppingCartServiceBaseUrl
-              value: http://octopetshop-shoppingcart-cluster-ip-service
+              value: http://octopetshop-shoppingcart-cluster-ip-service:5012

@@ -14,10 +14,9 @@ spec:
     spec:
       containers:
         - name: productservice
-          image: pjgcreations/octopetshop-productservice
-          command: [ "dotnet", "OctopusSamples.OctoPetShop.ProductService.dll" ]
+          image: octopussamples/octopetshop-productservice
           #image: octopetshop_productservice
           #imagePullPolicy: Never
           env:
             - name: OPSConnectionString
-              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=OctopusDeploy_1234
+              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=ReplaceThisWithYourPassword
