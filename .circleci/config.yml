@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  cake: octopus-samples/cake@0.0.1
+  #cake: octopus-samples/cake@0.0.1
   octo: octopusdeploylabs/octopus-cli@0.0.2
   octopetshop:
     orbs:
@@ -33,7 +33,44 @@ orbs:
               server: "OCTOPUS_SERVER_URL"
               api_key: "OCTOPUS_API_KEY" 
               space: $OCTOPUS_SPACE
+
+executors:
+  cake-executor:
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+
 jobs:
+  build:
+    executor: cake-execotor
+    parameters:
+      cake_version:
+        default: "0.35"
+        type: string
+      package_version:
+        default: "$PACKAGEVERSION"
+        type: string
+      publish_path:
+        default: "publish"
+        type: string
+      target:
+        default: "Publish"
+        type: string
+    steps:
+      - checkout
+      - run:
+        name: Install Cake
+        command: |
+          export PATH="$PATH:/$HOME/.dotnet/tools"
+          dotnet tool install -g Cake.Tool --version << parameters.cake_version >>
+      - run:
+        name: Build
+        command: |
+          export PATH="$PATH:$HOME/.dotnet/tools"
+          dotnet cake build.cake --target="<< parameters.target >>" --packageVersion="<< parameters.package_version >>"
+      persist_to_workspace:
+        root: << parameters.publish_path >>
+        paths:
+          - "*"
   package:
     executor:
       name: octo/default
