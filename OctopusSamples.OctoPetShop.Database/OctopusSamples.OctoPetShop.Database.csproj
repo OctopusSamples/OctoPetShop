@@ -1,24 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <RepositoryUrl>https://github.com/OctopusSamples/OctoPetShop.git</RepositoryUrl>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="dbup" Version="4.2.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="scripts/*.sql" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="deploy.sh" CopyToOutputDirectory="PreserveNewest" />
     <None Update="deploy.ps1" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
 </Project>

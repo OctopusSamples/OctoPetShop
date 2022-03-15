@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.Web", "OctopusSamples.OctoPetShop.Web\OctopusSamples.OctoPetShop.Web.csproj", "{6D02010B-BC6C-4D46-ADAB-5A1581DBCFC2}"
 EndProject
@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.Database", "OctopusSamples.OctoPetShop.Database\OctopusSamples.OctoPetShop.Database.csproj", "{8A23BBDA-EA46-4079-B2E2-F70BCBD9EDBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctopusSamples.OctoPetShop.ProductService.Tests", "OctopusSamples.OctoPetShop.ProductService.Tests\OctopusSamples.OctoPetShop.ProductService.Tests.csproj", "{B70F1D27-31F0-4CBF-8CD7-C8AEA01BB142}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctopusSamples.OctoPetShop.ProductService.Tests", "OctopusSamples.OctoPetShop.ProductService.Tests\OctopusSamples.OctoPetShop.ProductService.Tests.csproj", "{B70F1D27-31F0-4CBF-8CD7-C8AEA01BB142}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E4E5D6ED-B4A5-4390-96EF-B3A85C30B5D3}"
+	ProjectSection(SolutionItems) = preProject
+		build.ps1 = build.ps1
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
