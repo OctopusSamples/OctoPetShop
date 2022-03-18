@@ -49,6 +49,7 @@ jobs:
       run: |
         ls -R "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
         dotnet pack OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" -p:PackageVersion=$PACKAGE_VERSION
+        ls -R "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
     - name: Pack OctoPetShopWeb
       run: |
         dotnet pack OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web" -p:PackageVersion=$PACKAGE_VERSION
