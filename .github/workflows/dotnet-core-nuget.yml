@@ -48,8 +48,7 @@ jobs:
     - name: Pack OctoPetShopDatabase
       run: |
         #dotnet pack OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-build --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" -p:PackageVersion=$PACKAGE_VERSION
-        cd "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
-        dotnet pack --no-build --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
+        zip -r "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.$PACKAGE_VERSION.zip" "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
         
     - name: Pack OctoPetShopWeb
       run: |
