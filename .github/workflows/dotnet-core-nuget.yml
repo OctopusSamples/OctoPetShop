@@ -38,7 +38,9 @@ jobs:
         mkdir "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService"
         mkdir "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ShoppingCartService"
     - name: Publish OctoPetShopDatabase
-      run: dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
+      run: |
+        - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
+        - ls -R "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
     - name: Publish OctoPetShopWeb
       run: dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web"
     - name: Publish OctoPetShopProductService
@@ -48,7 +50,7 @@ jobs:
     - name: Pack OctoPetShopDatabase
       run: |
         dotnet pack OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" -p:PackageVersion=$PACKAGE_VERSION
-        ls -R "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
+        
     - name: Pack OctoPetShopWeb
       run: |
         dotnet pack OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web" -p:PackageVersion=$PACKAGE_VERSION
