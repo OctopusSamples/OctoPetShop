@@ -47,7 +47,7 @@ jobs:
       run: dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
     - name: Pack OctoPetShopDatabase
       run: |
-        ls "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database/bin/Release/net6.0/"
+        ls -R "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
         dotnet pack OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" -p:PackageVersion=$PACKAGE_VERSION
     - name: Pack OctoPetShopWeb
       run: |
