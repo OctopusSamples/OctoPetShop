@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: "0 07 * * *"
+    - cron: "0 09 * * *"
   workflow_dispatch:
     logLevel:
       description: 'Log level'
