@@ -8,7 +8,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="dbup" Version="4.2.0">
-      <IncludeAssets>runtime; build</IncludeAssets>
+      <IncludeAssets>runtime</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.310801">
       <PrivateAssets>all</PrivateAssets>
