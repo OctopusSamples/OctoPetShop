@@ -66,16 +66,16 @@ jobs:
         version: latest
     - name: Package OctoPetShopDatabase
       run: |
-        octo pack --id="OctopusSamples.OctoPetShop.Database" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="$GITHUB_WORKSPACE/artifacts"
+        octo pack --id="OctopusSamples.OctoPetShop.Database" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
     - name: Package OctoPetShopWeb
       run: |
-        octo pack --id="OctopusSamples.OctoPetShop.Web" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web" --outFolder="$GITHUB_WORKSPACE/artifacts"
+        octo pack --id="OctopusSamples.OctoPetShop.Web" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web" --outFolder="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web"
     - name: Package OctoPetShopProductService
       run: |
-        octo pack --id="OctopusSamples.OctoPetShop.ProductService" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder="$GITHUB_WORKSPACE/artifacts"
+        octo pack --id="OctopusSamples.OctoPetShop.ProductService" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService"
     - name: Package OctoPetShopShoppingCartService
       run: |
-        octo pack --id="OctopusSamples.OctoPetShop.ShoppingCartService" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService" --outFolder="$GITHUB_WORKSPACE/artifacts"
+        octo pack --id="OctopusSamples.OctoPetShop.ShoppingCartService" --format="NuPkg" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService" --outFolder="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
 
 
     - name: Setup .NET Core for publish
