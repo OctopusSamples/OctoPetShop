@@ -33,6 +33,7 @@ namespace OctopusSamples.ProductService.Controllers
 
             if (pet == null)
             {
+                // Nothing found. Return nothing.
                 return NotFound();
             }
 
