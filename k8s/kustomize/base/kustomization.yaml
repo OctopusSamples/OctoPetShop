@@ -1,14 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
-  kind: Kustomization
+kind: Kustomization
   
-  resources:
-    - octopetshop-database-job.yaml
-    - octopetshop-loadbalancer.yaml
-    - octopetshop-productservice-cluster-ip-service.yaml
-    - octopetshop-productservice-deployment.yaml
-    - octopetshop-shoppingcart-cluster-ip-service.yaml
-    - octopetshop-shoppingcartservice-deployment.yaml
-    - octopetshop-sql-deployment.yaml
-    - octopetshop-sqlserver-cluster-ip-service.yaml
-    - octopetshop-web-cluster-ip-service.yaml
-    - octopetshop-web-deployment.yaml
+resources:
+- octopetshop-database-job.yaml
+- octopetshop-loadbalancer.yaml
+- octopetshop-productservice-cluster-ip-service.yaml
+- octopetshop-productservice-deployment.yaml
+- octopetshop-shoppingcart-cluster-ip-service.yaml
+- octopetshop-shoppingcartservice-deployment.yaml
+- octopetshop-sql-deployment.yaml
+- octopetshop-sqlserver-cluster-ip-service.yaml
+- octopetshop-web-cluster-ip-service.yaml
+- octopetshop-web-deployment.yaml
