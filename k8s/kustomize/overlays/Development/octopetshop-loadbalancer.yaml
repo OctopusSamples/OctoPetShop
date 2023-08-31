@@ -8,9 +8,6 @@ spec:
   ports:
     - port: #{Project.Web.Http.Port}
       targetPort: #{Project.Web.Http.Port}
-      name: http-port
     - port: #{Project.Web.Https.Port}
       targetPort: #{Project.Web.Https.Port}
-      name: https-port
-  type: LoadBalancer
   
