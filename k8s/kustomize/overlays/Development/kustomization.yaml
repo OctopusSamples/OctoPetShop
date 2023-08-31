@@ -8,4 +8,4 @@ patches:
 - path: octopetshop-productservice-deployment.yaml
 - path: octopetshop-shoppingcartservice-deployment.yaml
 - path: octopetshop-sql-deployment.yaml
-- path: octopetshop-web-cluster-ip-service
+- path: octopetshop-web-cluster-ip-service.yaml
