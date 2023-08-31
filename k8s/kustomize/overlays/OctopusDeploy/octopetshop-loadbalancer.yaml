@@ -7,7 +7,9 @@ spec:
     component: web
   ports:
     - port: #{Project.Web.Http.Port}
+      name: http-port
       targetPort: #{Project.Web.Http.Port}
     - port: #{Project.Web.Https.Port}
+      name: https-port
       targetPort: #{Project.Web.Https.Port}
   
