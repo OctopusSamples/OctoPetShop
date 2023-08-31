@@ -6,6 +6,6 @@ patches:
 - path: octopetshop-database-job.yaml
 - path: octopetshop-loadbalancer.yaml
 - path: octopetshop-productservice-deployment.yaml
-- path: octopetshop-shoppingcartservice-deployment.ayml
+- path: octopetshop-shoppingcartservice-deployment.yaml
 - path: octopetshop-sql-deployment.yaml
 - path: octopetshop-web-cluster-ip-service
