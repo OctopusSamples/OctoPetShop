@@ -1,27 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
-  name: octopetshop-web-deployment
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      component: web
   template:
-    metadata:
-      labels:
-        component: web
     spec:
       containers:
         - name: web
-          image: octopussamples/octopetshop-web
           ports:
             - containerPort: #{Project.Web.Http.Port}
-              name: http-port
             - containerPort: #{Project.Web.Https.Port}
-              name: https-port
-          env:
-            - name: ProductServiceBaseUrl
-              value: http://octopetshop-productservice-cluster-ip-service:5011/
-            - name: ShoppingCartServiceBaseUrl
-              value: http://octopetshop-shoppingcart-cluster-ip-service:5012
