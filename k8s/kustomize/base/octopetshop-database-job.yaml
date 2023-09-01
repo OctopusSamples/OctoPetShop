@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: octopetshop-dbup
+spec:
+  template:
+    spec:
+      containers:
+        - name: dbup
+          image: octopussamples/octopetshop-database
+          #image: octopetshop_database
+          #imagePullPolicy: Never
+          command: [ "dotnet", "run", "--no-launch-profile" ]
+          env:
+            - name: DbUpConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: connectionstring
+      restartPolicy: Never
+
