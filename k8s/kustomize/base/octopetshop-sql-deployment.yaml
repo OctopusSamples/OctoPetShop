@@ -21,7 +21,7 @@ spec:
             - name: SA_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: database-credentials
                   key: sa-password
             - name: ACCEPT_EULA
               value: "Y"

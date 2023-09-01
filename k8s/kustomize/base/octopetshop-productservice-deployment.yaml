@@ -19,5 +19,5 @@ spec:
             - name: OPSConnectionString
               valueFrom:
                 secretKeyRef:
-                  name: db-credentials
+                  name: database-credentials
                   key: connectionstring
