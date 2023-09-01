@@ -1,0 +1,12 @@
+- op: replace
+  path: /spec/ports/0/port
+  value: 5000
+- op: replace
+  path: /spec/ports/0/targetPort
+  value: 5000
+- op: replace
+  path: /spec/ports/1/port
+  value: 5001
+- op: replace
+  path: /spec/ports/1/targetPort
+  value: 5001  

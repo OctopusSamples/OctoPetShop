@@ -12,3 +12,9 @@ resources:
 - octopetshop-sqlserver-cluster-ip-service.yaml
 - octopetshop-web-cluster-ip-service.yaml
 - octopetshop-web-deployment.yaml
+
+secretGenerator:
+  - name: database-credentials
+    literals:
+    - sa-password="#{Project.SQLServer.SA.Password}"
+    - connectionstring="Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=#{Project.SQLServer.SA.Password}"

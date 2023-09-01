@@ -19,4 +19,7 @@ spec:
           image: octopussamples/octopetshop-shoppingcartservice
           env:
             - name: OPSConnectionString
-              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=ReplaceThisWithYourPassword
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: connectionstring

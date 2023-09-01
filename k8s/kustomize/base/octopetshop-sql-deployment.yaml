@@ -19,6 +19,9 @@ spec:
             - containerPort: 1433
           env:
             - name: SA_PASSWORD
-              value: "ReplaceThisWithYourPassword"
+              valueFrom:
+                secretKeyRef:
+                  name: db-credentials
+                  key: sa-password
             - name: ACCEPT_EULA
               value: "Y"
