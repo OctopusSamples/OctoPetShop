@@ -19,4 +19,7 @@ spec:
           #imagePullPolicy: Never
           env:
             - name: OPSConnectionString
-              value: Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=ReplaceThisWithYourPassword
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: connectionstring
