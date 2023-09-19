@@ -15,7 +15,7 @@ images:
     newName: #{Project.Image.Name}
     newTag: "latest"
 
-patches:
+patchesJson6902:
 - target:
     kind: Deployment
     labelSelector: #{Project.Label.Selector}
