@@ -18,6 +18,7 @@ images:
 patches:
 - target:
     kind: Deployment
+    name: microservice
     labelSelector: #{Project.Label.Selector}
   patch: |-
 
