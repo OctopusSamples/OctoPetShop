@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: servicename
+  template:
+    metadata:
+      labels:
+        component: servicename
+    spec:
+      containers:
+        - name: containername
+          image: busybox
+          env:
+            - name: OPSConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: database-credentials
+                  key: connectionstring
