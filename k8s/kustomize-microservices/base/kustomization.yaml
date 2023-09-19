@@ -34,5 +34,5 @@ patches:
       value: #{Project.Service.Name}
 
     - op: replace
-      path: /spec/template/spec/containers/name
+      path: /spec/template/spec/containers/0/name
       value: #{Project.Container.Name}
