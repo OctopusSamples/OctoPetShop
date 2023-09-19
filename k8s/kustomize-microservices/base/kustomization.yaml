@@ -32,7 +32,3 @@ patches:
     - op: replace
       path: /spec/template/metadata/labels/component
       value: #{Project.Service.Name}
-
-    - op: replace
-      path: /spec/template/spec/containers/name
-      value: #{Project.Container.Name}
