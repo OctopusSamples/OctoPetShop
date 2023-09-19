@@ -13,7 +13,7 @@ secretGenerator:
 images:
   - name: busybox
     newName: #{Project.Image.Name}
-    newTag: "latest"
+    newTag: #{Project.Image.Tag}
 
 patches:
 - target:
@@ -32,3 +32,7 @@ patches:
     - op: replace
       path: /spec/template/metadata/labels/component
       value: #{Project.Service.Name}
+
+    - op: replace
+      path: /spec/template/spec/containers/name
+      value: #{Project.Container.Name}
