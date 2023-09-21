@@ -1,0 +1,38 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+  
+resources:
+- deployment.yaml
+
+secretGenerator:
+  - name: database-credentials
+    literals:
+    - sa-password="#{Project.SQLServer.SA.Password}"
+    - connectionstring="Data Source=octopetshop-sqlserver-cluster-ip-service;Initial Catalog=OctoPetShop; User ID=sa; Password=#{Project.SQLServer.SA.Password}"
+
+images:
+  - name: busybox
+    newName: #{Project.Image.Name}
+    newTag: #{Project.Image.Tag}
+
+patches:
+- target:
+    kind: Deployment
+    name: microservice
+  patch: |-
+
+    - op: replace
+      path: /metadata/name
+      value: #{Project.Deployment.Name}
+
+    - op: replace
+      path: /spec/selector/matchLabels/component
+      value: #{Project.Service.Name}
+
+    - op: replace
+      path: /spec/template/metadata/labels/component
+      value: #{Project.Service.Name}
+
+    - op: replace
+      path: /spec/template/spec/containers/0/name
+      value: #{Project.Container.Name}
