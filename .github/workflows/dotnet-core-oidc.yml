@@ -74,5 +74,4 @@ jobs:
       with:
         space: ${{ secrets.OCTOPUSSERVER_SPACE }}
         project: "Octo Pet Shop"
-        deploy_to: "Development"
-        progress: true
+        # Space is Target - Hybrid
