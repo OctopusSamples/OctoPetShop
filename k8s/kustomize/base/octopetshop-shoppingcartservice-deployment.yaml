@@ -16,7 +16,7 @@ spec:
         - name: shoppingcart
           #image: octopetshop_shoppingcartservice
           #imagePullPolicy: Never
-          image: devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice
+          image: octopetshop-shoppingcartservice
           env:
             - name: OPSConnectionString
               valueFrom:
