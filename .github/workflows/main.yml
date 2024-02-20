@@ -5,7 +5,6 @@ on:
     branches: 
       - master
       - FIN-**
-  workflow_dispatch:
 
 jobs:
 
