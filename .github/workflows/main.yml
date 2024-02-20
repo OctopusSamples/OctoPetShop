@@ -3,7 +3,7 @@ name: CI - Containers
 on:
   push:
     branches: 
-      - main
+      - master
       - FIN-**
   workflow_dispatch:
 
