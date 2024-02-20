@@ -31,6 +31,8 @@ namespace OctopusSamples.ProductService.Controllers
         {
             var pet = await _productRepository.GetById(id);
 
+            // Sample change for the demo!
+
             if (pet == null)
             {
                 return NotFound();
