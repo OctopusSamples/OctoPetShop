@@ -13,10 +13,10 @@ spec:
         component: shoppingcart
     spec:
       containers:
-        - name: octopussamples/shoppingcart
+        - name: shoppingcart
           #image: octopetshop_shoppingcartservice
           #imagePullPolicy: Never
-          image: octopetshop-shoppingcartservice
+          image: octopussamples/octopetshop-shoppingcartservice
           env:
             - name: OPSConnectionString
               valueFrom:
