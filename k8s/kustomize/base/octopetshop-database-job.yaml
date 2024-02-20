@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: dbup
-          image: octopetshop-database
+          image: octopussamples/octopetshop-database
           #image: octopetshop_database
           #imagePullPolicy: Never
           command: [ "dotnet", "run", "--no-launch-profile" ]

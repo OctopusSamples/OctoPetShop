@@ -13,7 +13,7 @@ spec:
         component: shoppingcart
     spec:
       containers:
-        - name: shoppingcart
+        - name: octopussamples/shoppingcart
           #image: octopetshop_shoppingcartservice
           #imagePullPolicy: Never
           image: octopetshop-shoppingcartservice

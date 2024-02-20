@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: octopetshop-web
+          image: octopussamples/octopetshop-web
           #image: octopetshop_octopetshop # use these when building locally
           #imagePullPolicy: Never
           ports:
