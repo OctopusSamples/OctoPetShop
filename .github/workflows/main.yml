@@ -3,7 +3,7 @@ name: CI - Containers
 on:
   push:
     branches: 
-      - master
+      - main
       - FIN-**
   workflow_dispatch:
 
@@ -41,22 +41,22 @@ jobs:
 
      - name: Build OctoPetShop web container
        run: |
-        docker build ./devtoolswebinar.azurecr.io.OctoPetShop.Web --file ./devtoolswebinar.azurecr.io.OctoPetShop.Web/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-web:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.Web --file ./OctopusSamples.OctoPetShop.Web/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-web:${{ steps.version-generator.outputs.version }}
         docker push devtoolswebinar.azurecr.io/octopetshop-web:${{ steps.version-generator.outputs.version }}
         
      - name: Build OctoPetShop product service container
        run: | 
-        docker build ./devtoolswebinar.azurecr.io.OctoPetShop.ProductService --file ./devtoolswebinar.azurecr.io.OctoPetShop.ProductService/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.ProductService --file ./OctopusSamples.OctoPetShop.ProductService/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
         docker push devtoolswebinar.azurecr.io/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
         
      - name: Build OctoPetShop shopping cart container
        run: | 
-        docker build ./devtoolswebinar.azurecr.io.OctoPetShop.ShoppingCartService --file ./devtoolswebinar.azurecr.io.OctoPetShop.ShoppingCartService/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.ShoppingCartService --file ./OctopusSamples.OctoPetShop.ShoppingCartService/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
         docker push devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
         
      - name: Build OctoPetShop database container
        run: | 
-        docker build ./devtoolswebinar.azurecr.io.OctoPetShop.Database --file ./devtoolswebinar.azurecr.io.OctoPetShop.Database/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-database:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.Database --file ./OctopusSamples.OctoPetShop.Database/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-database:${{ steps.version-generator.outputs.version }}
         docker push devtoolswebinar.azurecr.io/octopetshop-database:${{ steps.version-generator.outputs.version }}        
         
   Push-build-information:
