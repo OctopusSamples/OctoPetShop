@@ -75,10 +75,10 @@ jobs:
         with:
           version: ${{ needs.build.outputs.version }}
           packages: |
-            devtoolswebinar.azurecr.io/octopetshop-web
-            devtoolswebinar.azurecr.io/octopetshop-productservice
-            devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice
-            devtoolswebinar.azurecr.io/octopetshop-database
+            octopetshop-web
+            octopetshop-productservice
+            octopetshop-shoppingcartservice
+            octopetshop-database
           
   Create-Octopus-Release:
   
