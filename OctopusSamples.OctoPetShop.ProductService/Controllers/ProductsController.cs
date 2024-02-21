@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OctopusSamples.ProductService.Models;
@@ -13,6 +14,7 @@ namespace OctopusSamples.ProductService.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IList<ProductDetail> _productCache = new List<ProductDetail>();
 
         public ProductsController(IProductRepository productRepository)
         {
@@ -21,7 +23,7 @@ namespace OctopusSamples.ProductService.Controllers
         
         [HttpGet]
         public async Task<ActionResult<List<ProductDetail>>> GetAllAsync()
-        {
+        {  
             return await _productRepository.GetAll();
         }
 
@@ -29,16 +31,25 @@ namespace OctopusSamples.ProductService.Controllers
         [ProducesResponseType(404)]
         public async Task<ActionResult<ProductDetail>> GetByIdAsync(int id)
         {
-            var pet = await _productRepository.GetById(id);
+            ProductDetail product = null;
 
-            // Sample change for the demo!
+            var cachedProduct = _productCache.FirstOrDefault(x => x.Id == id);
 
-            if (pet == null)
+            if (cachedProduct != null) 
+            {
+                product = cachedProduct;
+            }
+            else 
+            {   
+                product = await _productRepository.GetById(id);
+            }
+
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return pet;
+            return product;
         }
     }
 }
