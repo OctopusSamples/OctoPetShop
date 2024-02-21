@@ -1,0 +1,151 @@
+step "run-database-migrations" {
+    name = "Run database migrations"
+
+    action {
+        action_type = "Octopus.Script"
+        properties = {
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                # Run database migration script using your tool of choice. 
+                # Example using Microsoft EF Core is below but you can execute any tool. 
+                
+                # efcore
+                
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool = "hosted-ubuntu"
+    }
+}
+
+step "kustomize" {
+    name = "Deploy Microservice to Kubernetes"
+    package_requirement = "AfterPackageAcquisition"
+    properties = {
+        Octopus.Action.TargetRoles = "kustomize"
+    }
+
+    action {
+        action_type = "kustomize"
+        properties = {
+            OctopusUseBundledTooling = "False"
+        }
+        step_package_version = "2.0.2"
+        worker_pool = "hosted-ubuntu"
+
+        container {
+            feed = "docker-hub"
+            image = "octopuslabs/k8s-workertools:1.28.2-ubuntu.2204"
+        }
+
+        git_dependencies {
+            default_branch = "master"
+            git_credential_id = "GitCredentials-1602"
+            git_credential_type = "Library"
+            repository_uri = "https://github.com/OctopusSamples/OctoPetShop.git"
+            step_package_inputs_reference_id = "3b7e4857-c539-46ae-94ec-62d0d76dcbf7"
+        }
+
+        packages "octopetshop-web" {
+            acquisition_location = "NotAcquired"
+            feed = "acr-registr"
+            package_id = "octopetshop-web"
+            step_package_inputs_reference_id = "6921b182-afb2-4d9a-87df-3efd28851b55"
+        }
+
+        packages "octopetshop-productservice" {
+            acquisition_location = "NotAcquired"
+            feed = "acr-registr"
+            package_id = "octopetshop-productservice"
+            step_package_inputs_reference_id = "18b1e893-a303-4a78-bef8-e87040ad1989"
+        }
+
+        packages "octopetshop-shoppingcartservice" {
+            acquisition_location = "NotAcquired"
+            feed = "acr-registr"
+            package_id = "octopetshop-shoppingcartservice"
+            step_package_inputs_reference_id = "da311aed-9581-42d8-bb80-88ea258d7891"
+        }
+
+        packages "octopetshop-database" {
+            acquisition_location = "NotAcquired"
+            feed = "acr-registr"
+            package_id = "octopetshop-database"
+            step_package_inputs_reference_id = "ada1d1d5-13ee-4430-b977-e34d1c79c713"
+        }
+
+        inputs {
+            overlayPath = "k8s/kustomize/overlays/#{Octopus.Environment.Name}"
+
+            containerImageReferences {
+                containerImageReference {
+                    feedId = "Feeds-4947"
+                    imageName = "octopetshop-web"
+                    referenceId = "6921b182-afb2-4d9a-87df-3efd28851b55"
+                }
+            }
+
+            containerImageReferences {
+                containerImageReference {
+                    feedId = "Feeds-4947"
+                    imageName = "octopetshop-productservice"
+                    referenceId = "18b1e893-a303-4a78-bef8-e87040ad1989"
+                }
+            }
+
+            containerImageReferences {
+                containerImageReference {
+                    feedId = "Feeds-4947"
+                    imageName = "octopetshop-shoppingcartservice"
+                    referenceId = "da311aed-9581-42d8-bb80-88ea258d7891"
+                }
+            }
+
+            containerImageReferences {
+                containerImageReference {
+                    feedId = "Feeds-4947"
+                    imageName = "octopetshop-database"
+                    referenceId = "ada1d1d5-13ee-4430-b977-e34d1c79c713"
+                }
+            }
+
+            gitSource {
+                defaultBranch = "master"
+                gitCredential = "GitCredentials-1602"
+                isAnonymous = false
+                referenceId = "3b7e4857-c539-46ae-94ec-62d0d76dcbf7"
+                type = "external"
+                url = "https://github.com/OctopusSamples/OctoPetShop.git"
+            }
+
+            kubernetesObjectStatus {
+                enabled = true
+                timeout = 360
+                waitForJobs = false
+            }
+
+            substituteFiles {
+                filesToTarget = "k8s/kustomize/base/kustomization.yaml"
+            }
+        }
+    }
+}
+
+step "notify-team" {
+    name = "Notify team"
+
+    action {
+        properties = {
+            Octopus.Action.Template.Id = "ActionTemplates-3044"
+            Octopus.Action.Template.Version = "15"
+            ssn_Channel = "#{Notification.Slack.Channel}"
+            ssn_Color = "good"
+            ssn_HookUrl = "#{Notification.Slack.Webhook}"
+            ssn_IconUrl = "https://octopus.com/content/resources/favicon.png"
+            ssn_Message = "#{Notification.Slack.Status.Message}"
+            ssn_Title = "#{Notification.Slack.Status.Deployment.Title}"
+            ssn_Username = "Octopus Deploy"
+        }
+        worker_pool = "hosted-ubuntu"
+    }
+}

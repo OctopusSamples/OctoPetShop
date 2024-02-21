@@ -1,0 +1,21 @@
+variable "Project.Namespace.Name" {
+    value "robp-devtools-#{Octopus.Environment.Name | ToLower}" {
+        process = ["runbook/display-resource-logs", "runbook/list-pods", "runbook/list-resources-in-namespace"]
+
+        prompt {
+            description = ""
+            label = ""
+        }
+    }
+}
+
+variable "Project.Resource.Name" {
+    value {
+        process = ["runbook/list-resources-in-namespace"]
+
+        prompt {
+            description = ""
+            label = ""
+        }
+    }
+}
