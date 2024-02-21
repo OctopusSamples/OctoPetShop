@@ -96,5 +96,6 @@ jobs:
         id: "create-release"
         with:
           project: "AMEX Microservice"
+          git_ref: ${{ github.head_ref || github.ref_name }} 
       outputs: 
        release_number: ${{ steps.create-release.outputs.release_number }}
