@@ -1,0 +1,100 @@
+name: CI - Containers
+
+on:
+  push:
+    branches: 
+      - master
+      - FIN-**
+
+jobs:
+
+  build:
+    
+    name: Build & Push Docker Imagess
+    runs-on: ubuntu-latest
+    
+    outputs:
+      version: ${{ steps.version-generator.outputs.version }}
+      
+    steps:
+    
+     - uses: actions/checkout@v3
+    
+     # - name: Login to DockerHub
+     #   uses: docker/login-action@v2
+     #   with:
+     #    username: ${{ secrets.DOCKERHUB_SAMPLES_USERNAME }}
+     #    password: ${{ secrets.DOCKERHUB_SAMPLES_PASSWORD }}
+
+     - name: ACR Login
+       uses: Azure/docker-login@v1
+       with:        
+         login-server: devtoolswebinar.azurecr.io
+         username: ${{ secrets.ACR_USERNAME }}
+         password: ${{ secrets.ACR_PASSWORD }}
+        
+     - name: Set Version Number
+
+       id: version-generator
+       run: echo "version=$(date +'%Y.%m.%d').$GITHUB_RUN_NUMBER" >> $GITHUB_OUTPUT
+
+     - name: Build OctoPetShop web container
+       run: |
+        docker build ./OctopusSamples.OctoPetShop.Web --file ./OctopusSamples.OctoPetShop.Web/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-web:${{ steps.version-generator.outputs.version }}
+        docker push devtoolswebinar.azurecr.io/octopetshop-web:${{ steps.version-generator.outputs.version }}
+        
+     - name: Build OctoPetShop product service container
+       run: | 
+        docker build ./OctopusSamples.OctoPetShop.ProductService --file ./OctopusSamples.OctoPetShop.ProductService/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
+        docker push devtoolswebinar.azurecr.io/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
+        
+     - name: Build OctoPetShop shopping cart container
+       run: | 
+        docker build ./OctopusSamples.OctoPetShop.ShoppingCartService --file ./OctopusSamples.OctoPetShop.ShoppingCartService/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
+        docker push devtoolswebinar.azurecr.io/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
+        
+     - name: Build OctoPetShop database container
+       run: | 
+        docker build ./OctopusSamples.OctoPetShop.Database --file ./OctopusSamples.OctoPetShop.Database/dockerfile --tag devtoolswebinar.azurecr.io/octopetshop-database:${{ steps.version-generator.outputs.version }}
+        docker push devtoolswebinar.azurecr.io/octopetshop-database:${{ steps.version-generator.outputs.version }}        
+        
+  Push-build-information:
+       
+      name: 🐙Push Build Information
+      needs: build 
+      runs-on: ubuntu-latest
+      
+      env:
+        OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
+        OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY }}
+        OCTOPUS_SPACE: ${{ secrets.OCTOPUS_SPACE }}      
+
+      steps:
+      - uses: OctopusDeploy/push-build-information-action@v3
+        name: Push Build Information
+        with:
+          version: ${{ needs.build.outputs.version }}
+          packages: |
+            octopetshop-web
+            octopetshop-productservice
+            octopetshop-shoppingcartservice
+            octopetshop-database
+          
+  Create-Octopus-Release:
+  
+      name: 🐙Create Release
+      needs: [build, Push-build-information]
+      runs-on: ubuntu-latest
+      
+      env:
+        OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
+        OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY }}
+        OCTOPUS_SPACE: ${{ secrets.OCTOPUS_SPACE }}
+        
+      steps:
+      - uses: OctopusDeploy/create-release-action@v3
+        id: "create-release"
+        with:
+          project: "AMEX Microservice"
+      outputs: 
+       release_number: ${{ steps.create-release.outputs.release_number }}
