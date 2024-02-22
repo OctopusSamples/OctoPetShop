@@ -69,5 +69,5 @@ jobs:
         api_key: ${{ secrets.OCTOPUS_API_KEY }}
         server: ${{ secrets.OCTOPUS_URL }}
         space: ${{ secrets.OCTOPUS_SPACE }}
-        project: "Octo Pet Shop"
+        project: "Customer Banking Portal"
         progress: true
