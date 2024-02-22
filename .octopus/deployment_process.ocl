@@ -44,6 +44,7 @@ step "deploy-backend-portal-service" {
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "azure-devops-artifacts"
             Octopus.Action.Package.PackageId = "OctoFX.RateService"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
 
@@ -73,6 +74,7 @@ step "deploy-legacy-web-front-end" {
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "azure-devops-artifacts"
             Octopus.Action.Package.PackageId = "OctoFX.TradingWebsite"
+            Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
 
@@ -96,6 +98,7 @@ step "kustomize" {
 
     action {
         action_type = "kustomize"
+        is_disabled = true
         properties = {
             OctopusUseBundledTooling = "False"
         }
