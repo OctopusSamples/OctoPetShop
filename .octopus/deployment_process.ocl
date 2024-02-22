@@ -62,11 +62,30 @@ step "deploy-backend-portal-service" {
 step "deploy-legacy-web-front-end" {
     name = "Deploy legacy web front end"
     properties = {
+        Octopus.Action.MaxParallelism = "1"
         Octopus.Action.TargetRoles = "octofx-web"
     }
 
-    action {
+    action "remove-from-load-balancer" {
+        action_type = "Octopus.Script"
+        name = "Remove from Load Balancer"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                Write-Host "Removing from load balancer ..."
+                
+                # TODO Write script to remove from load balancer
+                
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool_variable = ""
+    }
+
+    action "deploy-legacy-web-front-end" {
         action_type = "Octopus.TentaclePackage"
+        name = "Deploy legacy web front end"
         properties = {
             Octopus.Action.EnabledFeatures = ",Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables"
             Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles = "False"
@@ -86,6 +105,23 @@ step "deploy-legacy-web-front-end" {
                 SelectionMode = "immediate"
             }
         }
+    }
+
+    action "add-to-load-balancer" {
+        action_type = "Octopus.Script"
+        name = "Add to load balancer"
+        properties = {
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                Write-Host "Adding machine back to load balancer ..."
+                
+                # TODO Write script to add it to the load balancer
+                
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+        }
+        worker_pool_variable = ""
     }
 }
 
