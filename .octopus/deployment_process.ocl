@@ -15,11 +15,80 @@ step "run-database-migrations" {
             Octopus.Action.Script.Syntax = "PowerShell"
         }
         worker_pool = "hosted-ubuntu"
+
+        packages "OctoFX.Database" {
+            acquisition_location = "Server"
+            feed = "azure-devops-artifacts"
+            package_id = "OctoFX.Database"
+            properties = {
+                Extract = "True"
+                Purpose = ""
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}
+
+step "deploy-backend-portal-service" {
+    name = "Deploy backend portal service"
+    properties = {
+        Octopus.Action.TargetRoles = "octofx-service"
+    }
+
+    action {
+        action_type = "Octopus.TentaclePackage"
+        properties = {
+            Octopus.Action.EnabledFeatures = ",Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables"
+            Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles = "False"
+            Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "azure-devops-artifacts"
+            Octopus.Action.Package.PackageId = "OctoFX.RateService"
+        }
+        worker_pool_variable = ""
+
+        packages {
+            acquisition_location = "Server"
+            feed = "azure-devops-artifacts"
+            package_id = "OctoFX.RateService"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
+    }
+}
+
+step "deploy-legacy-web-front-end" {
+    name = "Deploy legacy web front end"
+    properties = {
+        Octopus.Action.TargetRoles = "octofx-web"
+    }
+
+    action {
+        action_type = "Octopus.TentaclePackage"
+        properties = {
+            Octopus.Action.EnabledFeatures = ",Octopus.Features.ConfigurationTransforms,Octopus.Features.ConfigurationVariables"
+            Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles = "False"
+            Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "azure-devops-artifacts"
+            Octopus.Action.Package.PackageId = "OctoFX.TradingWebsite"
+        }
+        worker_pool_variable = ""
+
+        packages {
+            acquisition_location = "Server"
+            feed = "azure-devops-artifacts"
+            package_id = "OctoFX.TradingWebsite"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
     }
 }
 
 step "kustomize" {
-    name = "Deploy Microservice to Kubernetes"
+    name = "Deploy Modern front end to Kubernetes"
     package_requirement = "AfterPackageAcquisition"
     properties = {
         Octopus.Action.TargetRoles = "kustomize"
