@@ -64,10 +64,32 @@ jobs:
         packages: "artifacts/OctoPetShop.Database.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.Web.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.ProductService.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.ShoppingCartService.${{ env.PACKAGE_VERSION }}.zip"
         space: ${{ secrets.OCTOPUS_SPACE }}
 
+  Push-build-information:
+       
+      name: 🐙Push Build Information
+      needs: build 
+      runs-on: ubuntu-latest
+      
+      env:
+        OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
+        OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY }}
+        OCTOPUS_SPACE: ${{ secrets.OCTOPUS_SPACE }}      
+
+      steps:
+      - uses: OctopusDeploy/push-build-information-action@v3
+        name: Push Build Information
+        with:
+          version: ${{ needs.build.outputs.version }}
+          packages: |
+            octopetshop-web
+            octopetshop-productservice
+            octopetshop-shoppingcartservice
+            octopetshop-database
+
   Create-Octopus-Release:
   
       name: 🐙Create Release
-      needs: [build]
+      needs: [build, Push-build-information]
       runs-on: ubuntu-latest
       
       env:
