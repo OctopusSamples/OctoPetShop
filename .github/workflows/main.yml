@@ -64,11 +64,7 @@ jobs:
         packages: "artifacts/OctoPetShop.Database.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.Web.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.ProductService.${{ env.PACKAGE_VERSION }}.zip,artifacts/OctoPetShop.ShoppingCartService.${{ env.PACKAGE_VERSION }}.zip"
         space: ${{ secrets.OCTOPUS_SPACE }}
     - name: Create and deploy release
-      uses: OctopusDeploy/create-release-action@v1.1.1
+      uses: OctopusDeploy/create-release-action@v3
       with:
-        api_key: ${{ secrets.OCTOPUS_API_KEY }}
-        server: ${{ secrets.OCTOPUS_URL }}
-        space: ${{ secrets.OCTOPUS_SPACE }}
         project: "Customer Banking Portal"
         git_ref: ${{ github.head_ref || github.ref_name }} 
-        progress: true
