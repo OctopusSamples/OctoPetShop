@@ -95,7 +95,7 @@ jobs:
       - uses: OctopusDeploy/create-release-action@v3
         id: "create-release"
         with:
-          project: "AMEX Microservice"
+          project: "Customer Banking Portal"
           git_ref: ${{ github.head_ref || github.ref_name }} 
       outputs: 
        release_number: ${{ steps.create-release.outputs.release_number }}
