@@ -9,6 +9,7 @@ on:
 jobs:
   build:
 
+    name: Build & Push Packages
     runs-on: ubuntu-latest
 
     steps:
