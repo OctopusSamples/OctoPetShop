@@ -70,4 +70,5 @@ jobs:
         server: ${{ secrets.OCTOPUS_URL }}
         space: ${{ secrets.OCTOPUS_SPACE }}
         project: "Customer Banking Portal"
+        git_ref: ${{ github.head_ref || github.ref_name }} 
         progress: true
