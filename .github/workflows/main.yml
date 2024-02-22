@@ -12,10 +12,14 @@ jobs:
     name: Build & Push Packages
     runs-on: ubuntu-latest
 
+    outputs:
+      version: ${{ steps.version-generator.outputs.version }}
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set Version
-      run: echo "PACKAGE_VERSION=$(date +'%Y.%m.%d').$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+    - uses: actions/checkout@v3
+    - name: Set Version Number
+      id: version-generator
+      run: echo "version=$(date +'%Y.%m.%d').$GITHUB_RUN_NUMBER" >> $GITHUB_OUTPUT
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
