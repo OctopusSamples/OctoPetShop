@@ -16,10 +16,10 @@ step "run-database-migrations" {
         }
         worker_pool = "hosted-ubuntu"
 
-        packages "OctoFX.Database" {
+        packages "OctoPetShop.Database" {
             acquisition_location = "Server"
-            feed = "azure-devops-artifacts"
-            package_id = "OctoFX.Database"
+            feed = "octopus-server-built-in"
+            package_id = "OctoPetShop.Database"
             properties = {
                 Extract = "True"
                 Purpose = ""
@@ -42,16 +42,16 @@ step "deploy-backend-portal-service" {
             Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles = "False"
             Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
             Octopus.Action.Package.DownloadOnTentacle = "False"
-            Octopus.Action.Package.FeedId = "azure-devops-artifacts"
-            Octopus.Action.Package.PackageId = "OctoFX.RateService"
+            Octopus.Action.Package.FeedId = "octopus-server-built-in"
+            Octopus.Action.Package.PackageId = "OctoPetShop.ProductService"
             Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
 
         packages {
             acquisition_location = "Server"
-            feed = "azure-devops-artifacts"
-            package_id = "OctoFX.RateService"
+            feed = "octopus-server-built-in"
+            package_id = "OctoPetShop.ProductService"
             properties = {
                 SelectionMode = "immediate"
             }
@@ -91,16 +91,16 @@ step "deploy-legacy-web-front-end" {
             Octopus.Action.Package.AutomaticallyRunConfigurationTransformationFiles = "False"
             Octopus.Action.Package.AutomaticallyUpdateAppSettingsAndConnectionStrings = "True"
             Octopus.Action.Package.DownloadOnTentacle = "False"
-            Octopus.Action.Package.FeedId = "azure-devops-artifacts"
-            Octopus.Action.Package.PackageId = "OctoFX.TradingWebsite"
+            Octopus.Action.Package.FeedId = "octopus-server-built-in"
+            Octopus.Action.Package.PackageId = "OctoPetShop.Web"
             Octopus.Action.RunOnServer = "false"
         }
         worker_pool_variable = ""
 
         packages {
             acquisition_location = "Server"
-            feed = "azure-devops-artifacts"
-            package_id = "OctoFX.TradingWebsite"
+            feed = "octopus-server-built-in"
+            package_id = "OctoPetShop.Web"
             properties = {
                 SelectionMode = "immediate"
             }
