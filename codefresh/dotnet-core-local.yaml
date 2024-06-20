@@ -1,0 +1,43 @@
+version: "1.0"
+stages:
+  - "clone"
+  - "build"
+  - "test"
+
+steps:
+  clone:
+    title: "Cloning repository"
+    type: "git-clone"
+    repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+    revision: "${{CF_BRANCH}}"
+    git: "github"
+    stage: "clone"
+
+  install_deps:
+    title: "Install dependencies"
+    image: docker.io/bitnami/dotnet:${{DOTNET_VERSION}}
+    working_directory: "${{clone}}"
+    commands:
+      - dotnet restore
+    stage: "build"
+
+  create_artifact_folders:
+    title: "Create Artifact Folders"
+    image: "ubuntu:latest"
+    working_directory: "${{clone}}" # Running command where code cloned
+    commands:
+      - |
+        mkdir "./artifacts"
+        mkdir "./artifacts/OctopusSamples.OctoPetShop.Database"
+        mkdir "./artifacts/OctopusSamples.OctoPetShop.Web"
+        mkdir "./artifacts/OctopusSamples.OctoPetShop.ProductService"
+        mkdir "./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService"
+    stage: "build"
+
+    publish_database:
+      title: Publish OctoPetShopDatabase
+      image: docker.io/bitnami/dotnet:${{DOTNET_VERSION}}
+      working_directory: "${{clone}}"
+      commands:
+        - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
+      stage: "build"
