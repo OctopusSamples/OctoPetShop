@@ -18,7 +18,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet restore
+      - dotnet restore --packages ${{CF_VOLUME_PATH}}/nuget/packages
     stage: "build"
 
   create_artifact_folders:
@@ -44,7 +44,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Database"
+      - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Database"
     stage: "build"
 
   publish_web:
