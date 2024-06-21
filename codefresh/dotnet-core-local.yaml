@@ -15,7 +15,7 @@ steps:
 
   install_deps:
     title: "Install dependencies"
-    image: docker.io/bitnami/dotnet:${{DOTNET_VERSION}}
+    image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
       - dotnet restore
@@ -36,7 +36,7 @@ steps:
 
     publish_database:
       title: Publish OctoPetShopDatabase
-      image: docker.io/bitnami/dotnet:${{DOTNET_VERSION}}
+      image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
       working_directory: "${{clone}}"
       commands:
         - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
