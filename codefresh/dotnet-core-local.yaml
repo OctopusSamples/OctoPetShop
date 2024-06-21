@@ -78,7 +78,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
+      - octopus package --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
 
   package_web:
     title: Package OctoPetShopWeb
@@ -86,7 +86,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus pack --id="OctoPetShop.Web" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Web" --outFolder=".artifacts"
+      - octopus package --id="OctoPetShop.Web" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Web" --outFolder=".artifacts"
 
   package_product_service:
     title: Package OctoPetShopProductService
@@ -94,7 +94,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus pack --id="OctoPetShop.ProductService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder=".artifacts"
+      - octopus package --id="OctoPetShop.ProductService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder=".artifacts"
 
   package_cart_service:
     title: Package OctoPetShopShoppingCartService
@@ -102,7 +102,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus pack --id="OctoPetShop.ShoppingCartService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --outFolder=".artifacts"
+      - octopus package --id="OctoPetShop.ShoppingCartService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --outFolder=".artifacts"
 
   push_db:
     title: Push OctoPetShop Database
