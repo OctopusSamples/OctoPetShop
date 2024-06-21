@@ -44,7 +44,7 @@ steps:
     image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database"
+      - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Database"
     stage: "build"
 
   publish_web:
@@ -52,7 +52,7 @@ steps:
     image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Web"
+      - dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Web"
     stage: "build"
 
   publish_ProductService:
@@ -60,7 +60,7 @@ steps:
     image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.ProductService"
+      - dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ProductService"
     stage: "build"
 
   publish_CartService:
@@ -68,7 +68,7 @@ steps:
     image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
+      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
     stage: "build"
 
   package_db:
