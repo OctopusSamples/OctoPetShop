@@ -27,6 +27,7 @@ steps:
     working_directory: "${{clone}}" # Running command where code cloned
     commands:
       - |
+        cf_export PACKAGE_VERSION=$(date +'%Y.%m.%d')
         if [ ! -d ./artifacts ] ; then
           mkdir ./artifacts
           mkdir ./artifacts/OctopusSamples.OctoPetShop.Database
@@ -76,4 +77,4 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octo pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="$GITHUB_WORKSPACE/artifacts"
+      - octo pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
