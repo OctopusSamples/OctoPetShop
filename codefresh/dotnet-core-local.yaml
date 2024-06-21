@@ -1,8 +1,9 @@
 version: "1.0"
 stages:
-  - "clone"
-  - "build"
-  - "package"
+  - clone
+  - build
+  - package
+  - push
 
 steps:
   clone:
@@ -52,7 +53,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Web"
+      - dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Web"
     stage: "build"
 
   publish_ProductService:
@@ -60,7 +61,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ProductService"
+      - dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ProductService"
     stage: "build"
 
   publish_CartService:
@@ -68,13 +69,45 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
+      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
     stage: "build"
 
   package_db:
     title: Package OctoPetShopDatabase
-    image: octopuslabs/octopus-cli
+    image: octopuslabs/octopus-cli:2.2.1
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octo pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
+      - octopus pack --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
+
+  package_web:
+    title: Package OctoPetShopWeb
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus pack --id="OctoPetShop.Web" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Web" --outFolder=".artifacts"
+
+  package_product_service:
+    title: Package OctoPetShopProductService
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus pack --id="OctoPetShop.ProductService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder=".artifacts"
+
+  package_cart_service:
+    title: Package OctoPetShopShoppingCartService
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus pack --id="OctoPetShop.ShoppingCartService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --outFolder=".artifacts"
+
+  push_db:
+    title: Push OctoPetShop Database
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus push --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --server="${{OCTOPUS_URL}}" --apiKey="${{OCTOPUS_API_KE}}" --space="Default"
