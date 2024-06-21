@@ -15,7 +15,7 @@ steps:
 
   install_deps:
     title: "Install dependencies"
-    image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
       - dotnet restore
@@ -41,7 +41,7 @@ steps:
 
   publish_database:
     title: Publish OctoPetShopDatabase
-    image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
       - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Database"
@@ -49,7 +49,7 @@ steps:
 
   publish_web:
     title: Publish OctoPetShopWeb
-    image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
       - dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Web"
@@ -57,7 +57,7 @@ steps:
 
   publish_ProductService:
     title: Publish OctoPetShopProductService
-    image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
       - dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ProductService"
@@ -65,7 +65,7 @@ steps:
 
   publish_CartService:
     title: Publish OctoPetShopShoppingCartService
-    image: docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
       - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
