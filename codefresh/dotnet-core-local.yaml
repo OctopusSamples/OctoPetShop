@@ -9,10 +9,11 @@ stages:
 steps:
 
   increment:
+    title: Increment  Build Number
     image: codefresh/cli
     commands:
       - |
-        BUILD_NUMBER=$(codefresh get annotation pipeline ${{CF_PIPELINE_NAME}} -o json | jq -r '.variables[] | select(.key=="BUILD_NUMBER") | .value')
+        BUILD_NUMBER=$(codefresh get annotation pipeline ${{CF_PIPELINE_NAME}} BUILD_NUMBER -o json | jq -r '.value' )
         cf_export BUILD_NUMBER=$BUILD_NUMBER
         codefresh create annotation pipeline ${{CF_PIPELINE_NAME}}D BUILD_NUMBER=$(($BUILD_NUMBER+1)
 
