@@ -15,7 +15,7 @@ steps:
       - |
         BUILD_NUMBER=$(codefresh get annotation pipeline ${{CF_PIPELINE_NAME}} BUILD_NUMBER -o json | jq -r '.value' )
         cf_export BUILD_NUMBER=$BUILD_NUMBER
-        codefresh create annotation pipeline ${{CF_PIPELINE_NAME}}D BUILD_NUMBER=$(($BUILD_NUMBER+1)
+        codefresh create annotation pipeline ${{CF_PIPELINE_NAME}}D BUILD_NUMBER=$(($BUILD_NUMBER+1))
 
   clone:
     title: "Cloning repository"
