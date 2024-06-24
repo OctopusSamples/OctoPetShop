@@ -110,4 +110,4 @@ steps:
     working_directory: "${{clone}}"
     stage: push
     commands:
-      - octopus push --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --server="${{OCTOPUS_URL}}" --apiKey="${{OCTOPUS_API_KE}}" --space="Default"
+      - octopus package upload --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --space="Default"
