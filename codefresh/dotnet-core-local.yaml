@@ -1,11 +1,21 @@
 version: "1.0"
 stages:
+  - init
   - clone
   - build
   - package
   - push
 
 steps:
+
+  increment:
+    image: codefresh/cli
+    commands:
+      - |
+        BUILD_NUMBER=$(codefresh get annotation pipeline ${{CF_PIPELINE_NAME}} -o json | jq -r '.variables[] | select(.key=="BUILD_NUMBER") | .value')
+        cf_export BUILD_NUMBER=$BUILD_NUMBER
+        codefresh create annotation pipeline ${{CF_PIPELINE_NAME}}D BUILD_NUMBER=$(($BUILD_NUMBER+1)
+
   clone:
     title: "Cloning repository"
     type: "git-clone"
@@ -28,7 +38,7 @@ steps:
     working_directory: "${{clone}}" # Running command where code cloned
     commands:
       - |
-        cf_export PACKAGE_VERSION=$(date +'%Y.%m.%d')
+        cf_export PACKAGE_VERSION=$(date +'%Y.%m.%d')-${{BUILD_NUMBER}}
         if [ ! -d ./artifacts ] ; then
           mkdir ./artifacts
           mkdir ./artifacts/OctopusSamples.OctoPetShop.Database
@@ -110,7 +120,7 @@ steps:
     working_directory: "${{clone}}"
     stage: push
     commands:
-      - octopus package upload --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --space="Default"
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --space="Default"
 
   push_web:
     title: Push OctoPetShop Web
@@ -118,7 +128,7 @@ steps:
     working_directory: "${{clone}}"
     stage: push
     commands:
-      - octopus package upload --package="./artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip" --space="Default"
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip" --space="Default"
 
   push_product_service:
     title: Push OctoPetShop Product Service
@@ -126,7 +136,7 @@ steps:
     working_directory: "${{clone}}"
     stage: push
     commands:
-      - octopus package upload --package="./artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip" --space="Default"
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip" --space="Default"
 
   push_cart_service:
     title: Push OctoPetShop Cart Service
@@ -134,4 +144,4 @@ steps:
     working_directory: "${{clone}}"
     stage: push
     commands:
-      - octopus package upload --package="./artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip" --space="Default"
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip" --space="Default"
