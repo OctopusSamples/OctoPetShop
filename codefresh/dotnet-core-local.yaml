@@ -111,3 +111,27 @@ steps:
     stage: push
     commands:
       - octopus package upload --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --space="Default"
+
+  push_web:
+    title: Push OctoPetShop Web
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --package="./artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip" --space="Default"
+
+  push_product_service:
+    title: Push OctoPetShop Product Service
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --package="./artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip" --space="Default"
+
+  push_cart_service:
+    title: Push OctoPetShop Cart Service
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --package="./artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip" --space="Default"
