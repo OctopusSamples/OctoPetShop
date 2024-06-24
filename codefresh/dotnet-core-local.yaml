@@ -69,7 +69,7 @@ steps:
     image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
     working_directory: "${{clone}}"
     commands:
-      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
+      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService"
     stage: "build"
 
   package_db:
@@ -78,7 +78,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package --id="OctoPetShop.Database" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Database" --outFolder="./artifacts"
+      - octopus package zip create --id="OctoPetShop.Database"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.Database" --out-folder="./artifacts"
 
   package_web:
     title: Package OctoPetShopWeb
@@ -86,7 +86,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package --id="OctoPetShop.Web" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.Web" --outFolder=".artifacts"
+      - octopus package zip create --id="OctoPetShop.Web"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.Web" --out-folder=".artifacts"
 
   package_product_service:
     title: Package OctoPetShopProductService
@@ -94,7 +94,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package --id="OctoPetShop.ProductService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ProductService" --outFolder=".artifacts"
+      - octopus package zip create --id="OctoPetShop.ProductService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ProductService" --out-folder=".artifacts"
 
   package_cart_service:
     title: Package OctoPetShopShoppingCartService
@@ -102,7 +102,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package --id="OctoPetShop.ShoppingCartService" --format="Zip" --version="$PACKAGE_VERSION" --basePath="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --outFolder=".artifacts"
+      - octopus package zip create --id="OctoPetShop.ShoppingCartService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --out-folder=".artifacts"
 
   push_db:
     title: Push OctoPetShop Database
