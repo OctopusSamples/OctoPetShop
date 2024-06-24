@@ -86,7 +86,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package zip create --id="OctoPetShop.Web"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.Web" --out-folder=".artifacts"
+      - octopus package zip create --id="OctoPetShop.Web"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.Web" --out-folder="./artifacts"
 
   package_product_service:
     title: Package OctoPetShopProductService
@@ -94,7 +94,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package zip create --id="OctoPetShop.ProductService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ProductService" --out-folder=".artifacts"
+      - octopus package zip create --id="OctoPetShop.ProductService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ProductService" --out-folder="./artifacts"
 
   package_cart_service:
     title: Package OctoPetShopShoppingCartService
@@ -102,7 +102,7 @@ steps:
     working_directory: "${{clone}}"
     stage: package
     commands:
-      - octopus package zip create --id="OctoPetShop.ShoppingCartService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --out-folder=".artifacts"
+      - octopus package zip create --id="OctoPetShop.ShoppingCartService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --out-folder="./artifacts"
 
   push_db:
     title: Push OctoPetShop Database
