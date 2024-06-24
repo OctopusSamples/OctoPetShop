@@ -1,0 +1,148 @@
+version: "1.0"
+stages:
+  - init
+  - clone
+  - build
+  - package
+  - push
+
+steps:
+
+  increment:
+    title: Increment  Build Number
+    image: codefresh/cli
+    commands:
+      - |
+        BUILD_NUMBER=$(codefresh get annotation pipeline ${{CF_PIPELINE_NAME}} BUILD_NUMBER -o json | jq -r '.value' )
+        cf_export BUILD_NUMBER=$BUILD_NUMBER
+        codefresh create annotation pipeline ${{CF_PIPELINE_NAME}} BUILD_NUMBER=$(($BUILD_NUMBER+1))
+
+  clone:
+    title: "Cloning repository"
+    type: "git-clone"
+    repo: "${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}"
+    revision: "${{CF_BRANCH}}"
+    git: "github"
+    stage: "clone"
+
+  install_deps:
+    title: "Install dependencies"
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    working_directory: "${{clone}}"
+    commands:
+      - dotnet restore --packages ${{CF_VOLUME_PATH}}/nuget/packages
+    stage: "build"
+
+  create_artifact_folders:
+    title: "Create Artifact Folders"
+    image: "ubuntu:latest"
+    working_directory: "${{clone}}" # Running command where code cloned
+    commands:
+      - |
+        cf_export PACKAGE_VERSION=$(date +'%Y.%m.%d')-${{BUILD_NUMBER}}
+        if [ ! -d ./artifacts ] ; then
+          mkdir ./artifacts
+          mkdir ./artifacts/OctopusSamples.OctoPetShop.Database
+          mkdir ./artifacts/OctopusSamples.OctoPetShop.Web
+          mkdir ./artifacts/OctopusSamples.OctoPetShop.ProductService
+          mkdir ./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService
+        else
+          echo "Directory artifacts already exist"
+        fi
+    stage: "build"
+
+  publish_database:
+    title: Publish OctoPetShopDatabase
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    working_directory: "${{clone}}"
+    commands:
+      - dotnet publish OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Database"
+    stage: "build"
+
+  publish_web:
+    title: Publish OctoPetShopWeb
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    working_directory: "${{clone}}"
+    commands:
+      - dotnet publish OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.Web"
+    stage: "build"
+
+  publish_ProductService:
+    title: Publish OctoPetShopProductService
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    working_directory: "${{clone}}"
+    commands:
+      - dotnet publish OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.ProductService.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ProductService"
+    stage: "build"
+
+  publish_CartService:
+    title: Publish OctoPetShopShoppingCartService
+    image: mcr.microsoft.com/dotnet/sdk:6.0        #docker.io/bitnami/dotnet-sdk:${{DOTNET_VERSION}}
+    working_directory: "${{clone}}"
+    commands:
+      - dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --packages ${{CF_VOLUME_PATH}}/nuget/packages --configuration Release --no-restore --output "./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService"
+    stage: "build"
+
+  package_db:
+    title: Package OctoPetShopDatabase
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus package zip create --id="OctoPetShop.Database"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.Database" --out-folder="./artifacts"
+
+  package_web:
+    title: Package OctoPetShopWeb
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus package zip create --id="OctoPetShop.Web"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.Web" --out-folder="./artifacts"
+
+  package_product_service:
+    title: Package OctoPetShopProductService
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus package zip create --id="OctoPetShop.ProductService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ProductService" --out-folder="./artifacts"
+
+  package_cart_service:
+    title: Package OctoPetShopShoppingCartService
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: package
+    commands:
+      - octopus package zip create --id="OctoPetShop.ShoppingCartService"  --version="$PACKAGE_VERSION" --base-path="./artifacts/OctopusSamples.OctoPetShop.ShoppingCartService" --out-folder="./artifacts"
+
+  push_db:
+    title: Push OctoPetShop Database
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.Database.$PACKAGE_VERSION.zip" --space="Default"
+
+  push_web:
+    title: Push OctoPetShop Web
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.Web.$PACKAGE_VERSION.zip" --space="Default"
+
+  push_product_service:
+    title: Push OctoPetShop Product Service
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.ProductService.$PACKAGE_VERSION.zip" --space="Default"
+
+  push_cart_service:
+    title: Push OctoPetShop Cart Service
+    image: octopuslabs/octopus-cli:2.2.1
+    working_directory: "${{clone}}"
+    stage: push
+    commands:
+      - octopus package upload --overwrite-mode overwrite --package="./artifacts/OctoPetShop.ShoppingCartService.$PACKAGE_VERSION.zip" --space="Default"
