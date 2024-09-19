@@ -1,69 +1,46 @@
 pipeline {
     agent any
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
-            stage ('Set version') {
-                steps {
-                    script {
-                        TEST_VAR = new Date().format("yyyy.MM.dd") as String
-                        echo "${TEST_VAR}"
-                        VERSION_NUMBER = VersionNumber(versionNumberString: "${TEST_VAR}.${BUILD_ID}")
-                        currentBuild.displayName = "${VERSION_NUMBER}"
+         stage('Clone repository') { 
+            steps { 
+                script{
+                checkout scm
+                }
+            }
+        }
+
+        stage('Build') { 
+            steps { 
+                script{
+                 app = docker.build("octopus-underwater-app")
+                }
+            }
+        }
+        stage('Test'){
+            steps {
+                 echo 'Empty'
+            }
+        }
+        stage('Push') {
+            steps {
+                script{
+                        docker.withRegistry('https://mycoregistry.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws-credentials') {
+                            app.push("${env.BUILD_NUMBER}")
+                            app.push("latest")
                     }
                 }
             }
-            stage ('Restore NuGet packages') {
-                steps {
-                    bat "dotnet restore \"${workspace}/OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj\""
-                    bat "dotnet restore \"${workspace}/OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.Productservice.csproj\""
-                    bat "dotnet restore \"${workspace}/OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj\""
-                    bat "dotnet restore \"${workspace}/OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj\""
-                }
+        }
+        stage('Deploy'){
+            steps {                
+                octopusPushBuildInformation additionalArgs: '', commentParser: 'GitHub', overwriteMode: 'FailIfExists', packageId: 'octopus-underwater-app', packageVersion: "1.0.${BUILD_NUMBER}", serverId: "${ServerId}", spaceId: "${SpaceId}", toolId: 'Default', verboseLogging: false, gitUrl: "${GIT_URL}", gitCommit: "${GIT_COMMIT}"
+                octopusCreateRelease additionalArgs: '', cancelOnTimeout: false, channel: '', defaultPackageVersion: '', deployThisRelease: false, deploymentTimeout: '', environment: "${EnvironmentName}", jenkinsUrlLinkback: false, project: "${ProjectName}", releaseNotes: false, releaseNotesFile: '', releaseVersion: "1.0.${BUILD_NUMBER}", serverId: "${ServerId}", spaceId: "${SpaceId}", tenant: '', tenantTag: '', toolId: 'Default', verboseLogging: false, waitForDeployment: false
+                octopusDeployRelease cancelOnTimeout: false, deploymentTimeout: '', environment: "${EnvironmentName}", project: "${ProjectName}", releaseVersion: "1.0.${BUILD_NUMBER}", serverId: "${ServerId}", spaceId: "${SpaceId}", tenant: '', tenantTag: '', toolId: 'Default', variables: '', verboseLogging: false, waitForDeployment: true
             }
-            stage ('Build') {
-                steps {
-                    bat "dotnet build \"${workspace}/OctopusSamples.OctoPetShop.Database/OctopusSamples.OctoPetShop.Database.csproj\" --output \"${workspace}/output/OctopusSamples.OctoPetShop.Database \""
-                    bat "dotnet publish \"${workspace}/OctopusSamples.OctoPetShop.ProductService/OctopusSamples.OctoPetShop.Productservice.csproj\" --output \"${workspace}/output/OctopusSamples.OctoPetShop.ProductService \""
-                    bat "dotnet publish \"${workspace}/OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj\" --output \"${workspace}/output/OctopusSamples.OctoPetShop.ShoppingCartService \""
-                    bat "dotnet publish \"${workspace}/OctopusSamples.OctoPetShop.Web/OctopusSamples.OctoPetShop.Web.csproj\" --output \"${workspace}/output/OctopusSamples.OctoPetShop.Web \""                    
-                }
-            }
-            stage ('Zip') {
-                steps {
-                    zip archive: true, dir: "${workspace}/output/OctopusSamples.OctoPetShop.Database", glob: "", zipFile: "OctopusSamples.OctoPetShop.Database.${VERSION_NUMBER}.zip"
-                    zip archive: true, dir: "${workspace}/output/OctopusSamples.OctoPetShop.ProductService", glob: "", zipFile: "OctopusSamples.OctoPetShop.ProductService.${VERSION_NUMBER}.zip"
-                    zip archive: true, dir: "${workspace}/output/OctopusSamples.OctoPetShop.ShoppingCartService", glob: "", zipFile: "OctopusSamples.OctoPetShop.ShoppingCartService.${VERSION_NUMBER}.zip"
-                    zip archive: true, dir: "${workspace}/output/OctopusSamples.OctoPetShop.Web", glob: "", zipFile: "OctopusSamples.OctoPetShop.Web.${VERSION_NUMBER}.zip"
-                }
-            }
-            stage ('Push') {
-                steps {
-                    octopusPushPackage \
-                        overwriteMode: "FailIfExists", \
-                        packagePaths: "${workspace}/OctopusSamples.OctoPetShop.Database.${VERSION_NUMBER}.zip", \
-                        serverId: "Octopus Deploy", \
-                        spaceId: "Spaces-1", \
-                        toolId: "Default"
+        }
 
-                    octopusPushPackage \
-                        overwriteMode: "FailIfExists", \
-                        packagePaths: "${workspace}/OctopusSamples.OctoPetShop.Web.${VERSION_NUMBER}.zip", \
-                        serverId: "Octopus Deploy", \
-                        spaceId: "Spaces-1", \
-                        toolId: "Default"
-
-                    octopusPushPackage \
-                        overwriteMode: "FailIfExists", \
-                        packagePaths: "${workspace}/OctopusSamples.OctoPetShop.ProductService.${VERSION_NUMBER}.zip", \
-                        serverId: "Octopus Deploy", \
-                        spaceId: "Spaces-1", \
-                        toolId: "Default"
-                    
-                    octopusPushPackage \
-                        overwriteMode: "FailIfExists", \
-                        packagePaths: "${workspace}/OctopusSamples.OctoPetShop.ShoppingCartService.${VERSION_NUMBER}.zip", \
-                        serverId: "Octopus Deploy", \
-                        spaceId: "Spaces-1", \
-                        toolId: "Default"                }
-            }
     }
 }
