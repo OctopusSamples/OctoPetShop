@@ -82,11 +82,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ build ]
     env:
-      OCTOPUS_URL: 'https://your-octopus-url'             # TODO: update to your Octopus Instance url
-      OCTOPUS_SERVICE_ACCOUNT: 'your-service-account-id'  # TODO: update to your service account Id
-      OCTOPUS_SPACE: 'your-space'                         # TODO: update to the name of the space your project is configured in
-      OCTOPUS_PROJECT: 'your-project'                     # TODO: update to the name of your Octopus project
-      OCTOPUS_ENVIRONMENT: 'your-environment'             # TODO: update to the name of the environment to recieve the first deployment
+      OCTOPUS_URL: 'https://octopus-operations.octopus.app/'             # TODO: update to your Octopus Instance url
+      OCTOPUS_SERVICE_ACCOUNT: 'LewisGithubActions'  # TODO: update to your service account Id
+      OCTOPUS_SPACE: 'Spaces-1115'                         # TODO: update to the name of the space your project is configured in
+      OCTOPUS_PROJECT: 'GitHub-Actions'                     # TODO: update to the name of your Octopus project
+      OCTOPUS_ENVIRONMENT: 'Test'             # TODO: update to the name of the environment to recieve the first deployment
 
     steps:
       - name: Log in to Octopus Deploy
