@@ -1,3 +1,4 @@
 [OC-2] Politely asked the intern and it worked somehow
 [OC-2] Convinced the void at 4:59pm on a Friday
 [OC-3] Reverse-engineered the void and nobody noticed
+[OC-2] Bribed Schrödinger's bug before standup
