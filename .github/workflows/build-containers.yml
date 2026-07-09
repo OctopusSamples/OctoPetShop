@@ -32,22 +32,22 @@ jobs:
 
      - name: Build OctoPetShop web container
        run: |
-        docker build ./OctopusSamples.OctoPetShop.Web --file ./OctopusSamples.OctoPetShop.Web/dockerfile --tag octopussamples/octopetshop-web-enterprise:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.Web --file ./OctopusSamples.OctoPetShop.Web/dockerfile --tag octopussamples/octopetshop-web:${{ steps.version-generator.outputs.version }}
         docker push octopussamples/octopetshop-web:${{ steps.version-generator.outputs.version }}
         
      - name: Build OctoPetShop product service container
        run: | 
-        docker build ./OctopusSamples.OctoPetShop.ProductService --file ./OctopusSamples.OctoPetShop.ProductService/dockerfile --tag octopussamples/octopetshop-productservice-enterprise:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.ProductService --file ./OctopusSamples.OctoPetShop.ProductService/dockerfile --tag octopussamples/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
         docker push octopussamples/octopetshop-productservice:${{ steps.version-generator.outputs.version }}
         
      - name: Build OctoPetShop shopping cart container
        run: | 
-        docker build ./OctopusSamples.OctoPetShop.ShoppingCartService --file ./OctopusSamples.OctoPetShop.ShoppingCartService/dockerfile --tag octopussamples/octopetshop-shoppingcartservice-enterprise:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.ShoppingCartService --file ./OctopusSamples.OctoPetShop.ShoppingCartService/dockerfile --tag octopussamples/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
         docker push octopussamples/octopetshop-shoppingcartservice:${{ steps.version-generator.outputs.version }}
         
      - name: Build OctoPetShop database container
        run: | 
-        docker build ./OctopusSamples.OctoPetShop.Database --file ./OctopusSamples.OctoPetShop.Database/dockerfile --tag octopussamples/octopetshop-database-enterprise:${{ steps.version-generator.outputs.version }}
+        docker build ./OctopusSamples.OctoPetShop.Database --file ./OctopusSamples.OctoPetShop.Database/dockerfile --tag octopussamples/octopetshop-database:${{ steps.version-generator.outputs.version }}
         docker push octopussamples/octopetshop-database:${{ steps.version-generator.outputs.version }}
         
         
