@@ -66,40 +66,48 @@ jobs:
       run: dotnet publish OctopusSamples.OctoPetShop.ShoppingCartService/OctopusSamples.OctoPetShop.ShoppingCartService.csproj --configuration Release --no-restore --output "$GITHUB_WORKSPACE/artifacts/OctopusSamples.OctoPetshop.ShoppingCartService"
 
     - name: Package OctoPetShop.Database 🐙
-      uses: OctopusDeploy/create-zip-package-action@v3
+      uses: OctopusDeploy/create-nuget-package-action@v4
       with:
         package_id: "OctoPetShop.Database"
         version: "${{ steps.version-generator.outputs.version }}"
+        nuspec_description: "OctoPetShop Database project"
+        nuspec_authors: "OctopusSamples"
         output_folder: "${{ github.workspace }}/artifacts"
         base_path: "${{ github.workspace }}/artifacts/OctopusSamples.OctoPetShop.Database"
         files: |
           **/*.*
 
     - name: Package OctoPetShop.Web 🐙
-      uses: OctopusDeploy/create-zip-package-action@v3
+      uses: OctopusDeploy/create-nuget-package-action@v4
       with:
         package_id: "OctoPetShop.Web"
         version: "${{ steps.version-generator.outputs.version }}"
+        nuspec_description: "OctoPetShop Web project"
+        nuspec_authors: "OctopusSamples"
         output_folder: "${{ github.workspace }}/artifacts"
         base_path: "${{ github.workspace }}/artifacts/OctopusSamples.OctoPetShop.Web"
         files: |
           **/*.*
 
     - name: Package OctoPetShop.ProductService 🐙
-      uses: OctopusDeploy/create-zip-package-action@v3
+      uses: OctopusDeploy/create-nuget-package-action@v4
       with:
         package_id: "OctoPetShop.ProductService"
         version: "${{ steps.version-generator.outputs.version }}"
+        nuspec_description: "OctoPetShop ProductService project"
+        nuspec_authors: "OctopusSamples"
         output_folder: "${{ github.workspace }}/artifacts"
         base_path: "${{ github.workspace }}/artifacts/OctopusSamples.OctoPetShop.ProductService"
         files: |
           **/*.*
 
     - name: Package OctoPetShop.ShoppingCartService 🐙
-      uses: OctopusDeploy/create-zip-package-action@v3
+      uses: OctopusDeploy/create-nuget-package-action@v4
       with:
         package_id: "OctoPetShop.ShoppingCartService"
         version: "${{ steps.version-generator.outputs.version }}"
+        nuspec_description: "OctoPetShop ShoppingCartService project"
+        nuspec_authors: "OctopusSamples"
         output_folder: "${{ github.workspace }}/artifacts"
         base_path: "${{ github.workspace }}/artifacts/OctopusSamples.OctoPetShop.ShoppingCartService"
         files: |
