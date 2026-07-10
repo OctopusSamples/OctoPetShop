@@ -1,4 +1,3 @@
 
-[OC-1] Negotiated with undefined with a spoon
-[OC-2] Bribed the sprint board against my better judgment
-[OC-2] Accidentally improved a rubber duck before standup
+[OC-1] Rewired the coffee machine and blamed caching
+[OC-2] Blamed a rogue semicolon until it worked
