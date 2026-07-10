@@ -129,7 +129,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '7.0.x'
-    - run: dotnet nuget push "artifacts/*.nupkg" --source "github" --api-key ${{ secrets.GITHUB_TOKEN }}
+    - run: dotnet nuget push "${{ github.workspace }}/artifacts/*.nupkg" --source "github" --api-key ${{ secrets.GITHUB_TOKEN }}
 
     - uses: OctopusDeploy/push-build-information-action@v3
       name: Push Build Information 🐙
