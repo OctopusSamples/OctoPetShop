@@ -1,3 +1,4 @@
 
 [OC-1] Negotiated with undefined with a spoon
 [OC-2] Bribed the sprint board against my better judgment
+[OC-2] Accidentally improved a rubber duck before standup
