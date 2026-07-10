@@ -1,3 +1,2 @@
 
-[OC-1] Fixed the coffee machine and called it a feature
-[OC-1] Fixed the coffee machine with zero tests
+[OC-1] Negotiated with undefined with a spoon
