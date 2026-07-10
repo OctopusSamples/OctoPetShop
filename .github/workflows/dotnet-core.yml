@@ -107,6 +107,8 @@ jobs:
 
     - name: Publish Artifacts to Octopus
       uses: OctopusDeploy/push-package-action@v3
+      env:
+        OCTOPUS_SPACE: "Demo Template"
       with: 
         packages: |
           artifacts/OctoPetShop.Database.${{ steps.version-generator.outputs.version }}.zip
@@ -116,6 +118,8 @@ jobs:
 
     - uses: OctopusDeploy/push-build-information-action@v3
       name: Push Build Information 🐙
+      env:
+        OCTOPUS_SPACE: "Demo Template"
       with:
         version: ${{ steps.version-generator.outputs.version }}
         packages: |
@@ -124,38 +128,38 @@ jobs:
           OctoPetShop.ProductService
           OctoPetShop.ShoppingCartService
 
-    - name: Create a release in Octopus Deploy 🐙
-      id: create-release
-      uses: OctopusDeploy/create-release-action@v3
-      with:
-        project: 'OctoPetShop'
-        release_number: ${{ steps.version-generator.outputs.version }}
+    # - name: Create a release in Octopus Deploy 🐙
+    #   id: create-release
+    #   uses: OctopusDeploy/create-release-action@v3
+    #   with:
+    #     project: 'OctoPetShop'
+    #     release_number: ${{ steps.version-generator.outputs.version }}
 
-    - uses: OctopusDeploy/deploy-release-action@v3
-      id: deploy-release-to-development
-      name: "Deploy release ${{ steps.version-generator.outputs.version }} to Development 🐙"
-      with:
-        project: 'OctoPetShop'
-        release_number: ${{ steps.version-generator.outputs.version }}
-        environments: "Development"
+    # - uses: OctopusDeploy/deploy-release-action@v3
+    #   id: deploy-release-to-development
+    #   name: "Deploy release ${{ steps.version-generator.outputs.version }} to Development 🐙"
+    #   with:
+    #     project: 'OctoPetShop'
+    #     release_number: ${{ steps.version-generator.outputs.version }}
+    #     environments: "Development"
 
-    - uses: OctopusDeploy/await-task-action@v3
-      id: "wait-for-deploy-development"
-      name: "Wait for deployment of ${{ steps.version-generator.outputs.version }} to complete 🐙"
-      with:
-        server_task_id: ${{ fromJson(steps.deploy-release-to-development.outputs.server_tasks)[0].serverTaskId }}
+    # - uses: OctopusDeploy/await-task-action@v3
+    #   id: "wait-for-deploy-development"
+    #   name: "Wait for deployment of ${{ steps.version-generator.outputs.version }} to complete 🐙"
+    #   with:
+    #     server_task_id: ${{ fromJson(steps.deploy-release-to-development.outputs.server_tasks)[0].serverTaskId }}
 
-    - uses: OctopusDeploy/deploy-release-action@v3
-      id: deploy-release-to-homologation
-      name: "Deploy release ${{ steps.version-generator.outputs.version }} to Homologation 🐙"
-      with:
-        project: 'OctoPetShop'
-        release_number: ${{ steps.version-generator.outputs.version }}
-        environments: "Homologation"
+    # - uses: OctopusDeploy/deploy-release-action@v3
+    #   id: deploy-release-to-homologation
+    #   name: "Deploy release ${{ steps.version-generator.outputs.version }} to Homologation 🐙"
+    #   with:
+    #     project: 'OctoPetShop'
+    #     release_number: ${{ steps.version-generator.outputs.version }}
+    #     environments: "Homologation"
 
-    - uses: OctopusDeploy/await-task-action@v3
-      id: "wait-for-deploy-homologation"
-      name: "Wait for deployment of ${{ steps.version-generator.outputs.version }} to complete 🐙"
-      with:
-        server_task_id: ${{ fromJson(steps.deploy-release-to-homologation.outputs.server_tasks)[0].serverTaskId }}
+    # - uses: OctopusDeploy/await-task-action@v3
+    #   id: "wait-for-deploy-homologation"
+    #   name: "Wait for deployment of ${{ steps.version-generator.outputs.version }} to complete 🐙"
+    #   with:
+    #     server_task_id: ${{ fromJson(steps.deploy-release-to-homologation.outputs.server_tasks)[0].serverTaskId }}
 
