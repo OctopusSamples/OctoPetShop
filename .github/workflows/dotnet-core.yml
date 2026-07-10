@@ -116,6 +116,15 @@ jobs:
     #       artifacts/OctoPetShop.ProductService.${{ steps.version-generator.outputs.version }}.zip
     #       artifacts/OctoPetShop.ShoppingCartService.${{ steps.version-generator.outputs.version }}.zip
 
+    - name: Add GitHub NuGet Source
+      run: |
+        dotnet nuget add source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" \
+          --name "GitHub" \
+          --username "${{ github.actor }}" \
+          --password "${{ secrets.GITHUB_TOKEN }}" \
+          --store-password-in-clear-text
+
+
     - name: Push NuGet packages to GitHub NuGet repository
       uses: actions/setup-dotnet@v3
       with:
