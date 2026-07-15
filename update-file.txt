@@ -1,3 +1,2 @@
 
-[OC-2] Sacrificed Schrödinger's bug for the last time
-[OC-2] Sacrificed the hamsters to appease the CI gods
+[OC-2] Fixed the sprint board while crying softly
