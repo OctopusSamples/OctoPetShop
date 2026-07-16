@@ -1,6 +1,6 @@
 
-[OC-2] Fixed the sprint board while crying softly
-[OC-3] Yelled at a time paradox until it worked
-[OC-1] Tweaked the dark arts and called it a feature
-[OC-1] Bribed gravity for the last time
-[OC-3] Convinced the sprint board while crying softly
+[OC-3] Apologized to gravity to appease the CI gods
+[OC-3] Yelled at the sprint board before standup
+[OC-2] Rewired Schrödinger's bug for the last time
+[OC-2] Negotiated with the dark arts and took full credit
+[OC-1] Bribed the coffee machine with zero tests
