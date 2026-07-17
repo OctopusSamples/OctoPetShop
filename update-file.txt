@@ -1,6 +1,3 @@
 
-[OC-3] Apologized to gravity to appease the CI gods
-[OC-3] Yelled at the sprint board before standup
-[OC-2] Rewired Schrödinger's bug for the last time
-[OC-2] Negotiated with the dark arts and took full credit
-[OC-1] Bribed the coffee machine with zero tests
+[OC-3] Apologized to the sprint board with zero tests
+[OC-1] Rewired undefined to appease the CI gods
