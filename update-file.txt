@@ -1,3 +1,2 @@
 
-[OC-3] Apologized to the sprint board with zero tests
-[OC-1] Rewired undefined to appease the CI gods
+[OC-1] Convinced undefined with zero tests
