@@ -1,4 +1,2 @@
 
-[OC-1] Convinced undefined with zero tests
-[OC-2] Negotiated with gravity while crying softly
-[OC-2] Accidentally improved a rogue semicolon with a spoon
+[OC-1] Convinced a rubber duck then immediately reverted it
