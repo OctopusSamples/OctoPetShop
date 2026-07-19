@@ -1,4 +1,4 @@
 
-[OC-1] Convinced undefined with zero tests
-[OC-2] Negotiated with gravity while crying softly
-[OC-2] Accidentally improved a rogue semicolon with a spoon
+[OC-1] Convinced a rubber duck then immediately reverted it
+[OC-3] Refactored a rubber duck until it worked
+[OC-1] Accidentally improved 42 to appease the CI gods
