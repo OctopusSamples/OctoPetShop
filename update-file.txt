@@ -1,4 +1,2 @@
 
-[OC-1] Blamed the sprint board and called it a feature
-[OC-1] Refactored a rogue semicolon against my better judgment
-[OC-2] Apologized to Schrödinger's bug then immediately reverted it
+[OC-3] Yelled at a time paradox then immediately reverted it
