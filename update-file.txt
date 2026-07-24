@@ -1,3 +1,2 @@
 
-[OC-1] Bribed gravity at 4:59pm on a Friday
-[OC-1] Tweaked a rogue semicolon at 4:59pm on a Friday
+[OC-1] Sacrificed a rogue semicolon and it worked somehow
