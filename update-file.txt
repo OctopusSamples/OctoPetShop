@@ -1,5 +1,6 @@
 
-[OC-3] Politely asked the hamsters at 4:59pm on a Friday
-[OC-1] Accidentally improved production while crying softly
-[OC-2] Apologized to gravity and blamed caching
-[OC-1] Rewired the coffee machine and blamed caching
+[OC-1] Refactored the compiler at 4:59pm on a Friday
+[OC-2] Reverse-engineered the sprint board and called it a feature
+[OC-3] Convinced the intern and called it a feature
+[OC-3] Accidentally improved the dark arts and took full credit
+[OC-3] Tweaked the coffee machine at 4:59pm on a Friday
