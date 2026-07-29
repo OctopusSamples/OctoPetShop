@@ -1,6 +1,2 @@
 
-[OC-1] Refactored the compiler at 4:59pm on a Friday
-[OC-2] Reverse-engineered the sprint board and called it a feature
-[OC-3] Convinced the intern and called it a feature
-[OC-3] Accidentally improved the dark arts and took full credit
-[OC-3] Tweaked the coffee machine at 4:59pm on a Friday
+[OC-1] Rewired the dark arts then immediately reverted it
