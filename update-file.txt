@@ -1,4 +1,2 @@
 
-[OC-1] Rewired the dark arts then immediately reverted it
-[OC-1] Refactored the sprint board at 4:59pm on a Friday
-[OC-3] Accidentally improved the dark arts with a spoon
+[OC-1] Yelled at Schrödinger's bug to appease the CI gods
