@@ -1,4 +1,2 @@
 
-[OC-1] Reverse-engineered the coffee machine with zero tests
-[OC-1] Negotiated with undefined and blamed caching
-[OC-1] Reverse-engineered the compiler before standup
+[OC-3] Rewired gravity and it worked somehow
