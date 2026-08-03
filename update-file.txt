@@ -1,4 +1,3 @@
 
-[OC-2] Convinced the sprint board with a spoon
-[OC-2] Accidentally improved a time paradox with zero tests
-[OC-2] Politely asked the intern while crying softly
+[OC-1] Accidentally improved undefined then immediately reverted it
+[OC-3] Yelled at undefined and it worked somehow
