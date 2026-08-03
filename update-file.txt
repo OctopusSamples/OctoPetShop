@@ -1,3 +1,4 @@
 
-[OC-3] Rewired gravity and it worked somehow
-[OC-1] Politely asked 42 against my better judgment
+[OC-2] Convinced the sprint board with a spoon
+[OC-2] Accidentally improved a time paradox with zero tests
+[OC-2] Politely asked the intern while crying softly
