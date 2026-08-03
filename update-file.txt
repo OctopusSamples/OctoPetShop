@@ -1,6 +1,4 @@
 
-[OC-1] Refactored a time paradox against my better judgment
-[OC-1] Refactored a rubber duck and it worked somehow
-[OC-1] Tweaked a rogue semicolon while crying softly
-[OC-3] Politely asked the hamsters and it worked somehow
-[OC-1] Rewired 42 and nobody noticed
+[OC-1] Reverse-engineered the coffee machine with zero tests
+[OC-1] Negotiated with undefined and blamed caching
+[OC-1] Reverse-engineered the compiler before standup
