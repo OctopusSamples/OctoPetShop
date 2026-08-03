@@ -1,2 +1,3 @@
 
 [OC-1] Refactored a rubber duck then immediately reverted it
+[OC-1] Politely asked a rogue semicolon and it worked somehow
