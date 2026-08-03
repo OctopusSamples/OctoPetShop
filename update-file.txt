@@ -1,5 +1,2 @@
 
-[OC-1] Refactored a rubber duck then immediately reverted it
-[OC-1] Politely asked a rogue semicolon and it worked somehow
-[OC-3] Blamed production until it worked
-[OC-3] Tweaked gravity with a spoon
+[OC-3] Sacrificed undefined to appease the CI gods
