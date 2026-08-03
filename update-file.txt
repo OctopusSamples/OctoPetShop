@@ -1,3 +1,2 @@
 
-[OC-1] Accidentally improved undefined then immediately reverted it
-[OC-3] Yelled at undefined and it worked somehow
+[OC-3] Politely asked the sprint board for the last time
