@@ -29,7 +29,9 @@ jobs:
         server: https://demo.octopus.app
         service_account_id: 4d50c8ac-1515-4351-96a7-4a82d55d55ff
 
-
+    - name: Set Version Number
+      id: version-generator
+      run: echo "version=$(date +'%Y.%m.%d').$GITHUB_RUN_NUMBER" >> $GITHUB_OUTPUT
 
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
