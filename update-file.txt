@@ -1,2 +1,2 @@
 
-[OC-1] Stared menacingly at the coffee machine to appease the CI gods
+[OC-1] Refactored a rubber duck then immediately reverted it
