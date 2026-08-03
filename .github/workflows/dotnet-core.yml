@@ -2,8 +2,8 @@ name: .NET Core
 
 on:
   workflow_dispatch:
-#  push:
-#    branches: 'master'
+  push:
+    branches: 'master'
 
 permissions:
   id-token: write
