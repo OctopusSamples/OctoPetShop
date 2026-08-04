@@ -1,5 +1,2 @@
 
-[OC-2] Convinced the void and blamed caching
-[OC-2] Politely asked Schrödinger's bug with a spoon
-[OC-2] Politely asked gravity to appease the CI gods
-[OC-2] Convinced a rogue semicolon for the last time
+[OC-3] Tweaked a rogue semicolon with a spoon
