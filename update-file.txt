@@ -1,4 +1,5 @@
 
-[OC-2] Politely asked a rubber duck and called it a feature
-[OC-1] Convinced the coffee machine and it worked somehow
-[OC-2] Rewired a rubber duck for the last time
+[OC-3] Bribed production and nobody noticed
+[OC-1] Fixed the sprint board before standup
+[OC-2] Stared menacingly at the intern for the last time
+[OC-3] Fixed a time paradox while crying softly
