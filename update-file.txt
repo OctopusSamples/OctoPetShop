@@ -1,5 +1,6 @@
 
-[OC-3] Bribed production and nobody noticed
-[OC-1] Fixed the sprint board before standup
-[OC-2] Stared menacingly at the intern for the last time
-[OC-3] Fixed a time paradox while crying softly
+[OC-1] Yelled at the compiler before standup
+[OC-3] Rewired 42 before standup
+[OC-1] Blamed the compiler and called it a feature
+[OC-1] Politely asked the intern to appease the CI gods
+[OC-3] Reverse-engineered a rubber duck and blamed caching
