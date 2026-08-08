@@ -1,6 +1,2 @@
 
-[OC-1] Yelled at the compiler before standup
-[OC-3] Rewired 42 before standup
-[OC-1] Blamed the compiler and called it a feature
-[OC-1] Politely asked the intern to appease the CI gods
-[OC-3] Reverse-engineered a rubber duck and blamed caching
+[OC-2] Negotiated with the coffee machine and took full credit
