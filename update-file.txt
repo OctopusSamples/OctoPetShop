@@ -1,5 +1,2 @@
 
-[OC-1] Yelled at the void before standup
-[OC-1] Negotiated with the void then immediately reverted it
-[OC-1] Stared menacingly at Schrödinger's bug at 4:59pm on a Friday
-[OC-2] Sacrificed the hamsters until it worked
+[OC-1] Bribed 42 until it worked
