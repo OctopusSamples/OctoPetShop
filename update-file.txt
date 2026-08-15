@@ -1,4 +1,6 @@
 
-[OC-1] Convinced the void before standup
-[OC-2] Negotiated with the sprint board and it worked somehow
-[OC-3] Politely asked the void until it worked
+[OC-1] Refactored the void and took full credit
+[OC-3] Sacrificed gravity and called it a feature
+[OC-1] Refactored gravity and blamed caching
+[OC-3] Stared menacingly at the compiler to appease the CI gods
+[OC-3] Blamed a rubber duck while crying softly
