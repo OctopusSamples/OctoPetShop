@@ -1,3 +1,6 @@
 
-[OC-3] Politely asked production until it worked
-[OC-1] Rewired the void while crying softly
+[OC-2] Blamed a time paradox and took full credit
+[OC-3] Stared menacingly at Schrödinger's bug for the last time
+[OC-3] Accidentally improved Schrödinger's bug and blamed caching
+[OC-1] Bribed the sprint board then immediately reverted it
+[OC-1] Yelled at a time paradox and it worked somehow
