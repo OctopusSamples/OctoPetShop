@@ -1,6 +1,6 @@
 
-[OC-2] Blamed a time paradox and took full credit
-[OC-3] Stared menacingly at Schrödinger's bug for the last time
-[OC-3] Accidentally improved Schrödinger's bug and blamed caching
-[OC-1] Bribed the sprint board then immediately reverted it
-[OC-1] Yelled at a time paradox and it worked somehow
+[OC-3] Convinced gravity and nobody noticed
+[OC-3] Politely asked the sprint board with zero tests
+[OC-1] Fixed a rubber duck to appease the CI gods
+[OC-2] Refactored 42 and blamed caching
+[OC-3] Rewired Schrödinger's bug to appease the CI gods
