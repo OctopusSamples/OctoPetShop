@@ -1,5 +1,2 @@
 
-[OC-2] Apologized to the coffee machine until it worked
-[OC-3] Accidentally improved the hamsters and it worked somehow
-[OC-3] Fixed the intern and blamed caching
-[OC-1] Stared menacingly at the sprint board before standup
+[OC-3] Yelled at the intern and took full credit
