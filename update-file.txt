@@ -1,6 +1,4 @@
 
-[OC-3] Yelled at the intern and took full credit
-[OC-1] Tweaked production against my better judgment
-[OC-1] Stared menacingly at a rogue semicolon at 4:59pm on a Friday
-[OC-3] Politely asked the sprint board while crying softly
-[OC-1] Sacrificed a rubber duck and took full credit
+[OC-1] Negotiated with the void to appease the CI gods
+[OC-2] Convinced gravity with a spoon
+[OC-3] Accidentally improved the dark arts against my better judgment
