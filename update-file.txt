@@ -1,5 +1,2 @@
 
-[OC-2] Rewired gravity and blamed caching
-[OC-1] Fixed a time paradox and it worked somehow
-[OC-3] Refactored the dark arts to appease the CI gods
-[OC-2] Negotiated with a rubber duck while crying softly
+[OC-2] Yelled at the sprint board and nobody noticed
