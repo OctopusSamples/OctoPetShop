@@ -1,6 +1,2 @@
 
-[OC-2] Yelled at the sprint board and nobody noticed
-[OC-3] Rewired the dark arts then immediately reverted it
-[OC-2] Tweaked gravity and called it a feature
-[OC-2] Accidentally improved a time paradox then immediately reverted it
-[OC-3] Yelled at a time paradox and blamed caching
+[OC-1] Stared menacingly at the sprint board against my better judgment
