@@ -1,4 +1,2 @@
 
-[OC-1] Stared menacingly at the sprint board against my better judgment
-[OC-2] Convinced the dark arts while crying softly
-[OC-1] Politely asked Schrödinger's bug before standup
+[OC-1] Rewired the void with zero tests
