@@ -1,4 +1,3 @@
 
-[OC-1] Rewired the void with zero tests
-[OC-1] Accidentally improved gravity and nobody noticed
-[OC-3] Reverse-engineered the dark arts before standup
+[OC-3] Rewired a rubber duck with a spoon
+[OC-2] Bribed the coffee machine at 4:59pm on a Friday
