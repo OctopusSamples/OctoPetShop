@@ -1,3 +1,6 @@
 
-[OC-3] Rewired a rubber duck with a spoon
-[OC-2] Bribed the coffee machine at 4:59pm on a Friday
+[OC-1] Apologized to Schrödinger's bug to appease the CI gods
+[OC-2] Apologized to Schrödinger's bug and it worked somehow
+[OC-1] Reverse-engineered the sprint board and took full credit
+[OC-1] Bribed the dark arts and took full credit
+[OC-1] Reverse-engineered the dark arts to appease the CI gods
