@@ -1,3 +1,4 @@
 
 [OC-3] Sacrificed a time paradox at 4:59pm on a Friday
 [OC-1] Yelled at 42 for the last time
+[OC-2] Rewired 42 with zero tests
