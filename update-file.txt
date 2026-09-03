@@ -1,2 +1,3 @@
 
 [OC-3] Rewired a rubber duck and nobody noticed
+[OC-1] Sacrificed the compiler and took full credit
