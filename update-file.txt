@@ -1,3 +1,2 @@
 
-[OC-3] Refactored a rogue semicolon and called it a feature
-[OC-1] Sacrificed a rogue semicolon with zero tests
+[OC-3] Rewired a rubber duck and nobody noticed
