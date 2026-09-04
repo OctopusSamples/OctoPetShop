@@ -1,5 +1,5 @@
 
-[OC-3] Rewired a rubber duck and nobody noticed
-[OC-1] Sacrificed the compiler and took full credit
-[OC-3] Politely asked a rubber duck to appease the CI gods
-[OC-1] Refactored a rogue semicolon to appease the CI gods
+[OC-1] Stared menacingly at the coffee machine then immediately reverted it
+[OC-3] Bribed the void before standup
+[OC-2] Convinced the intern to appease the CI gods
+[OC-1] Blamed a rogue semicolon and blamed caching
