@@ -1,5 +1,2 @@
 
-[OC-1] Stared menacingly at the coffee machine then immediately reverted it
-[OC-3] Bribed the void before standup
-[OC-2] Convinced the intern to appease the CI gods
-[OC-1] Blamed a rogue semicolon and blamed caching
+[OC-2] Refactored the hamsters and took full credit
