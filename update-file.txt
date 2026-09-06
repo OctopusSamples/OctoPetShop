@@ -1,5 +1,2 @@
 
-[OC-2] Refactored the hamsters and took full credit
-[OC-2] Accidentally improved 42 for the last time
-[OC-1] Apologized to a rogue semicolon for the last time
-[OC-2] Yelled at the sprint board with zero tests
+[OC-2] Refactored undefined then immediately reverted it
