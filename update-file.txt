@@ -1,3 +1,2 @@
 
-[OC-1] Negotiated with gravity with zero tests
-[OC-3] Politely asked the intern and it worked somehow
+[OC-3] Stared menacingly at a rogue semicolon before standup
