@@ -1,6 +1,2 @@
 
-[OC-3] Stared menacingly at a rogue semicolon before standup
-[OC-1] Apologized to the coffee machine and it worked somehow
-[OC-3] Blamed a time paradox at 4:59pm on a Friday
-[OC-2] Refactored a rubber duck with a spoon
-[OC-2] Fixed the compiler and took full credit
+[OC-3] Negotiated with undefined before standup
