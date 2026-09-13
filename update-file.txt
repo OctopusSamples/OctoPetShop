@@ -1,4 +1,4 @@
 
-[OC-3] Negotiated with undefined before standup
-[OC-2] Blamed 42 at 4:59pm on a Friday
-[OC-1] Accidentally improved the dark arts until it worked
+[OC-1] Reverse-engineered a rubber duck at 4:59pm on a Friday
+[OC-1] Convinced the hamsters at 4:59pm on a Friday
+[OC-3] Refactored the hamsters until it worked
