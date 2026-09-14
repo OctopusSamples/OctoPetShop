@@ -1,4 +1,4 @@
 
-[OC-1] Reverse-engineered a rubber duck at 4:59pm on a Friday
-[OC-1] Convinced the hamsters at 4:59pm on a Friday
-[OC-3] Refactored the hamsters until it worked
+[OC-1] Tweaked production and called it a feature
+[OC-1] Bribed the dark arts with a spoon
+[OC-2] Apologized to the sprint board and took full credit
