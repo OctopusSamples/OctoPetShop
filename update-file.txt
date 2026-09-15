@@ -1,4 +1,2 @@
 
-[OC-1] Tweaked production and called it a feature
-[OC-1] Bribed the dark arts with a spoon
-[OC-2] Apologized to the sprint board and took full credit
+[OC-1] Fixed the sprint board at 4:59pm on a Friday
