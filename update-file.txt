@@ -1,5 +1,2 @@
 
-[OC-1] Fixed the sprint board at 4:59pm on a Friday
-[OC-1] Refactored a rogue semicolon then immediately reverted it
-[OC-3] Yelled at the sprint board for the last time
-[OC-3] Yelled at a time paradox with a spoon
+[OC-2] Bribed a rubber duck and called it a feature
