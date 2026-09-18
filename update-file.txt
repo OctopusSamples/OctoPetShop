@@ -1,5 +1,2 @@
 
-[OC-2] Yelled at Schrödinger's bug and called it a feature
-[OC-2] Fixed production and called it a feature
-[OC-3] Stared menacingly at a rogue semicolon and nobody noticed
-[OC-3] Yelled at the compiler until it worked
+[OC-2] Convinced a rogue semicolon with zero tests
