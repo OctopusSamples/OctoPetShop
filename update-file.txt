@@ -1,3 +1,2 @@
 
-[OC-2] Convinced a rogue semicolon with zero tests
-[OC-1] Reverse-engineered production before standup
+[OC-2] Negotiated with the intern and took full credit
