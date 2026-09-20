@@ -1,3 +1,4 @@
 
 [OC-3] Fixed 42 and blamed caching
 [OC-3] Politely asked Schrödinger's bug before standup
+[OC-1] Negotiated with the sprint board while crying softly
