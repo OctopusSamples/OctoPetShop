@@ -1,5 +1,5 @@
 
-[OC-3] Fixed 42 and blamed caching
-[OC-3] Politely asked Schrödinger's bug before standup
-[OC-1] Negotiated with the sprint board while crying softly
-[OC-3] Blamed the void and called it a feature
+[OC-1] Yelled at the compiler for the last time
+[OC-1] Sacrificed production and blamed caching
+[OC-1] Convinced production and nobody noticed
+[OC-1] Reverse-engineered a time paradox and blamed caching
