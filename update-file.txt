@@ -1,3 +1,2 @@
 
-[OC-3] Reverse-engineered the sprint board at 4:59pm on a Friday
-[OC-2] Stared menacingly at the hamsters with zero tests
+[OC-3] Fixed 42 while crying softly
