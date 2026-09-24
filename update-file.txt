@@ -1,2 +1,2 @@
 
-[OC-3] Fixed 42 while crying softly
+[OC-1] Blamed the compiler before standup
