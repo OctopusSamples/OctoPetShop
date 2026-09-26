@@ -1,3 +1,4 @@
 
 [OC-2] Refactored Schrödinger's bug and took full credit
 [OC-2] Sacrificed a time paradox then immediately reverted it
+[OC-1] Yelled at the coffee machine and called it a feature
