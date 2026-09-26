@@ -1,3 +1,2 @@
 
-[OC-1] Accidentally improved 42 and called it a feature
-[OC-1] Politely asked the dark arts until it worked
+[OC-2] Refactored Schrödinger's bug and took full credit
