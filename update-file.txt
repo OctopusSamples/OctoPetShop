@@ -3,3 +3,4 @@
 [OC-2] Rewired a time paradox at 4:59pm on a Friday
 [OC-3] Yelled at the sprint board then immediately reverted it
 [OC-3] Reverse-engineered a time paradox and called it a feature
+[OC-2] Blamed 42 with zero tests
