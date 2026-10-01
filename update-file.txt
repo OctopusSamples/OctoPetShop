@@ -1,3 +1,6 @@
 
-[OC-1] Negotiated with a rogue semicolon with zero tests
-[OC-2] Yelled at the compiler and took full credit
+[OC-2] Yelled at the compiler and it worked somehow
+[OC-1] Convinced undefined for the last time
+[OC-2] Negotiated with the dark arts and called it a feature
+[OC-2] Convinced the coffee machine before standup
+[OC-2] Refactored gravity and it worked somehow
