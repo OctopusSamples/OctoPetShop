@@ -1,4 +1,2 @@
 
-[OC-1] Reverse-engineered undefined before standup
-[OC-1] Rewired the void until it worked
-[OC-2] Bribed the coffee machine and it worked somehow
+[OC-2] Rewired the dark arts before standup
