@@ -1,3 +1,2 @@
 
-[OC-3] Blamed gravity with zero tests
-[OC-1] Fixed production and took full credit
+[OC-3] Accidentally improved a rubber duck at 4:59pm on a Friday
