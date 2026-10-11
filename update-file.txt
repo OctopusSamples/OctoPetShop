@@ -1,3 +1,2 @@
 
-[OC-2] Accidentally improved a rubber duck with a spoon
-[OC-3] Reverse-engineered undefined to appease the CI gods
+[OC-2] Stared menacingly at a rogue semicolon and took full credit
