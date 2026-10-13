@@ -1,3 +1,4 @@
 
 [OC-1] Stared menacingly at 42 with zero tests
 [OC-3] Rewired a rubber duck and nobody noticed
+[OC-1] Refactored the coffee machine and nobody noticed
