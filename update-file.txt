@@ -1,3 +1,4 @@
 
 [OC-1] Convinced gravity until it worked
 [OC-1] Accidentally improved a rubber duck then immediately reverted it
+[OC-3] Refactored a rubber duck with zero tests
