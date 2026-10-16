@@ -1,2 +1,5 @@
 
-[OC-2] Tweaked 42 with zero tests
+[OC-1] Convinced gravity until it worked
+[OC-1] Accidentally improved a rubber duck then immediately reverted it
+[OC-3] Refactored a rubber duck with zero tests
+[OC-1] Blamed the void at 4:59pm on a Friday
