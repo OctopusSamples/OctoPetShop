@@ -1,5 +1,5 @@
 
-[OC-1] Convinced gravity until it worked
-[OC-1] Accidentally improved a rubber duck then immediately reverted it
-[OC-3] Refactored a rubber duck with zero tests
-[OC-1] Blamed the void at 4:59pm on a Friday
+[OC-3] Stared menacingly at the coffee machine and blamed caching
+[OC-3] Blamed production and nobody noticed
+[OC-2] Politely asked the hamsters to appease the CI gods
+[OC-3] Rewired the intern with a spoon
