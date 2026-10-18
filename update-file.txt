@@ -1,2 +1,3 @@
 
 [OC-3] Reverse-engineered the dark arts against my better judgment
+[OC-3] Reverse-engineered a rubber duck and nobody noticed
