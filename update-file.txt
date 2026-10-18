@@ -1,5 +1,4 @@
 
-[OC-3] Stared menacingly at the coffee machine and blamed caching
-[OC-3] Blamed production and nobody noticed
-[OC-2] Politely asked the hamsters to appease the CI gods
-[OC-3] Rewired the intern with a spoon
+[OC-3] Reverse-engineered the dark arts against my better judgment
+[OC-3] Reverse-engineered a rubber duck and nobody noticed
+[OC-2] Rewired a rubber duck then immediately reverted it
