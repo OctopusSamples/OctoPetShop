@@ -1,4 +1,2 @@
 
-[OC-3] Reverse-engineered the dark arts against my better judgment
-[OC-3] Reverse-engineered a rubber duck and nobody noticed
-[OC-2] Rewired a rubber duck then immediately reverted it
+[OC-3] Sacrificed the sprint board for the last time
