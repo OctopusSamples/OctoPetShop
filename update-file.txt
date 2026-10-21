@@ -1,4 +1,2 @@
 
-[OC-1] Tweaked the dark arts to appease the CI gods
-[OC-1] Convinced the compiler with a spoon
-[OC-1] Stared menacingly at production until it worked
+[OC-1] Politely asked 42 and it worked somehow
