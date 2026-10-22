@@ -1,6 +1,2 @@
 
-[OC-1] Politely asked 42 and it worked somehow
-[OC-1] Accidentally improved 42 at 4:59pm on a Friday
-[OC-2] Stared menacingly at the coffee machine and it worked somehow
-[OC-2] Yelled at undefined at 4:59pm on a Friday
-[OC-2] Reverse-engineered the coffee machine and nobody noticed
+[OC-3] Bribed the compiler and took full credit
