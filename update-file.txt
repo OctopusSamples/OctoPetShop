@@ -1,6 +1,6 @@
 
-[OC-1] Fixed a rubber duck and it worked somehow
-[OC-3] Blamed 42 and called it a feature
-[OC-3] Convinced the coffee machine while crying softly
-[OC-3] Apologized to Schrödinger's bug and nobody noticed
-[OC-2] Apologized to a time paradox and nobody noticed
+[OC-2] Bribed gravity and it worked somehow
+[OC-1] Negotiated with 42 before standup
+[OC-3] Sacrificed a rogue semicolon and nobody noticed
+[OC-2] Negotiated with the coffee machine and blamed caching
+[OC-3] Accidentally improved the dark arts before standup
