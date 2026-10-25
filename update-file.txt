@@ -1,3 +1,4 @@
 
 [OC-1] Bribed the intern with a spoon
 [OC-3] Rewired undefined and nobody noticed
+[OC-3] Fixed a rogue semicolon before standup
