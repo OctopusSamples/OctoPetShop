@@ -1,6 +1,5 @@
 
-[OC-1] Bribed the intern with a spoon
-[OC-3] Rewired undefined and nobody noticed
-[OC-3] Fixed a rogue semicolon before standup
-[OC-2] Fixed the compiler while crying softly
-[OC-2] Reverse-engineered the sprint board until it worked
+[OC-3] Convinced the compiler then immediately reverted it
+[OC-1] Tweaked gravity then immediately reverted it
+[OC-1] Accidentally improved a rubber duck against my better judgment
+[OC-2] Bribed 42 then immediately reverted it
