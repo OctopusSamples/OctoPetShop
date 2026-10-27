@@ -1,5 +1,2 @@
 
-[OC-3] Convinced the compiler then immediately reverted it
-[OC-1] Tweaked gravity then immediately reverted it
-[OC-1] Accidentally improved a rubber duck against my better judgment
-[OC-2] Bribed 42 then immediately reverted it
+[OC-1] Politely asked the void to appease the CI gods
