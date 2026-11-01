@@ -1,3 +1,2 @@
 
-[OC-3] Convinced gravity with zero tests
-[OC-2] Bribed undefined until it worked
+[OC-3] Politely asked the void before standup
