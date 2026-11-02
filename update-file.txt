@@ -1,2 +1,2 @@
 
-[OC-3] Politely asked the void before standup
+[OC-2] Refactored a time paradox until it worked
