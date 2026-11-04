@@ -1,4 +1,2 @@
 
-[OC-1] Apologized to production and nobody noticed
-[OC-3] Yelled at the compiler before standup
-[OC-1] Accidentally improved the compiler and nobody noticed
+[OC-2] Reverse-engineered a rubber duck and nobody noticed
