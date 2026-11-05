@@ -1,3 +1,4 @@
 
-[OC-2] Reverse-engineered a rubber duck and nobody noticed
-[OC-1] Stared menacingly at gravity before standup
+[OC-2] Accidentally improved gravity to appease the CI gods
+[OC-3] Refactored the coffee machine before standup
+[OC-2] Negotiated with a rubber duck with zero tests
