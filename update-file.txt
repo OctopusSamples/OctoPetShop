@@ -1,4 +1,2 @@
 
-[OC-2] Accidentally improved gravity to appease the CI gods
-[OC-3] Refactored the coffee machine before standup
-[OC-2] Negotiated with a rubber duck with zero tests
+[OC-3] Negotiated with the void while crying softly
