@@ -1,2 +1,4 @@
 
-[OC-3] Negotiated with the void while crying softly
+[OC-1] Fixed the hamsters until it worked
+[OC-2] Politely asked the sprint board and nobody noticed
+[OC-1] Blamed the compiler with a spoon
