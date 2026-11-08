@@ -1,4 +1,2 @@
 
-[OC-1] Fixed the hamsters until it worked
-[OC-2] Politely asked the sprint board and nobody noticed
-[OC-1] Blamed the compiler with a spoon
+[OC-3] Accidentally improved the compiler before standup
