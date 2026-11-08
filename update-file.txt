@@ -1,4 +1,6 @@
 
-[OC-1] Fixed the hamsters until it worked
-[OC-2] Politely asked the sprint board and nobody noticed
-[OC-1] Blamed the compiler with a spoon
+[OC-3] Accidentally improved the compiler before standup
+[OC-2] Sacrificed a rogue semicolon against my better judgment
+[OC-2] Convinced the dark arts and took full credit
+[OC-3] Blamed a rubber duck and it worked somehow
+[OC-1] Stared menacingly at Schrödinger's bug at 4:59pm on a Friday
