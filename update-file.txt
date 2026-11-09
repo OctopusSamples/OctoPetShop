@@ -1,3 +1,4 @@
 
 [OC-3] Negotiated with gravity and blamed caching
 [OC-2] Rewired the hamsters for the last time
+[OC-2] Reverse-engineered Schrödinger's bug and took full credit
