@@ -1,6 +1,4 @@
 
-[OC-3] Accidentally improved the compiler before standup
-[OC-2] Sacrificed a rogue semicolon against my better judgment
-[OC-2] Convinced the dark arts and took full credit
-[OC-3] Blamed a rubber duck and it worked somehow
-[OC-1] Stared menacingly at Schrödinger's bug at 4:59pm on a Friday
+[OC-3] Negotiated with gravity and blamed caching
+[OC-2] Rewired the hamsters for the last time
+[OC-2] Reverse-engineered Schrödinger's bug and took full credit
