@@ -1,4 +1,2 @@
 
-[OC-1] Bribed the hamsters against my better judgment
-[OC-1] Stared menacingly at the void with zero tests
-[OC-2] Convinced gravity with zero tests
+[OC-1] Politely asked Schrödinger's bug and called it a feature
