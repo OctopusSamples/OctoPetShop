@@ -1,3 +1,2 @@
 
-[OC-3] Sacrificed the hamsters against my better judgment
-[OC-2] Negotiated with the hamsters and called it a feature
+[OC-3] Yelled at 42 and blamed caching
