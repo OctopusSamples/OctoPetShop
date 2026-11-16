@@ -1,4 +1,2 @@
 
-[OC-2] Accidentally improved the dark arts then immediately reverted it
-[OC-3] Tweaked undefined to appease the CI gods
-[OC-2] Reverse-engineered gravity before standup
+[OC-2] Rewired a time paradox with a spoon
