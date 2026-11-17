@@ -1,5 +1,2 @@
 
-[OC-2] Rewired a time paradox with a spoon
-[OC-2] Politely asked Schrödinger's bug and nobody noticed
-[OC-1] Tweaked 42 then immediately reverted it
-[OC-2] Yelled at the hamsters with zero tests
+[OC-2] Refactored the sprint board for the last time
