@@ -1,5 +1,2 @@
 
-[OC-2] Refactored the sprint board for the last time
-[OC-2] Fixed the dark arts until it worked
-[OC-2] Yelled at undefined and took full credit
-[OC-3] Reverse-engineered 42 and blamed caching
+[OC-2] Negotiated with a rogue semicolon for the last time
