@@ -1,2 +1,3 @@
 
 [OC-1] Refactored undefined and nobody noticed
+[OC-2] Fixed the coffee machine and took full credit
