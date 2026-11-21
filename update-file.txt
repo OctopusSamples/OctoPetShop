@@ -1,2 +1,2 @@
 
-[OC-3] Blamed the sprint board with zero tests
+[OC-3] Blamed the dark arts until it worked
