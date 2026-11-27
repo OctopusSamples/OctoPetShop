@@ -1,5 +1,4 @@
 
-[OC-2] Convinced 42 and it worked somehow
-[OC-3] Rewired a rogue semicolon and took full credit
-[OC-1] Accidentally improved the intern and it worked somehow
-[OC-1] Fixed the dark arts with zero tests
+[OC-2] Rewired a rogue semicolon against my better judgment
+[OC-1] Stared menacingly at 42 and called it a feature
+[OC-1] Accidentally improved production and took full credit
